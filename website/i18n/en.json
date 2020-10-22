@@ -736,6 +736,18 @@
       "Users/overview": {
         "title": "Overview"
       },
+      "ViewPro/vpConvert4DView": {
+        "title": "Converting 4D View documents"
+      },
+      "ViewPro/vpDatabaseReferences": {
+        "title": "4D View Pro Database References"
+      },
+      "ViewPro/vpFormEvents": {
+        "title": "4D View Pro Form Events"
+      },
+      "ViewPro/vpOverview": {
+        "title": "4D View Pro Overview"
+      },
       "WebServer/webServerObject": {
         "title": "Web Server object"
       }

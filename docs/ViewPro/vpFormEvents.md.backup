@@ -169,3 +169,138 @@ Dragging content to fill adjacent cells generates the following additional prope
 |fillRange	|object|	Range used for fill| 
 |autoFillType|	longint	|Value used for the fill.<br> <li>0: Cells are filled with all data (values, formatting, and formulas)</li><li>1: Cells are filled with automatically sequential data</li><li>2: Cells are filled with formatting only</li><li>3: Cells are filled with values but not formatting</li><li>4: Values are removed from the cells</li><li>5: Cells are filled automatically</li>|
 |fillDirection|	longint	|Direction of the fill.<br><li>0: The cells to the left are filled</li><li>1: The cells to the right are filled</li><li>2: The cells above are filled</li><li>3: The cells below are filled</li>|
+
+### action = formulaChanged  
+Entering formula(s) generates the following additional properties:
+
+ 
+|Property|	Type	|Description|
+|---|---|---|
+|range|	object|	Cell range|
+|formula|	text|	The formula entered |
+
+### action = clipboardPasted  
+
+Pasting content from the clipboard generates the following additional properties:
+
+|Property|	Type	|Description|
+|---|---|---|
+|range|	object|	Cell range receiving the contents|
+|pasteOption|	longint	|Specifies what is pasted from the clipboard:<br><li>0: Everything is pasted (values, formatting, and formulas)</li><li>1: Only values are pasted</li><li>2: Only the formatting is pasted</li><li>3: Only formulas are pasted</li><li>4: Values and formatting are pasted (not formulas)</li><li>5: Formulas and formatting are pasted (not values)</li>|
+|pasteData|	object|	The data from the clipboard to be pasted:<table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td>text</td><td>text</td><td>The text from the clipboard</td></tr><tr><td>html</td><td>text</td><td>The HTML from the clipboard</td></tr></table>|
+
+### Example  
+
+Here is an example handling an `On After Edit` event:
+
+```4d
+ If(FORM Event.code=On After Edit)
+    If(FORM Event.action="valueChanged")
+       ALERT("WARNING: You are currently changing the value from "+String(FORM Event.oldValue)+" to "+String(FORM Event.newValue)+"!")
+    End if
+ End if
+```
+
+The above example could generate an event object (see `FORM Event`) like this:
+
+```4d
+{
+"code":45;
+"description":"On After Edit";
+"objectName":"ViewProArea"
+"sheetname":"Sheet1";
+"action":"valueChanged";
+"range": {area:ViewProArea,ranges:[{column:1,row:2,sheet:1}]};
+"oldValue":"The quick brown fox";
+"newValue":"jumped over the lazy dog";
+}
+```
+
+
+## On Selection Change  
+
+Modification of the current selection of rows or columns in a 4D View Pro document generates the `On Selection Change` event. The object returned by the `FORM Event` command contains:
+
+ 
+|Property|	Type	|Description|
+|---|---|---|
+|code|	longint|	`On Selection Change`|
+|description|	text|	"On Selection Change"|
+|objectName|	text|	4D View Pro area name|
+|sheetName|	text|	Name of the sheet of the event|
+|oldSelections|	object|	Cell range before change| 
+|newSelections|	object|	Cell range after change|
+ 
+
+**Example**:
+
+```4d
+ If(FORM Event.code=On Selection Change)
+    VP SET CELL STYLE(FORM Event.oldSelections;New object("backColor";Null))
+    VP SET CELL STYLE(FORM Event.newSelections;New object("backColor";"red"))
+ End if
+``` 
+
+
+## On Column Resize  
+
+When a user modifies the width of a column in a 4D View Pro document, the `On Column Resize` event is generated. The object returned by the `FORM Event` command contains:
+
+ 
+|Property|	Type	|Description|
+|---|---|---|
+|code|	longint	|`On Column Resize`|
+|description|	text	|"On Column Resize"|
+|objectName|	text	|4D View Pro area name|
+|sheetName|	text	|Name of the sheet of the event|
+|range|	object	|Cell range of the columns whose widths have changed|
+|header|	boolean	|True if the row header column (first column) is resized, else false|
+ 
+
+**Example**:
+
+```4d
+ If(FORM Event.code=On Column Resize)
+    VP SET CELL STYLE(FORM Event.range;New object("hAlign";vk horizontal align right))
+ End if
+```
+
+## On Row Resize  
+
+A user modifying the height of a row in a 4D View Pro document generates the `On Row Resize` event. The object returned by the `FORM Event` command contains:
+
+|Property|	Type	|Description|
+|---|---|---|
+|code	|longint	|`On Row Resize`|
+|description	|text	|"On Row Resize"|
+|objectName	|text	|4D View Pro area name|
+|sheetName	|text	|Name of the sheet of the event|
+|range	|object	|Cell range of the rows whose heights have changed|
+|header	|boolean	|True if the column header row (first row) is resized, else false|
+ 
+
+**Example**:
+
+```4d
+ If(FORM Event.code=On Row Resize)
+    VP SET CELL STYLE(FORM Event.range;New object("vAlign";vk vertical align top))
+ End if
+```
+
+
+## On VP Range Changed  
+
+When a change occurs within a cell range in the 4D View Pro document, the `On VP Range Changed` event is generated. The object returned by the `FORM Event` command contains:
+
+|Property|	Type	|Description|
+|---|---|---|
+|objectName	|text	|4D View Pro area name|
+|code	|longint	|`On VP Range Changed`|
+|description	|text	|"On VP Range Changed"|
+|sheetName	|text	|Name of the sheet of the event|
+|range	|object	|Cell range of the change|
+|changedCells	|object	Range containing only the changed cells. It can be a combined range. 
+|action	|text	|The type of operation generating the event:<br><li>"clear" - A clear range value operation</li><li>"dragDrop" - A drag and drop operation</li><li>"dragFill" - A drag fill operation</li><li>"evaluateFormula" - Setting a formula in a specified cell range</li><li>"paste" - A paste operation</li><li>"setArrayFormula" - Setting a formula in a specified cell range</li><li>"sort" - Sorting a range of cells</li>|
+ 
+
+>See also [`On After Edit`](#on-after-edit). 
