@@ -745,6 +745,9 @@
       "ViewPro/vpFormEvents": {
         "title": "4D View Pro Form Events"
       },
+      "ViewPro/vpFormulas": {
+        "title": "4D View Pro Formulas"
+      },
       "ViewPro/vpOverview": {
         "title": "4D View Pro Overview"
       },
@@ -774,7 +777,8 @@
       "Form Objects": "Form Objects",
       "Form Object Properties": "Form Object Properties",
       "Form Events": "Form Events",
-      "Menus": "Menus"
+      "Menus": "Menus",
+      "View Pro": "View Pro"
     }
   },
   "pages-strings": {

@@ -187,7 +187,8 @@
 			"Events/onValidate",
 			"Events/onVpReady",
 			"Events/onWindowOpeningDenied"],
-  "Menus":["Menus/overview","Menus/creating","Menus/properties","Menus/bars","Menus/sdi"]
+  "Menus":["Menus/overview","Menus/creating","Menus/properties","Menus/bars","Menus/sdi"],
+  "View Pro":["ViewPro/vpOverview","ViewPro/vpFormEvents","ViewPro/vpConvert4DView","ViewPro/vpDatabaseReferences","ViewPro/vpFormulas"]
 
   }
 }
