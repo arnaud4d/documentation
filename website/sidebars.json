@@ -188,7 +188,14 @@
 			"Events/onVpReady",
 			"Events/onWindowOpeningDenied"],
   "Menus":["Menus/overview","Menus/creating","Menus/properties","Menus/bars","Menus/sdi"],
-  "View Pro":["ViewPro/vpOverview","ViewPro/vpFormEvents","ViewPro/vpConvert4DView","ViewPro/vpDatabaseReferences","ViewPro/vpFormulas"]
-
+  "4D View Pro":["ViewPro/vpOverview","ViewPro/vpDatabaseReferences","ViewPro/vpFormEvents","ViewPro/vpFormulas","ViewPro/vpConvert4DView",
+		{
+        "type": "subcategory",
+        "label": "4D View Pro Language",
+        "ids": [
+          "ViewPro/vpLanguageOverview","ViewPro/vpAddFormulaName","ViewPro/vpAddRangeName","ViewPro/vpAddSelection","ViewPro/vpAddStylesheet","ViewPro/vpAll","ViewPro/vpCell","ViewPro/vpCells","ViewPro/vpColumn","ViewPro/vpColumnAutoFit","ViewPro/vpCombineRanges","ViewPro/vpConvertFrom4DView","ViewPro/vpConvertToPicture","ViewPro/vpDeleteColumns","ViewPro/vpDeleteRows","ViewPro/vpExportDocument","ViewPro/vpExportToObject","ViewPro/vpFind","ViewPro/vpFlushCommands","ViewPro/vpFontToObject","ViewPro/vpGetActiveCell","ViewPro/vpGetCellStyle","ViewPro/vpGetColumnAttributes","ViewPro/vpGetColumnCount","ViewPro/vpGetDefaultStyle","ViewPro/vpGetFormula","ViewPro/vpGetFormulaByName","ViewPro/vpConstants","ViewPro/vpconstRef","ViewPro/vpStyleObjectsAndStyleSheets"	  
+        ]
+      }
+	  ]
   }
 }

@@ -1,6 +1,6 @@
 ---
 id: vpOverview
-title: 4D View Pro Overview
+title: Overview
 ---
 
 4D View Pro is a component and a 4D form area that allow developers to embed advanced spreadsheet features in their forms. 
@@ -38,6 +38,7 @@ A 4D View Pro form area is configured by means of standard properties found in t
 When the form is executed, the 4D View Pro area displays a spreadsheet by default:
 
 ![](assets/en/ViewPro/vpSpreadsheet.PNG)
+
 
 ## Using a 4D View Pro area     
 

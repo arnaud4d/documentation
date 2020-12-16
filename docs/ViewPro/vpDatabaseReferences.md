@@ -1,6 +1,6 @@
 ---
 id: vpDatabaseReferences
-title: 4D View Pro Database References
+title: Database References
 ---
 
 ## Project method references

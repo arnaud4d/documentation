@@ -1,6 +1,6 @@
 ---
 id: vpFormEvents
-title: 4D View Pro Form Events
+title: Form Events
 ---
 
 The following form events are available in the Property List for 4D View Pro areas:
