@@ -736,95 +736,23 @@
       "Users/overview": {
         "title": "Overview"
       },
+      "ViewPro/vpCellFormat": {
+        "title": "4D View Pro Cell Format"
+      },
+      "ViewPro/vpPrintAttributes": {
+        "title": "4D View Pro Print Attributes"
+      },
+      "ViewPro/vpRangeObjectProperties": {
+        "title": "4D View Pro Range Object Properties"
+      },
+      "ViewPro/vpSheetOptions": {
+        "title": "4D View Pro Sheet Options"
+      },
       "ViewPro/vpStyleObjectsAndStyleSheets": {
         "title": "4D View Pro Style Objects and Style Sheets"
       },
-      "ViewPro/vpAddFormulaName": {
-        "title": "VP ADD FORMULA NAME"
-      },
-      "ViewPro/vpAddRangeName": {
-        "title": "VP ADD RANGE NAME"
-      },
-      "ViewPro/vpAddSelection": {
-        "title": "VP ADD SELECTION"
-      },
-      "ViewPro/vpAddStylesheet": {
-        "title": "VP ADD STYLESHEET"
-      },
-      "ViewPro/vpAll": {
-        "title": "VP All"
-      },
-      "ViewPro/vpCell": {
-        "title": "VP Cell"
-      },
-      "ViewPro/vpCells": {
-        "title": "VP Cells"
-      },
-      "ViewPro/vpColumn": {
-        "title": "VP Column"
-      },
-      "ViewPro/vpColumnAutoFit": {
-        "title": "VP COLUMN AUTOFIT"
-      },
-      "ViewPro/vpCombineRanges": {
-        "title": "VP Combine Ranges"
-      },
-      "ViewPro/vpConvertFrom4DView": {
-        "title": "VP Convert from 4D View"
-      },
-      "ViewPro/vpConvertToPicture": {
-        "title": "VP Convert to picture"
-      },
-      "ViewPro/vpDeleteColumns": {
-        "title": "VP DELETE COLUMNS"
-      },
-      "ViewPro/vpDeleteRows": {
-        "title": "VP DELETE ROWS"
-      },
-      "ViewPro/vpExportDocument": {
-        "title": "VP EXPORT DOCUMENT"
-      },
-      "ViewPro/vpExportToObject": {
-        "title": "VP Export to object"
-      },
-      "ViewPro/vpFind": {
-        "title": "VP Find"
-      },
-      "ViewPro/vpFlushCommands": {
-        "title": "VP FLUSH COMMANDS"
-      },
-      "ViewPro/vpFontToObject": {
-        "title": "VP Font to object"
-      },
-      "ViewPro/vpGetActiveCell": {
-        "title": "VP Get active cell"
-      },
-      "ViewPro/vpGetCellStyle": {
-        "title": "VP Get cell style"
-      },
-      "ViewPro/vpGetColumnAttributes": {
-        "title": "VP Get column attributes"
-      },
-      "ViewPro/vpGetColumnCount": {
-        "title": "VP Get column count"
-      },
-      "ViewPro/vpGetDefaultStyle": {
-        "title": "VP Get default style"
-      },
-      "ViewPro/vpGetFormula": {
-        "title": "VP Get formula"
-      },
-      "ViewPro/vpGetFormulaByName": {
-        "title": "VP Get formula by name"
-      },
-      "ViewPro/vpConstants": {
-        "title": "4D View Pro Constants"
-      },
       "ViewPro/vpconstRef": {
         "title": "4DVP Constant Reference"
-      },
-      "ViewPro/vpConvert4DView": {
-        "title": "Converting 4D View documents"
       },
       "ViewPro/vpDatabaseReferences": {
         "title": "Database References"
@@ -837,6 +765,9 @@
       },
       "ViewPro/vpLanguageOverview": {
         "title": "Using the 4D View Pro Language"
+      },
+      "ViewPro/vpLanguageRef": {
+        "title": "Language Reference"
       },
       "ViewPro/vpOverview": {
         "title": "Overview"

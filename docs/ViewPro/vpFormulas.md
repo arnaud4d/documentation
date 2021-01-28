@@ -12,8 +12,8 @@ title: Formulas
 	*	values,
 	*	references to other cells (relatives, absolutes, mixed or by name), 
 	*	4D variables, fields and functions,
-	*	4D methods (registered by `VP SET ALLOWED METHODS`), 
-	*	4D formulas (via `VP SET CUSTOM FUNCTIONS`),
+	*	4D methods (registered by [VP SET ALLOWED METHODS](vpLanguageRef.md#vp-set-allowed-methods)), 
+	*	4D formulas (via [VP SET CUSTOM FUNCTIONS](vpLanguageRef.md#vp-set-custom-functions)),
 	*	4D View Pro functions.
 
 To enter a formula:
@@ -22,11 +22,11 @@ To enter a formula:
 2.	Enter = (the equal sign).
 3.	Type in the formula then hit the Enter key
 
->You can also create named formulas that can be called via their name. In this case, the formula is entered using the `VP ADD FORMULA NAME` command.
+>You can also create named formulas that can be called via their name. In this case, the formula is entered using the [VP ADD FORMULA NAME](vpLanguageRef.md#vp-add-formula-name) command.
 
 A large number of functions are available in 4D View Pro. This section describes a subset of essential functions. The complete list of functions supported by 4D View Pro can be found in the [Spreadsheets documentation](http://help.grapecity.com/spread/SpreadSheets11/webframe.html#FormulaFunctions.html).
 
- 
+>If a 4D project method in a formula has the same name as a SpreadJS function, 4D View Pro will use the function and the project method will not be called.  
  
 
 ## Operators and values  
@@ -128,208 +128,6 @@ The following table shows the effect of the different notations:
 |Cell name	|Absolute	|Reference is absolute. Will always refer to the named cell no matter where the reference is used.|
 
 
-
-## Converting 4D View plug-in formulas  
- 
-As stated in the [Converting 4D View documents](vpConvert4DView.md) page, most of the 4D View plug-in document contents and properties can be converted in 4D View Pro documents.
-
-Formulas are also converted. However, the formula languages of 4D View and 4D View Pro are somewhat different and 4D View Pro implements default security features that control access to database data. As a result, some adaptations can sometimes be necessary regarding operators, constants and functions, as well as references to methods and database fields.
-
-Three compatibility cases can occur:
-
-*	a 4D View feature (operator, constant, function) is exactly the same in 4D View Pro: in this case, the conversion is transparent.
-
-*	a 4D View feature or a 4D command is supported in 4D View Pro through a different function or operator: in this case, an automatic mapping is performed
-
-*	a 4D View feature is partially or not supported in 4D View Pro: in this case, it will be necessary to adapt your converted formulas to make them work as expected. This is the case for references to methods, variables, or fields.
-
-The following sections list 4D View formula features and their correspondences in 4D View Pro.
-
-
-
-### Operators
-
-|Type|Operator|4D View|	4D View Pro|
-|---|---|---|---|
-|**Numeric**|Addition|	+|	+|
-||Subtraction|	-|	-|
-||Multiplication|	*|	*|
-||Division|	/|	/|
-||Remainder|	\ |	[MOD](http://help.grapecity.com/spread/SpreadJSWeb/MOD.html)|
-||Integer division|	÷	|[TRUNC](http://help.grapecity.com/spread/SpreadJSWeb/TRUNC.html)(a/b)|
-||Exponent|	^	|^|
-||Percentage	|%	|%|
-|||||
-|**Boolean**|AND|	&|	[AND](#and)|
-||OR	| &#124;	|[OR](#or)|
-||Not	|~	|[NOT](#not)|
-|||||
-|**String**|concatenation|	+	|&|
-||destruction|	-	|[SUBSTITUTE](#substitute), ex: "Down Trend"-"Down" is replaced by SUBSTITUTE("Down Trend","Down","")|
-||position|	\	|[FIND](http://help.grapecity.com/spread/SpreadJSWeb/FIND.html) (case sensitive) or [SEARCH](http://help.grapecity.com/spread/SpreadJSWeb/SEARCH.html) (case insensitive)|
-|||||
-|**Date**|date+days->date|	+	|+|
-||date+time->date+time of day|	+|	+|
-||date-days->date	|-|	-|
-||date-date->number of days|	-|	-|
-|||||
-|**Duration**|addition	|+	|+|
-||subtraction	|-|	-|
-||multiplication|	*	|*|
-||division|	/|	/|
-|||||
-|**Comparison**|equality|	=	|=|
-||difference|	#	|<>|
-||greater than|	>	|>|
-||less than|	<	|<|
-||greater than or equal to|	>=	|>=|
-||less than or equal to|	<=	|<=|
-
-
-### Functions and 4D commands  
-
-In the table below, 4D commands are shown in *`italics`*. 4D View functions are displayed in normal font.
-
- 
-
-|4D & 4D View|	4D View Pro	|Comment|
-|---|---|---|
-|Abs|	[ABS](#abs)	| |
-|*`Add to date`*, AddToDate	|[DATE](http://help.grapecity.com/spread/SpreadJSWeb/DATE.html)|AddToDate(date;years;months;days) is replaced by:<p><br>DATE([YEAR](http://help.grapecity.com/spread/SpreadJSWeb/YEAR.html)(date)<br>+years,[MONTH](http://help.grapecity.com/spread/SpreadJSWeb/MONTH.html)(date)<br>+months,[DAY](http://help.grapecity.com/spread/SpreadJSWeb/DAY.html)(date)+days)|
-|date+time|	[TIME](http://help.grapecity.com/spread/SpreadJSWeb/TIME.html)|	[DATE](http://help.grapecity.com/spread/SpreadJSWeb/DATE.html)(date) + TIME(time)|
-|And|	[AND](#and)	| |
-|ArcCos|[ACOS](#acos)	| |
-|ArcSin|[ASIN](#asin)| |	
-|*`Arctan`*, ArcTan|	[ATAN](#atan)| |	
-|Area	|-	|n/a (no plug-in area)|
-|Average|[AVERAGE](#average)	| |
-|Cell|	[INDIRECT](#indirect)	| |
-|*`Char`*|	*`Char`*| |	
-|*`Character code`*|[CODE](http://help.grapecity.com/spread/SpreadJSWeb/CODE.html)| |	 
-|Column|[COLUMNLETTER](#columnletter)|[COLUMN](http://help.grapecity.com/spread/SpreadJSWeb/COLUMN.html) returns a number (not a letter)|
-|Cos|	COS	| |
-|Count	|COUNTA	| |
-|*`Current date`*, CurrentDate|	[TODAY](#today)| |	
-|*`Current time`*|[RUNTIME\_CURRENT\_TIME](#runtime-current-time)	| |
-|CurrentTime|[NOW](#now)	| |
-|CVCompound|[PV](#pv)|	CVCompound(1%;5;1000) is replaced by:<p><br> [PV](#pv)(1%,5,-1000)|
-|CVSimple|[PV](#pv)|CVSimple(1%;5;5\*1000) is replaced by:<p><br> [PV](#pv)(1%,5,,-1000)<p>*note the two consecutive commas*|
-|*`Date`*, Date	|[RUNTIME\_DATE](#runtime-date)| |	
-|*`Day of`*	|[DAY](http://help.grapecity.com/spread/SpreadJSWeb/DAY.html)| |	
-|*`Dec`*|	[MOD](http://help.grapecity.com/spread/SpreadJSWeb/MOD.html)	| |
-|Empty|	[ISBLANK](#isblank)	| |
-|Eval4D|	-	|Currently not available|
-|Exp|	[EXP](#exp)	| |
-|*`False`*, False|	[FALSE](#false)	| |
-|Find|	[LOOKUP](#lookup)	||
-|FindCell|	[FINDCELL](#findcell)| |	
-|FVCompound|[FV](#fv)|	FVCompound(1%;35;35\*1000) is replaced by:<p><br> [FV](#fv)(1%,35,-1000)|
-|FVSimple|	[FV](#fv)|	FVSimple(12%;35;35\*1000) is replaced by:<p><br> [FV](#fv)(12%,35,,-35\*1000)<p>*note the two consecutive commas*|
-|If|	[IF](#if)	||
-|*`Insert string`*|	[REPLACE](http://help.grapecity.com/spread/SpreadJSWeb/REPLACE.html)	| |
-|*`Int`*|	[INT](http://help.grapecity.com/spread/SpreadJSWeb/INT.html)	||
-|*`Length`*, Length|	[LEN](#len)	| |
-|*`Log`*, Log|	[LN](#ln)	||
-|*`Lowercase`*|	[LOWER](http://help.grapecity.com/spread/SpreadJSWeb/LOWER.html)| |	
-|Max|	[MAX](#max)	||
-|Min|	[MIN](#max)	||
-|*`Mod`*, Mod|	[MOD](http://help.grapecity.com/spread/SpreadJSWeb/MOD.html)	| |
-|MonthlyValue|	[PMT](#pmt)	|MonthlyValue(10.5%/12,48,6500) is replaced by:<p><br> [PMT](#pmt)(10.5%/12,48,-6500)|
-|*`Month of`*|	[MONTH](http://help.grapecity.com/spread/SpreadJSWeb/MONTH.html)	| |
-|Not|	[NOT](#not)	| |
-|*`Num`*|	[VALUE](http://help.grapecity.com/spread/SpreadJSWeb/VALUE.html)|	**Warning**: decimal separator|
-|Or	|[OR](#or)	||
-|PeriodNumber1	|[NPER](#nper)|	PeriodNumber1(10.5%/12;166.42;6500) is replaced by:<p><br> [NPER](#nper)(10.5%/12,-166.42,6500)|
-|PeriodNumber2	|[NPER](#nper)|	PeriodNumber2(10.5%/12,5000,3000) is replaced by:<p><br> [NPER](#nper)(10.5%/12,,3000,-5000)<p>*note the two consecutive commas*|
-|Pi	|[PI](#pi)	||
-|*`Position`*|	[SEARCH](http://help.grapecity.com/spread/SpreadJSWeb/SEARCH.html)|	Only the first two parameters are taken into account
-|*`Random`*, Random	|[RAND](#rand)|	Random (0->32767) is replaced by:<p><br> [RAND](#rand) (0->1)|
-|Range|	[INDIRECT](#indirect)|	Range("A1";"A3") is replaced by:<p><br> [INDIRECT](#indirect)("A1:A3")<p>n*ote the colon character between A1 and A3*|
-|Rate1|	[RATE](#rate)|	Rate1(5;1000;3000) is replaced by:<p><br> [RATE](#rate)(5,-1000,3000)|
-|Rate2|	[RATE](#rate)|	Rate2(5,6000,2800) is replaced by:<p><br> [RATE](#rate)(5,,2800,-6000)<p>*note the two consecutive commas*|
-|*`Replace string`*|	[SUBSTITUTE](http://help.grapecity.com/spread/SpreadJSWeb/SUBSTITUTE.html)	||
-|*`Round`*, Rounding|	[ROUND](#round)	||
-|Row|	[ROW](#row)	| |
-|*`Sin`*, Sin|	[SIN](#sin)	| |
-|SquareRoot	|[SQRT](#sqrt)||	
-|StdDeviation|	[STDEV.P](#stdevp)	||
-|*`String`*|	[RUNTIME\_STRING](#runtime-string)	|
-|String|	[RUNTIME\_VIEW\_STRING](#runtime-view-string)	| |
-|*`Substring`*, SubString|	[MID](#mid)	| |
-|Sum|	[SUM](#sum)	| |
-|Tan|	[TAN](#tan)	| |
-|*`Time`*|	[RUNTIME\_TIME](#runtime-time)	| |
-|*`True`*, True	|[TRUE](#true)	| |
-|*`Trunc`*	|[TRUNC](http://help.grapecity.com/spread/SpreadJSWeb/TRUNC.html)	| |
-|*`Type`*, Type|	[TYPE](#type)|	Returned types in 4D View Pro are different from 4D View|
-|*`Uppercase`*|	[UPPER](http://help.grapecity.com/spread/SpreadJSWeb/UPPER.html)	| |
-|Variance|	[VAR.P](#var-p)	| |
-|*`Year of`*|	[YEAR](http://help.grapecity.com/spread/SpreadJSWeb/YEAR.html)	| |
-
->Notes about 4D commands:
->*	If a 4D command is not part of the above list of authorized commands, it is converted to: UNSUPPORTED_4DCOMMAND(<command name>,param1,...,paramN).
->*	Expression parameters of a 4D command called from a 4D View formula are converted to the equivalent SpreadJS syntax.
-
-
-### Project methods  
-
-When a 4D View document is converted, calls to 4D project methods in formulas are converted to calls to 4D View Pro user functions with the same name and parameters. Note that parenthesis are mandatory in 4D View Pro to call functions. Also, parameters are separated by commas (,).
-
-For example, in 4D View:
-
-```4d
-=myMethod
-=myMethod(1;5)
-```
-
-will be converted in 4D View Pro:
-
-```4d
-=MYMETHOD()
-=MYMETHOD(1,5)
-```
-
-Project method names must comply with JavaScript Identifier Grammar (see [ECMA Script standard](https://www.ecma-international.org/ecma-262/5.1/#sec-7.6)). Note in particular that space characters are not allowed. Any non compliant method name is converted to UNSUPPORTED\_4DMETHOD\_NAME("\<method name\>",param1,...paramN).
-
->If a 4D project method in a formula has the same name as a SpreadJS function, 4D View Pro will use the function and the project method will not be called. 
-
-Once converted, project methods must comply with 4D View Pro security and availability [Requirements](vpDatabaseReferences.md#requirements) for methods.
-
-For more information about method calls in 4D View Pro formulas, please refer to the [Project method references](vpDatabaseReferences.md#project-method-references) page.
-
-### Fields  
-
-When a 4D View document is converted, calls to 4D database fields in formulas are converted to calls to 4D View Pro user functions named "TABLETITLE\_FIELDTITLE()".
-
-For example, in 4D View:
-
-```4d
-=[myTable]MyField
-```
-
-will be converted in 4D View Pro:
-
-```4d
-=MYTABLE_MYFIELD()
-```
-
-#### Virtual structure
-
-4D View Pro converts field names in 4D View formulas that come from the "virtual" structure (structure defined through calls to the `SET TABLE TITLES` and/or `SET FIELD TITLES` commands) or from the database structure (if no virtual structure was defined).
-
-However, for security reasons **only fields declared in the virtual structure will be taken into account by 4D View Pro** (see [Requirements](vpDatabaseReferences.md#requirements-1) for the [Field references](vpDatabaseReferences.md#field-references)). It means that you must call the `SET TABLE TITLES` and/or `SET FIELD TITLES` commands in your database if you want 4D View Pro to use field references. It is recommended to declare a virtual structure before converting the document, thus you can select fields and tables to embed as functions in the 4D View Pro document.
-
->Converted structure fields that are not declared in a virtual structure will generate *?NAME* errors in the cells when the converted document will be opened.
-
-#### Conversion requirements
-
-*	During the conversion, the original structure must be available. Otherwise, field and table references will only be converted with their numbers (for example, Table\_6\_Field\_5) and need additional processing.
-
-*	Table and field names must comply with JavaScript Identifier Grammar (see [ECMA Script standard](https://www.ecma-international.org/ecma-262/5.1/#sec-7.6)). Otherwise, table or field name is converted to a string with this format: "UNSUPPORTED\_TABLE\_FIELD\_TITLE(\<virtual structure name\>)"
-
->If a field in a formula has the same name as an allowed 4D project method, 4D View Pro will use the field reference and the project method will not be called. 
-
-For more information about field references in 4D View Pro formulas, please refer to the [Field references](vpDatabaseReferences.md#field-references) page.
 
 
 ## 4D View Pro Functions
@@ -1630,6 +1428,7 @@ TEXT(100,"0.00€") //100.00€
 |Parameter|Type||Description|
 |---|---|----|---|
 |  | ||Does not require any parameters|  
+
 
 The `TODAY` function  returns the date and time of the current date. It returns a DateTime object.
 

@@ -11,26 +11,28 @@ title: Database References
 
 To be called in a 4D View Pro formula, a project method must be:
 
-*	**Allowed**: it was explicitly declared using the `VP SET ALLOWED METHODS` command.
+*	**Allowed**: it was explicitly declared using the [VP SET ALLOWED METHODS](vpLanguageRef.md#vp-set-allowed-methods) command.
 
 *	**Runnable**: it belongs to the host database or a loaded component with the "Shared by components and host database" option enabled (see *Sharing of project methods*).
 
 *	**Not in conflict** with an existing 4D View Pro function: if you call a project method with the same name as a 4D View Pro built-in function, the function is called.
 
->If the `VP SET ALLOWED METHODS` command has never been executed during the session, 4D View Pro custom functions rely on allowed methods defined by 4D's generic `SET ALLOWED METHODS` command. In this case, the project method names must comply with JavaScript Identifier Grammar (see [ECMA Script standard](https://www.ecma-international.org/ecma-262/5.1/#sec-7.6)). The global filtering option in the Settings dialog box (see *Data Access*) is ignored in all cases.
+>If the [VP SET ALLOWED METHODS](vpLanguageRef.md#vp-set-allowed-methods) command has never been executed during the session, 4D View Pro custom functions rely on allowed methods defined by 4D's generic `SET ALLOWED METHODS` command. In this case, the project method names must comply with JavaScript Identifier Grammar (see [ECMA Script standard](https://www.ecma-international.org/ecma-262/5.1/#sec-7.6)). The global filtering option in the Settings dialog box (see *Data Access*) is ignored in all cases.
 
 
 ### Hello World example  
 
 We want to print "Hello World" in a 4D View Pro area cell using a 4D project method:
 
-1.	Create a "myMethod" project method with the following code:
+1.	Create a "myMethod" project method with the following code:  
+
  	```4d
  	C_TEXT($0)
  	$0:="Hello World"
  	```
 
-2.	Execute the following code before opening any form that contains a 4D View Pro area (for example in the On Startup database method):
+2.	Execute the following code before opening any form that contains a 4D View Pro area (for example in the `On Startup database method`):
+ 	  
  	```4d
  	C_OBJECT($allowed;VPHello)
  	
@@ -67,31 +69,31 @@ Note that the ( ) are mandatory, even if no parameters are passed:
 =METHODWITHOUTNAME()
 ```
 
-You can declare the name, type, and number of parameters through the parameters collection of the function you declared using the `VP SET ALLOWED METHODS` command. Optionally, you can control the number of parameters passed by the user through *minParams* and *maxParams* properties. Example:
+You can declare the name, type, and number of parameters through the parameters collection of the function you declared using the [VP SET ALLOWED METHODS](vpLanguageRef.md#vp-set-allowed-methods) command. Optionally, you can control the number of parameters passed by the user through *minParams* and *maxParams* properties. Example:
 
 ```4d
- C_OBJECT($allowed)
+C_OBJECT($allowed)
  
- $allowed:=New object
+$allowed:=New object
  
- $allowed.VPMethod:=New object
+$allowed.VPMethod:=New object
  
- $allowed.VPMethod.method:="4DMethodWithParams"
+$allowed.VPMethod.method:="4DMethodWithParams"
  
- $allowed.VPMethod.parameters:=New collection
- $allowed.VPMethod.parameters.push(New object("name";"Param1";"type";Is longint))
- $allowed.VPMethod.parameters.push(New object("name";"Param2";"type";Is date))
- $allowed.VPMethod.parameters.push(New object("name";"Param3";"type";Is text))
+$allowed.VPMethod.parameters:=New collection
+$allowed.VPMethod.parameters.push(New object("name";"Param1";"type";Is longint))
+$allowed.VPMethod.parameters.push(New object("name";"Param2";"type";Is date))
+$allowed.VPMethod.parameters.push(New object("name";"Param3";"type";Is text))
  
- $allowed.VPMethod.minParams:=3
- $allowed.VPMethod.maxParams:=3 //the function gets 3 mandatory parameters
+$allowed.VPMethod.minParams:=3  
+$allowed.VPMethod.maxParams:=3 //the function gets 3 mandatory parameters
  
- VP SET ALLOWED METHODS($allowed)
+VP SET ALLOWED METHODS($allowed)
 ```
 
-For more information on supported incoming parameter types, please refer to the `VP SET ALLOWED METHODS` command description. 
+For more information on supported incoming parameter types, please refer to the [VP SET ALLOWED METHODS](vpLanguageRef.md#vp-set-allowed-methods) command description. 
 
->If you do not declare parameters, values can be sequentially passed to methods (they will be received in $1, $2...) and their type will be automatically converted. Dates in *jstype* will be passed as `C_OBJECT` in 4D methods with two properties:
+>If you do not declare parameters, values can be sequentially passed to methods (they will be received in $1, $2...) and their type will be automatically converted. Dates in *jstype* will be passed as [C_OBJECT](Concepts/dt_object.md) in 4D methods with two properties:
 
 |Property|	Type|	Description|
 |---|---|---|
@@ -100,19 +102,20 @@ For more information on supported incoming parameter types, please refer to the 
 
 4D project methods can also return values in the 4D View Pro cell formula via $0. The following data types are supported for returned parameters:
 
-*	`C_TEXT` (converted to string in 4D View Pro)
+*	[C_TEXT](Concepts/dt_string.md) (converted to string in 4D View Pro)
 
-*	`C_REAL`/`C_LONGINT` (converted to number in 4D View Pro)
+*	[C_REAL](Concepts/dt_number.md)/[C_LONGINT](Concepts/dt_number.md) (converted to number in 4D View Pro)
 
-*	`C_DATE` (converted to JS Date type in 4D View Pro - hour, minute, sec = 0)
+*	[C_DATE](Concepts/dt_date.md) (converted to JS Date type in 4D View Pro - hour, minute, sec = 0)
 
-*	`C_TIME` (converted to JS Date type in 4D View Pro - date in base date, i.e. 12/30/1899)
+*	[C_TIME](Concepts/dt_time.md) (converted to JS Date type in 4D View Pro - date in base date, i.e. 12/30/1899)
 
-*	`C_BOOLEAN` (converted to bool in 4D View Pro)
+*	[C_BOOLEAN](Concepts/dt_boolean.md) (converted to bool in 4D View Pro)
 
-*	`C_PICTURE` (jpg,png,gif,bmp,svg other types converted into png) creates a URI (data:image/png;base64,xxxx) and then used as the background in 4D View Pro in the cell where the formula is executed
+*	[C_PICTURE](Concepts/dt_picture.md) (jpg,png,gif,bmp,svg other types converted into png) creates a URI (data:image/png;base64,xxxx) and then used as the background in 4D View Pro in the cell where the formula is executed
 
-*	`C_OBJECT` with the following two properties (allowing passing a date and time):
+*	[C_OBJECT](Concepts/dt_object.md) with the following two properties (allowing passing a date and time):
+	  
 	|Property|	Type|	Description|
 	|---|---|---|
 	|value|	Date|	Date value|
@@ -123,7 +126,7 @@ If the 4D method returns nothing, an empty string is automatically returned.
 An error is returned in the 4D View Pro cell if:
 
 *	the 4D method returns another type other than those listed above,
-*	an error occurred during 4D method execution (when user click on "abort" button).
+*	an error occurred during 4D method execution (when user clicks on "abort" button).
 
 
 
@@ -131,13 +134,13 @@ An error is returned in the 4D View Pro cell if:
 
 4D View Pro allows you to use references to 4D database fields in your formulas. When displaying a 4D View Pro area, a field reference is replaced by the field value in the current record. A dynamic link is kept between the area and the 4D data: if the value of the field is changed, the 4D View Pro area will use the new value.
 
-For security reasons, only fields and tables that have been included in the database "virtual structure" (i.e. renamed using `SET TABLE TITLES` and `SET FIELD TITLES` commands and the * parameter) can be called in 4D View Pro areas.
+For security reasons, only fields and tables that have been included in the database "virtual structure" (i.e., renamed using `SET TABLE TITLES` and `SET FIELD TITLES` commands and the * parameter) can be called in 4D View Pro areas.
 
 ### Requirements  
 
 To be called in a 4D View Pro formula, a 4D field must comply to the following requirements:
 
-*	the field belongs to the virtual structure of the database, i.e. it must be declared through the `SET TABLE TITLES` and/or `SET FIELD TITLES` commands with the * parameter (see example),
+*	the field belongs to the virtual structure of the database, i.e. it must be declared through the `SET TABLE TITLES` and/or `SET FIELD TITLES` commands with the \* parameter (see example),
 
 *	table and field names must be ECMA compliant (see [ECMA Script standard](https://www.ecma-international.org/ecma-262/5.1/#sec-7.6)),
 
@@ -154,7 +157,7 @@ An error is returned in the 4D View Pro cell if the formula calls a field which 
 |Alpha, Text|	string|
 |Integer, Long integer, Integer 64-bit, Real, Float|	number|
 |Date|	JavaScript Date type (hour, minute, sec = 0)|
-|Time	|JavaScript Date type (date in base date, i.e. 12/31/1899)|
+|Time	|JavaScript Date type (date in base date, i.e., 12/31/1899)|
 |Boolean|	bool|
 |Picture|	Supported picture types: jpg, png, gif, bmp, svg; other types converted into png. Creates an URI (data:image/png;base64,xxxx) set as background for the 4D View Pro cell where the formula is executed|
 
@@ -186,6 +189,7 @@ We want to print the name of a person in a 4D View Pro area cell using a 4D fiel
 
 
 2.	Execute the following code to initialize a virtual structure:
+	  
 	```4d
 	ARRAY TEXT($tableTitles;1)
 	ARRAY LONGINT($tableNum;1)

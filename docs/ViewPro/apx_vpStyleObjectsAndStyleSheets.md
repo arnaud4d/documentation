@@ -9,7 +9,7 @@ title: 4D View Pro Style Objects and Style Sheets
 
 Style objects contain the style property settings. They can be used either in a style sheet or on their own. Style objects can also be used in addition to a style sheet so that different settings can be specified for individual cell ranges without affecting the rest of the document. 
 
-You can use style objects directly with the [`VP SET CELL STYLE`](cmd_vpSetCellStyle.md) and [`VP SET DEFAULT STYLE`](vpSetDefaultStyle.md) commands.
+You can use style objects directly with the [VP SET CELL STYLE]((vpLanguageRef.md#vp-set-cell-style)) and [VP SET DEFAULT STYLE](vpLanguageRef.md#vp-set-default-style) commands.
 
 ### Style sheets 
 
@@ -17,14 +17,14 @@ A style sheet groups together a combination of properties in a style object (see
 
 When created, a 4D View Pro style sheet is given a name which is saved within the style sheet in the "name" property. This allows a style sheet to be easily used and, if thoughtfully selected, can facilitate its identification and purpose (e.g., Letterhead\_internal, Letterhead_external).
 
-Style sheets are created with the [`VP ADD STYLESHEET`](cmd_vpAddStylesheet.md) command and applied with the the [`VP SET DEFAULT STYLE`](cmd_vpSetDefaultStyle.md) or [`VP SET CELL STYLE`](cmd_vpSetCellStyle.md) commands. You can  remove a style sheet with the [`VP REMOVE STYLESHEET`](cmd_vpRemoveStylesheet.md) command.
+Style sheets are created with the [VP ADD STYLESHEET](vpLanguageRef.md#vp-add-stylesheet) command and applied with the the [VP SET DEFAULT STYLE](vpLanguageRef.md#vp-set-default-style) or [VP SET CELL STYLE](vpLanguageRef.md#vp-set-cell-style) commands. You can  remove a style sheet with the [VP REMOVE STYLESHEET](vpLanguageRef.md#vp-remove-stylesheet) command.
 
-The [`VP Get stylesheet`](cmd_vpGetStylesheet.md) command can be used to return the style object of a single style sheet or you can use the [`VP Get stylesheets`](cmd_vpGetStylesheets.md) command to retrieve a collection of style objects for multiple style sheets.
+The [VP Get stylesheet](vpLanguageRef.md#vp-get-stylesheet) command can be used to return the style object of a single style sheet or you can use the [VP Get stylesheets](vpLanguageRef.md#vp-get-stylesheets) command to retrieve a collection of style objects for multiple style sheets.
 
 ### Style properties
 
  
-You can find detailed descriptions of the possible values below on the [4D View Pro Constants](vpConstants.md) page.
+You can find detailed descriptions of the possible values below on the [4D View Pro Constants](vpconstRef.md) page.
 
 #### Background & Foreground  
 
@@ -37,9 +37,9 @@ You can find detailed descriptions of the possible values below on the [4D View 
 
 #### Borders  
 
-|Property|	Type|	Description|	Possible values|
-|---|---|---|---|
-|borderBottom, borderLeft, borderRight, borderTop, diagonalDown,diagonalUp|object|	Defines the corresponding border line|	 
+|Property|	SubProperty|Type|	Description|	Possible values|
+|---|---|---|---|---|
+|borderBottom, borderLeft, borderRight, borderTop, diagonalDown,diagonalUp|object|	Defines the corresponding border line|	 |
 ||color|	text|	Defines the color of the border. Default = black.|CSS color "#rrggbb" syntax (preferred syntax), CSS color "rgb(r,g,b)" syntax (alternate syntax), CSS color name (alternate syntax)|
 ||style|	longint|	Defines the style of the border. Default = empty. Cannot be null or undefined.|	vk line style dash dot, vk line style dash dot dot, vk line style dashed, vk line style dotted, vk line style double, vk line style empty, vk line style hair, vk line style medium, vk line style medium dash dot, vk line style medium dash dot dot, vk line style medium dashed, vk line style slanted dash dot, vk line style thick, vk line style thick|
 
@@ -47,8 +47,8 @@ You can find detailed descriptions of the possible values below on the [4D View 
 
 |Property|Subproperty|	Type|	Description|	Possible values|
 |---|---|---|---|---|
-|font|		|text|	Specifies the font characteristics in CSS font shorthand ("font-style font-variant font-weight font-size/line-height font-family"). Example: "14pt Century Gothic". The font-size and font-family values are mandatory. If one of the other values is missing, their default values are used. Note: If a font name contains a space, the name must be within quotes.|	A CSS font shorthand.<p>4D provides utility commands to handle font characteristics as objects: [`VP Font to object`](cmd_vpFontToObject.md) and [`VP Object to font`](cmd_vpObjectToFont.md)|
-|formatter|		|text|Pattern for value/time property.|Number/text/date/time formats, special characters. See [4D View Pro Cell Format](vpCellFormat.md) section.|
+|font|		|text|	Specifies the font characteristics in CSS font shorthand ("font-style font-variant font-weight font-size/line-height font-family"). Example: "14pt Century Gothic". The font-size and font-family values are mandatory. If one of the other values is missing, their default values are used. Note: If a font name contains a space, the name must be within quotes.|	A CSS font shorthand.<p>4D provides utility commands to handle font characteristics as objects: [`VP Font to object`](vpLanguageRef.md#vp-font-to-object) and [`VP Object to font`](vpLanguageRef.md#vp-object-to-font)|
+|formatter|		|text|Pattern for value/time property.|Number/text/date/time formats, special characters. See [4D View Pro Cell Format](apx_vpCellFormat.md) section.|
 |isVerticalText|		|boolean|Specifies text direction.|True = vertical text, False = horizontal text.|
 |labelOptions|		|object|	Defines cell label options (watermark options).| |	
 ||alignment|	longint|Specifies the position of the cell label. Optional property.|	vk label alignment top left, vk label alignment bottom left, vk label alignment top center, vk label alignment bottom center, vk label alignment top right, vk label alignment bottom right|
@@ -57,8 +57,8 @@ You can find detailed descriptions of the possible values below on the [4D View 
 ||font|	text|Specifies the font characteristics with CSS font shorthand ("font-style font-variant font-weight font-size/line-height font-family"). The font-size and font-family values are mandatory.|	|
 |textDecoration|		|longint|Specifies the decoration added to text.|	vk text decoration double underline, vk text decoration line through, vk text decoration none, vk text decoration overline, vk text decoration underline|
 |textIndent|		|longint|Defines the unit of text indention. 1 = 8 pixels	||
-|textOrientation|		|longint|	Defines the rotation angle of the text in a cell.	Number between -90 and 90|
-|watermark|		|text|Defines the watermark (cell label) content|	
+|textOrientation|		|longint|	Defines the rotation angle of the text in a cell.	Number between -90 and 90| |
+|watermark|		|text|Defines the watermark (cell label) content|	|
 |wordWrap|		|boolean|Specifies if text should be wrapped.|True = wrapped text, False = unwrapped text|
 
 #### Layout  
