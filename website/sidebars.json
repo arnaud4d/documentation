@@ -188,20 +188,6 @@
 			"Events/onVpReady",
 			"Events/onWindowOpeningDenied"],
   "Menus":["Menus/overview","Menus/creating","Menus/properties","Menus/bars","Menus/sdi"],
-  "4D View Pro":["ViewPro/vpOverview","ViewPro/vpDatabaseReferences","ViewPro/vpFormEvents","ViewPro/vpFormulas",
-		{
-        "type": "subcategory",
-        "label": "4DVP Language",
-        "ids": [
-          "ViewPro/vpLanguageOverview","ViewPro/vpLanguageRef","ViewPro/vpFlushCommands","ViewPro/vpFontToObject","ViewPro/vpGetActiveCell","ViewPro/vpGetCellStyle","ViewPro/vpGetColumnAttributes","ViewPro/vpGetColumnCount","ViewPro/vpGetDefaultStyle","ViewPro/vpGetFormula","ViewPro/vpGetFormulaByName","ViewPro/vpconstRef"	  
-        ]},
-		{
-        "type": "subcategory",
-        "label": "Appendices",
-        "ids": [
-		"ViewPro/vpSheetOptions","ViewPro/vpRangeObjectProperties","ViewPro/vpPrintAttributes","ViewPro/vpCellFormat","ViewPro/vpStyleObjectsAndStyleSheets"
-		]
-      }
-	  ]
+  "4D View Pro":["ViewPro/vpOverview","ViewPro/vpFundamentals","ViewPro/vpUsing","ViewPro/vpDatabaseReferences","ViewPro/vpConfig","ViewPro/vpFormulas","ViewPro/vpLanguageRef","ViewPro/vpconstRef"]
   }
 }
