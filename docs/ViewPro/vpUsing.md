@@ -5,11 +5,11 @@ title: Using a 4D View Pro area
    
 When executed in forms, 4D View Pro areas provide basic spreadsheet features including cell editing and formula entry. More advanced features are available through the 4D View Pro language.
 
-### Selection, Input and Navigation Basics  
+## Selection, Input and Navigation Basics  
 
 Spreadsheets are composed of rows and columns. A number is associated with each row. A letter (or group of letters once the number of columns surpasses the number of letters in the alphabet) is associated with each column. The intersection of a row and a column makes a cell. Cells can be selected and their contents edited.
 
-#### Selection  
+### Selection  
 
 *	To select a cell, simply click on it or use the direction arrows on the keyboard. Its content (or formula) is displayed within the cell.
 
@@ -26,7 +26,7 @@ Spreadsheets are composed of rows and columns. A number is associated with each 
 
 *	To deselect cells, simply click anywhere within the spreadsheet.
 
-#### Input and navigation  
+### Input and navigation  
 
 Double-clicking on a cell allows passing into input mode in the relevant cell. If the cell is not empty, the insertion cursor is placed after the content of the cell.
 
@@ -37,11 +37,12 @@ replaces the content of the cell.
 
 The **Tab** key validates the cell input and selects the cell to its right. Combining the **Shift + Tab** keys validates the cell input and selects the cell to its left.
 
+
 The **Carriage return** key validates the cell input and selects the cell below it. Combining the **Shift + Carriage return** keys validates the cell input and selects the cell above it.
 
 The direction keys (arrows) allow you to move a cell in the direction indicated by the arrow.
 
-### Entering a Formula, a Function or a Reference  
+## Entering a Formula, a Function or a Reference  
 
 To enter a formula or a function in a 4D View Pro area:
 
@@ -56,7 +57,7 @@ To enter a formula or a function in a 4D View Pro area:
 	![](assets/en/ViewPro/vpFormula2.PNG)
 	
 	
-### Context Menu  
+## Context Menu  
 
 4D View Pro areas benefit from an automatic context menu that provides users with standard editing features such as copy and paste, but also with basic spreadsheet features:
 

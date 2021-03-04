@@ -98,46 +98,6 @@ Some of the events are standard form events (available to all active objects) an
 | 	|[On VP Range Changed](../Events/onVpRangeChanged.md)|
 
 
-## Using a 4D View Pro area     
-
- 
-When executed in forms, 4D View Pro areas provide basic spreadsheet features including cell editing and formula entry. More advanced features are available through the 4D View Pro language.
-
-### Selection, Input and Navigation Basics  
-
-Spreadsheets are composed of rows and columns. A number is associated with each row. A letter (or group of letters once the number of columns surpasses the number of letters in the alphabet) is associated with each column. The intersection of a row and a column makes a cell. Cells can be selected and their contents edited.
-
-#### Selection  
-
-*	To select a cell, simply click on it or use the direction arrows on the keyboard. Its content (or formula) is displayed within the cell.
-
-*	To select several continuous cells, drag the mouse from one end of the selection to the other. You can also click on the two ends of the selection while holding down the Shift key.
-
-*	To select all cells in the spreadsheet, click on the cell at the top left of the area:
-	![](assets/en/ViewPro/vpSelectAll.PNG)
-	
-*	To select a column, click on the corresponding letter (or set of letters).
-
-*	To select a row, click on the corresponding number.
-
-*	To select a group of cells that are not continuous, hold down the **Ctrl** key (Windows) or **Command** key (Mac) and click on each cell to be selected.
-
-*	To deselect cells, simply click anywhere within the spreadsheet.
-
-#### Input and navigation  
-
-Double-clicking on a cell allows passing into input mode in the relevant cell. If the cell is not empty, the insertion cursor is placed after the content of the cell.
-
-![](assets/en/ViewPro/vpInput.PNG)
-
-Data can be entered directly once a cell is already selected, even if the insertion cursor is not visible. The input then
-replaces the content of the cell.
-
-The **Tab** key validates the cell input and selects the cell to its right. Combining the **Shift + Tab** keys validates the cell input and selects the cell to its left.
-
-The **Carriage return** key validates the cell input and selects the cell below it. Combining the **Shift + Carriage return** keys validates the cell input and selects the cell above it.
-
-The direction keys (arrows) allow you to move a cell in the direction indicated by the arrow.
 
 
 ## Using the 4D View Pro Language
@@ -150,9 +110,9 @@ The 4D View Pro spreadsheet feature is a built-in 4D component. Thus, the 4D Vie
 You can expand this element in order to view all the component commands. These commands can be used in the 4D Method editor just like 4D language commands.
 
 
-### Handling 4D View Pro areas
+## Handling 4D View Pro areas
 
-#### Architecture  
+### Architecture  
 
 When working with 4D View Pro areas in your forms, you need to handle several elements:
 
@@ -165,7 +125,7 @@ When working with 4D View Pro areas in your forms, you need to handle several el
 
 When loading a 4D View Pro object in a form area, 4D generates the [On VP Ready](../Events/onVpReady.md) form event once the whole area is loaded. You must execute any 4D View Pro code handling the area in this event, otherwise an error is returned.
 
-#### 4D View Pro object
+### 4D View Pro object
 
 The 4D View Pro object describes the document and is automatically handled by the 4D View Pro commands. It contains the following properties:
 
@@ -178,7 +138,7 @@ The 4D View Pro object describes the document and is automatically handled by th
 |spreadJS|Object|Reserved for the 4D View Pro component|
 
 
-#### 4D View Pro form object variable  
+### 4D View Pro form object variable  
 
 The 4D View Pro form object variable manages information used by the 4D View Pro object. It contains the following variables:
 

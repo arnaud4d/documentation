@@ -798,6 +798,7 @@ You want to export a 4D View Pro document in ".xlsx" format and call a method th
 |Parameter|Type| |Description|
 |---|---|---|---|
 |vpAreaName| Text|->|4D View Pro area form object name|
+
 |option| Object|->|Export option|
 |Result| Object|<-|4D View Pro object|
 <!-- END REF -->  
@@ -4121,4 +4122,3 @@ End if
 ```
 
 
-<style> h2 { background: #d9ebff;}</style>
