@@ -736,32 +736,20 @@
       "Users/overview": {
         "title": "Overview"
       },
-      "ViewPro/vpCellFormat": {
-        "title": "4D View Pro Cell Format"
-      },
-      "ViewPro/vpPrintAttributes": {
-        "title": "4D View Pro Print Attributes"
-      },
-      "ViewPro/vpRangeObjectProperties": {
-        "title": "4D View Pro Range Object Properties"
-      },
-      "ViewPro/vpSheetOptions": {
-        "title": "4D View Pro Sheet Options"
-      },
-      "ViewPro/vpStyleObjectsAndStyleSheets": {
-        "title": "4D View Pro Style Objects and Style Sheets"
+      "ViewPro/vpConfig": {
+        "title": "Configuring a 4D View Pro area"
       },
       "ViewPro/vpconstRef": {
-        "title": "4DVP Constant Reference"
+        "title": "Constant Reference"
       },
       "ViewPro/vpDatabaseReferences": {
         "title": "Database References"
       },
-      "ViewPro/vpFormEvents": {
-        "title": "Form Events"
-      },
       "ViewPro/vpFormulas": {
         "title": "Formulas"
+      },
+      "ViewPro/vpFundamentals": {
+        "title": "Fundamentals"
       },
       "ViewPro/vpLanguageOverview": {
         "title": "Using the 4D View Pro Language"
@@ -771,6 +759,9 @@
       },
       "ViewPro/vpOverview": {
         "title": "Overview"
+      },
+      "ViewPro/vpUsing": {
+        "title": "Using a 4D View Pro area"
       },
       "WebServer/webServerObject": {
         "title": "Web Server object"
