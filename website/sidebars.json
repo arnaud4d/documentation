@@ -42,6 +42,7 @@
 	"API/FunctionClass",
 	"API/IMAPTransporterClass",
 	"API/MailAttachmentClass",
+	"API/OAuth2ProviderClass",
 	"API/POP3TransporterClass",
 	"API/SessionClass",
 	"API/SignalClass",
