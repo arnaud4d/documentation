@@ -1,6 +1,6 @@
 ---
 id: OAuth2ProviderClass
-title: OAuth2Provider
+title: OAuth2.Provider
 ---
 
 The OAuth2.Provider class allows you to send authentication token requests to third-party service providers in order to use their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
