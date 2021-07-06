@@ -33,7 +33,9 @@ The OAuth2.Provider class allows you to send authentication token requests to th
 `OAuth2.Provider.new()`<!-- REF #OAuth2.Provider.new().Summary -->instantiates an object of the OAuth2.Provider class. 
 <!-- END REF --> 
 
-In `paramObj`, pass an object that determines the properties of the returned 4D.Oauth2Provider object. The available properties are:
+In `paramObj`, pass an object that determines the properties of the returned 4D.Oauth2Provider object. 
+
+The available properties of `paramObj` are:
 
 |Parameter|Type|Description|
 |---------|--- |------|
@@ -49,7 +51,7 @@ In `paramObj`, pass an object that determines the properties of the returned 4D.
 | token | token object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automaticaly updated with the token received by the `getToken()` function.   |
 | timeout|real| Waiting time in second (by default 120s)|
 
-### The `token` property
+### Value of the `token` property
 
 The value of `token` is an object that can contain optional additional information returned by the server, like information defined in your token configuration:
 
@@ -73,7 +75,7 @@ Property|Object properties|Type|Description |
 
 #### Description 
 
-If the value of the `token` property is "empty", the command sends a request for a new token.
+If the value of `token` is "empty", the command sends a request for a new token.
 
 If the token has expired: 
 *   If the token object has the `refreshToken` property, the command sends a new request to refresh the token and returns it.
