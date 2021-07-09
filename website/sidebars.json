@@ -27,6 +27,7 @@
   "Class API Reference":
   [
 	"API/overview",
+	"API/4DNetkit",
 	"API/BlobClass",
 	"API/ClassClass",
 	"API/CollectionClass",
@@ -42,7 +43,6 @@
 	"API/FunctionClass",
 	"API/IMAPTransporterClass",
 	"API/MailAttachmentClass",
-	"API/OAuth2ProviderClass",
 	"API/POP3TransporterClass",
 	"API/SessionClass",
 	"API/SignalClass",
@@ -68,8 +68,7 @@
 	"WebServer/errorPages",
 	"WebServer/authentication",
 	"WebServer/sessions",
-	"WebServer/preemptiveWeb",
-	"WebStudio/webStudio"],
+	"WebServer/preemptiveWeb"],
   "REST Server": [		{
         "type": "subcategory",
         "label": "Guides",
