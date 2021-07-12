@@ -28,6 +28,7 @@
   [
 	"API/overview",
 	"API/4DNetkit",
+	"API/4DNetkithowto",
 	"API/BlobClass",
 	"API/ClassClass",
 	"API/CollectionClass",

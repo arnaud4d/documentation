@@ -1,6 +1,6 @@
 ---
-id: 4DNetKit
-title: 4DNetKit
+id: 4DNetkit
+title: 4DNetkit
 ---
 
 The 4DNetKit component allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
@@ -14,7 +14,7 @@ The `Provider` class allows you to send requests for authentication tokens to th
 ### OAuth2.Provider.new()
 
 #### Syntax 
-**OAuth2.Provider.new**( paramObj : Object ) : 
+**OAuth2.Provider.new**( paramObj : Object ) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
@@ -42,16 +42,16 @@ The available properties of `paramObj` are:
 | applicationSecret | text | (optional) The application secret that you created for your app on the app registration portal. Required for web apps. |
 | token | token object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automaticaly updated with the token received by the `getToken()` function.   |
 | timeout|real| Waiting time in second (by default 120s)|
-||expiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
+|expiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
 
-### Value of the `token` property
+#### Value of the returned object
 
-The value of `token` is an object that can contain optional additional information returned by the server, like information defined in your token configuration:
+The returned object contains the token `property`, as well as optional additional information returned by the server, like information defined in your token configuration:
 
 Property|Object properties|Type|Description |
 |--- |---------| --- |------|
+|expiration || text | Timestamp (ISO 8601 UTC) that represents the expiration time |
 |token||object| Token returned  |
-
 || expires_in | text | How long the access token is valid (in seconds). |
 || access_token | text | The requested access token. |
 || refresh_token | text | Your app can use this token to acquire additional access tokens after the current access token expires. Refresh tokens are long-lived, and can be used to retain access to resources for extended periods of time. Available only if the value of the `permission` property is "signedIn" |

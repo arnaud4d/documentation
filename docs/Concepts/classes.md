@@ -98,10 +98,13 @@ In the various 4D windows (code editor, compiler, debugger, runtime explorer), c
  
 ## Class stores
 
-Available classes are accessible from their class stores. Two class stores are available:
+A class store is an object whose properties are classes.
+
+Available classes are accessible from their class stores. Several class stores are available:
 
 - `cs` for user class store
 - `4D` for built-in class store
+- class stores returned by components such as [4D Netkit](../API/4DNetkit.md)
 
  
 ### `cs`
