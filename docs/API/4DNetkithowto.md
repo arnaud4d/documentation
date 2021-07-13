@@ -1,5 +1,5 @@
 ---
-id: 4DNetkithowto
+id: 4DNetKithowto
 title: How to Send an Email using the Microsoft Graph API
 ---
 
@@ -13,7 +13,7 @@ You have registered an app with the [Microsoft Identity platform](https://docs.m
 
 > Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. Once it's done, you can use the generated application ID to tell your 4D application to trust the Microsoft identity platform.
 
-You have installed the 4DNetkit component.
+You have installed the 4D Netkit component.
 
 You have an email adress compatible with Microsoft Graph, such as "myadress@outlook.com" for example.
 

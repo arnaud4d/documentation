@@ -27,8 +27,8 @@
   "Class API Reference":
   [
 	"API/overview",
-	"API/4DNetkit",
-	"API/4DNetkithowto",
+	"API/4DNetKit",
+	"API/4DNetKithowto",
 	"API/BlobClass",
 	"API/ClassClass",
 	"API/CollectionClass",

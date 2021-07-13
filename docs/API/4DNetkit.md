@@ -1,16 +1,28 @@
 ---
-id: 4DNetkit
-title: 4DNetkit
+id: 4DNetKit
+title: 4D NetKit
 ---
 
-The 4DNetKit component allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
+# Overview
+The 4D NetKit component allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
 
-## OAuth2
+# Table of contents
+
+* [Installation](#installation)
+* [Authorization flow](authorization-flow)
+* [OAuth2 method and class store](#oauth2-method-and-class-store)
+* [The Provider class](#the-provider-class)
+* [Class Methods](#class-methods)
+* [Tutorial](#tutorial)
+
+
+## OAuth2 method and class store
 Inside the 4D Netkit component, the OAuth2 method returns the OAuth2 [class store](../Concepts/classes.html#class-stores).
 
 ## The Provider Class
-The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
+The `Provider` class belongs to the OAuth2 class store. It allows you to send requests for authentication tokens to third-party web service providers. 
 
+## Class Methods
 ### OAuth2.Provider.new()
 
 #### Syntax 
@@ -32,7 +44,7 @@ The available properties of `paramObj` are:
 |Parameter|Type|Description|
 |---------|--- |------|
 | name | text | Name of the provider. For example "Microsoft" |
-| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests. Requires opening a web browser. "service": call Microsoft Graph with their own identity.|
+| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service).|
 | applicationId | text | The Application ID  assigned to the app by the registration portal|
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions |
@@ -60,11 +72,11 @@ Property|Object properties|Type|Description |
 
 ### .getToken()
 
-`4D.OAuth2Provider.getToken()` returns an object:
+`OAuth2.Provider.getToken()` returns an object:
 
 #### Syntax
 
-**4D.OAuth2Provider.getToken**() : Object
+**OAuth2.Provider.getToken**() : Object
 
 #### Description 
 
@@ -76,19 +88,33 @@ If the token has expired:
 
 If the 4D.OAuth2Provider object has the "signedIn" property, the command opens a web browser to request authorization.
 
-## Tutorial: Sending an email using Microsoft Graph 
 
-This tutorial walks you through the process of sending an email using Microsoft Graph.
+# Tutorial
 
-### Prerequisites 
+## Objectives 
 
-*   You have registered your app on the [Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2) to get an application ID.
+Send an email from 4D by calling the Microsoft Graph API
 
-> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal, and which allows you to call Microsoft Graph.
+## Prerequisites
 
-*   You have an email address compatible with Microsoft Graph
 
-Once you have your app ID, you can establish a connection to your Azure application and send an email using the SMTP transporter:
+You have installed the 4D Netkit component.
+
+You have registered an app with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID.
+
+> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. Once it's done, you can use the generated application ID to tell your 4D application to trust the Microsoft identity platform.
+
+You have an email adress compatible with Microsoft Graph, such as "myadress@outlook.com" for example.
+
+## Overview
+
+[Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow) is a great resource to understand the authorization workflow.
+
+## Establishing a connection to your Azure application
+
+Once you have your app ID, you can establish a connection to your Azure application. In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
+
+1. Create a method and insert the following code:
 
 ```4d
 
@@ -107,37 +133,14 @@ $param.scope:="https://outlook.office.com/SMTP.Send"
 $oAuth2:=OAuth2.Provider.new($param)
 
 $token:=$oAuth2.getToken()
-
-// Configure SMTP
-$address:="your-email-address"
-
-$parameters:=New object
-$parameters.accessTokenOAuth2:=$token.accessToken
-$parameters.authenticationMode:=SMTP authentication OAUTH2
-$parameters.host:="smtp.office365.com"
-$parameters.port:=587
-$parameters.user:=$address
-
-$parameters.logFile:="smtp.log"
-
-// Send an email
-$smtp:=SMTP New transporter($parameters)
-
-$statusSMTP:=$smtp.checkConnection()
-If ($statusSMTP.success)
-	$statusSend:=$smtp.send(mail($address))
-Else 
-	ALERT("Access denied to SMTP server")
-End if 
 ```
 
-Set the contents of the mail: 
-
-> TODO -> Explain the code
-
+2. Create a second method that contains the contents of the email:
 
 ```4d
 #DECLARE($from : Text)->$email : Object
+
+> TODO: explain the declare and pointer here
 
 $email:=New object
 $email.subject:="my first mail "+Timestamp
@@ -150,3 +153,33 @@ $email.to.push(New object("email"; "recipient-email-address"))
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
 $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
 ```
+
+3. Back to the first method, insert the following code to configure SMTP authentication:
+
+```4d
+// Configure SMTP
+$address:="your-email-address"
+$parameters:=New object
+$parameters.accessTokenOAuth2:=$token.accessToken
+$parameters.authenticationMode:=SMTP authentication OAUTH2
+$parameters.host:="smtp.office365.com"
+$parameters.port:=587
+$parameters.user:=$address
+
+$parameters.logFile:="smtp.log"
+```
+
+4. Add these lines to check the connection and send the email:
+
+```4d
+$smtp:=SMTP New transporter($parameters)
+
+$statusSMTP:=$smtp.checkConnection()
+If ($statusSMTP.success)
+	$statusSend:=$smtp.send(mail($address))
+Else 
+	ALERT("Access denied to SMTP server")
+End if 
+```
+
+Now you can execute the method and check if the recipient address gets the email.
