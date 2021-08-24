@@ -140,8 +140,6 @@ $token:=$oAuth2.getToken()
 ```4d
 #DECLARE($from : Text)->$email : Object
 
-> TODO: explain the declare and pointer here
-
 $email:=New object
 $email.subject:="my first mail "+Timestamp
 $email.from:=$from
