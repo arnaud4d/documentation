@@ -45,7 +45,7 @@ The available properties of `paramObj` are:
 |---------|--- |------|
 | name | text | Name of the provider. For example "Microsoft" |
 | permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service).|
-| applicationId | text | The Application ID  assigned to the app by the registration portal|
+| clientId | text | The Application ID  assigned to the app by the registration portal|
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions |
 | tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are *"common"* for both Microsoft accounts and work or school accounts, *"organizations"* for work or school accounts only, *"consumers"* for Microsoft accounts only, and *tenant identifiers* such as the tenant ID or domain name. Default is "common" |
@@ -125,7 +125,7 @@ var $token : Object
 $param:=New object()
 $param.name:="Microsoft"
 $param.permission:="signedIn"
-$param.applicationId:="your-application-id"
+$param.clientId:="your-client-id"
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 
 $param.scope:="https://outlook.office.com/SMTP.Send"
