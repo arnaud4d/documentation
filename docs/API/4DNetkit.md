@@ -4,38 +4,33 @@ title: 4D NetKit
 ---
 
 # Overview
-The 4D NetKit component allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
+The 4D NetKit component is a built-in 4D component that allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
 
 # Table of contents
 
-* [Installation](#installation)
-* [Authorization flow](authorization-flow)
-* [OAuth2 method and class store](#oauth2-method-and-class-store)
+* [Component method and class store](#oauth2-method-and-class-store)
 * [The Provider class](#the-provider-class)
 * [Class Methods](#class-methods)
 * [Tutorial](#tutorial)
 
 
-## OAuth2 method and class store
-Inside the 4D Netkit component, the OAuth2 method returns the OAuth2 [class store](../Concepts/classes.html#class-stores).
+## Component method
+Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the Provider [class](https://developer.4d.com/docs/en/Concepts/classes.html).
 
 ## The Provider Class
-The `Provider` class belongs to the OAuth2 class store. It allows you to send requests for authentication tokens to third-party web service providers. 
-
-## Class Methods
-### OAuth2.Provider.new()
+The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
 
 #### Syntax 
-**OAuth2.Provider.new**( paramObj : Object ) : Object
+**New OAuth2 provider()**( paramObj : Object ) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|paramObj|Object|->| object that determines the properties of the 4D.OAuth2Provider object to be returned |
+|paramObj|Object|->| determines the properties of the object to be returned |
 |Result|Object|<-| object
 
 #### Description
-`OAuth2.Provider.new()` instantiates an object of the OAuth2.Provider class.
+`New OAuth2 provider` instantiates an object of the Provider class.
 
 In `paramObj`, pass an object that determines the properties of the returned object. 
 
@@ -44,31 +39,31 @@ The available properties of `paramObj` are:
 |Parameter|Type|Description|
 |---------|--- |------|
 | name | text | Name of the provider. For example "Microsoft" |
-| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service).|
-| clientId | text | The Application ID  assigned to the app by the registration portal|
+| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|
+| clientId | text | The client ID assigned to the app by the registration portal|
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions |
 | tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are *"common"* for both Microsoft accounts and work or school accounts, *"organizations"* for work or school accounts only, *"consumers"* for Microsoft accounts only, and *tenant identifiers* such as the tenant ID or domain name. Default is "common" |
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize" |
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token" |
-| applicationSecret | text | (optional) The application secret that you created for your app on the app registration portal. Required for web apps. |
-| token | token object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automaticaly updated with the token received by the `getToken()` function.   |
-| timeout|real| Waiting time in second (by default 120s)|
-|expiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
+| clientSecret | text | (optional) The application secret that you created for your app in the app registration portal. Required for web apps. |
+| token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |
+| timeout|real| Waiting time in seconds (by default 120s)|
+|tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
 
 #### Value of the returned object
 
-The returned object contains the token `property`, as well as optional additional information returned by the server, like information defined in your token configuration:
+The returned object contains the `token` property, as well as optional additional information returned by the server, like information defined in your token configuration:
 
 Property|Object properties|Type|Description |
 |--- |---------| --- |------|
-|expiration || text | Timestamp (ISO 8601 UTC) that represents the expiration time |
-|token||object| Token returned  |
+|tokenExpiration || text | Timestamp (ISO 8601 UTC) that indicates the expiration time of the token|
+|token||object| Token returned (as defined by the [IETF](https://datatracker.ietf.org/doc/html/rfc6749#page-71)) |
 || expires_in | text | How long the access token is valid (in seconds). |
 || access_token | text | The requested access token. |
 || refresh_token | text | Your app can use this token to acquire additional access tokens after the current access token expires. Refresh tokens are long-lived, and can be used to retain access to resources for extended periods of time. Available only if the value of the `permission` property is "signedIn" |
 || token_type | text | Indicates the token type value. The only token type that Azure AD supports is "Bearer". |
-||scope|text| The permissions (scopes) that the access_token is valid for.|
+||scope|text| A space separated list of the Microsoft Graph permissions that the access_token is valid for.|
 
 ### .getToken()
 
@@ -97,12 +92,9 @@ Send an email from 4D by calling the Microsoft Graph API
 
 ## Prerequisites
 
+You have registered an app with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your client ID.
 
-You have installed the 4D Netkit component.
-
-You have registered an app with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID.
-
-> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. Once it's done, you can use the generated application ID to tell your 4D application to trust the Microsoft identity platform.
+> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. Once it's done, you can use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
 You have an email adress compatible with Microsoft Graph, such as "myadress@outlook.com" for example.
 
@@ -130,7 +122,7 @@ $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
-$oAuth2:=OAuth2.Provider.new($param)
+$oAuth2:=New OAuth2 provider($param)
 
 $token:=$oAuth2.getToken()
 ```
@@ -158,7 +150,7 @@ $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br
 // Configure SMTP
 $address:="your-email-address"
 $parameters:=New object
-$parameters.accessTokenOAuth2:=$token.accessToken
+$parameters.accessTokenOAuth2:=$token.token.access_token
 $parameters.authenticationMode:=SMTP authentication OAUTH2
 $parameters.host:="smtp.office365.com"
 $parameters.port:=587
