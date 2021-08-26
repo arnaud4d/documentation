@@ -56,7 +56,7 @@ The available properties of `paramObj` are:
 **Auth2ProviderObject.getToken()** : Object
 
 |Parameter|Type||Description|
-|---------|--- |------||------|
+|---------|--- |------|------|
 |Result|Object|<-| Object that contains information on the token
 
 
