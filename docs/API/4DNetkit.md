@@ -121,6 +121,7 @@ $param.clientId:="your-client-id"
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
+
 // Instantiate an object of the Auth2Provider class
 
 $oAuth2:=New OAuth2 provider($param)
