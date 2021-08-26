@@ -115,15 +115,10 @@ var $oAuth2; $token; $param; $email : Object
 // Configure authentication
 
 $param:=New object()
-
 $param.name:="Microsoft"
-
 $param.permission:="signedIn"
-
 $param.clientId:="your-client-id"
-
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
-
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
 // Instantiate an object of the Auth2Provider class
@@ -139,34 +134,22 @@ $token:=$oAuth2.getToken()
 // Set the email's content and metadata
 
 $email:=New object
-
 $email.subject:="my first mail "+Timestamp
-
 $email.from:="email-sender-address@outlook.fr"
-
 $email.to:=New collection
-
 $email.to.push(New object("email"; "email-recipient-address@outlook.fr"))
-
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
-
 $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
 
 
 // Configure the SMTP connection
 
 $address:="email-address@outlook.fr"
-
 $parameters:=New object
-
 $parameters.accessTokenOAuth2:=$token.token.access_token
-
 $parameters.authenticationMode:=SMTP authentication OAUTH2
-
 $parameters.host:="smtp.office365.com"
-
 $parameters.port:=587
-
 $parameters.user:=$address
 
 
@@ -176,19 +159,12 @@ $parameters.logFile:="smtp.log"
 // Send the email if the connection is successful, and handle errors.
 
 $smtp:=SMTP New transporter($parameters)
-
 $statusSMTP:=$smtp.checkConnection()
-
 If ($statusSMTP.success)
-	
 	$statusSend:=$smtp.send($email)
-	
 Else 
-	
 	ALERT("Access denied to SMTP server")
-	
 End if 
-
 ```
 
 5. Execute the method. Your browser opens a page that allows you to authenticate.
