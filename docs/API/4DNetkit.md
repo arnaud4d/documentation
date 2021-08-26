@@ -106,10 +106,9 @@ Once you have your client ID, you can establish a connection to your Azure appli
 ```4d
 
 // Establish a connection to your Azure application
-var $oAuth2 : Object
-var $token : Object
+var $oAuth2, $token, $param : Object
 
-$param:=New object()
+$param:=New object
 $param.name:="Microsoft"
 $param.permission:="signedIn"
 $param.clientId:="your-client-id"
