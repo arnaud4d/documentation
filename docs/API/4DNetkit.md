@@ -82,7 +82,7 @@ When requesting access on behalf of a user ("signedIn" mode) the command opens a
 
 ## Objectives 
 
-Establish a connection to the Microsoft Graph and send an email using 4D NetKit and the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html)
+Establish a connection to the Microsoft Graph and send an email using 4D NetKit and the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
 ## Prerequisites
 
