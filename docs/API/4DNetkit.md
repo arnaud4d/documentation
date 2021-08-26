@@ -10,7 +10,7 @@
 * [Tutorial](#tutorial)
 
 ## Component method and Provider class
-Inside the component, the `New OAuth2 provider` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
+Inside the component, the `New OAuth2 provider()` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
 The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
 
