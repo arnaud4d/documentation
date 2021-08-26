@@ -104,9 +104,7 @@ In this example, we get access [on behalf of a user](https://docs.microsoft.com/
 
 ## Steps
 
-Once you have your client ID, you can establish a connection to your Azure application. 
-
-1. Create a method and insert the following code:
+Once you have your client ID, you're ready to establish a connection to your Azure application and send an email. To do this, open your 4D applicaiton, create a method and insert the following code:
 
 ```4d
 
