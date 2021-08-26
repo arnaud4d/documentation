@@ -151,8 +151,6 @@ $parameters.authenticationMode:=SMTP authentication OAUTH2
 $parameters.host:="smtp.office365.com"
 $parameters.port:=587
 $parameters.user:=$address
-
-
 $parameters.logFile:="smtp.log"
 
 
