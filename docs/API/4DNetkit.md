@@ -79,7 +79,7 @@ If the token has expired:
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
 
-# Tutorial : Send an email by calling the Microsoft Graph API
+# Tutorial : Send an Email by Calling the Microsoft Graph API
 
 ## Objectives 
 
