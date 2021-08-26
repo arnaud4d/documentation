@@ -6,7 +6,7 @@
 ## Table of contents
 
 * [Component method](#component-method)
-* [Auth2Provider-class]
+* [Auth2Provider-class](#Auth2Provider-class)
 * [Tutorial](#tutorial)
 
 ## Component method 
