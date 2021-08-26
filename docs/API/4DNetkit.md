@@ -66,13 +66,13 @@ The available properties of `paramObj` are:
 
 Property|Object properties|Type|Description |
 |--- |---------| --- |------|
-|tokenExpiration || text | Timestamp (ISO 8601 UTC) that indicates the expiration time of the token|
 |token||object| Token returned |
 || expires_in | text | How long the access token is valid (in seconds). |
 || access_token | text | The requested access token. |
 || refresh_token | text | Your app can use this token to acquire additional access tokens after the current access token expires. Refresh tokens are long-lived, and can be used to retain access to resources for extended periods of time. Available only if the value of the `permission` property is "signedIn". |
 || token_type | text | Indicates the token type value. The only token type that Azure AD supports is "Bearer". |
 ||scope|text| A space separated list of the Microsoft Graph permissions that the access_token is valid for.|
+|tokenExpiration || text | Timestamp (ISO 8601 UTC) that indicates the expiration time of the token|
 
 If the value of `token` is empty, the command sends a request for a new token.
 
