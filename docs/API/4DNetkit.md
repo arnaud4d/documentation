@@ -30,7 +30,7 @@ The `Provider` class allows you to send requests for authentication tokens to th
 |Result|Object|<-| object
 
 #### Description
-`New OAuth2 provider` instantiates an object of the Provider class.
+`New OAuth2 provider` instantiates an object of the `Provider` class.
 
 In `paramObj`, pass an object that determines the properties of the returned object. 
 
@@ -50,67 +50,66 @@ The available properties of `paramObj` are:
 | token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |
 | timeout|real| Waiting time in seconds (by default 120s)|
 |tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
+### .getToken()
 
-#### Value of the returned object
-
-The returned object contains the `token` property, as well as optional additional information returned by the server, like information defined in your token configuration:
+`.getToken()` returns an object that contains a `token` property (as defined by the [IETF](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1)), as well as optional additional information returned by the server:
 
 Property|Object properties|Type|Description |
 |--- |---------| --- |------|
 |tokenExpiration || text | Timestamp (ISO 8601 UTC) that indicates the expiration time of the token|
-|token||object| Token returned (as defined by the [IETF](https://datatracker.ietf.org/doc/html/rfc6749#page-71)) |
+|token||object| Token returned |
 || expires_in | text | How long the access token is valid (in seconds). |
 || access_token | text | The requested access token. |
 || refresh_token | text | Your app can use this token to acquire additional access tokens after the current access token expires. Refresh tokens are long-lived, and can be used to retain access to resources for extended periods of time. Available only if the value of the `permission` property is "signedIn" |
 || token_type | text | Indicates the token type value. The only token type that Azure AD supports is "Bearer". |
 ||scope|text| A space separated list of the Microsoft Graph permissions that the access_token is valid for.|
 
-### .getToken()
-
-`OAuth2.Provider.getToken()` returns an object:
-
 #### Syntax
 
-**OAuth2.Provider.getToken**() : Object
+**.getToken**() : Object
 
 #### Description 
 
-If the value of `token` is "empty", the command sends a request for a new token.
+If the value of `token` is empty, the command sends a request for a new token.
 
 If the token has expired: 
-*   If the token object has the `refreshToken` property, the command sends a new request to refresh the token and returns it.
-*   If the token object does not have the `refreshToken` property, the command automatically sends a request for a new token. 
+*   If the token object has the `refresh_token` property, the command sends a new request to refresh the token and returns it.
+*   If the token object does not have the `refresh_token` property, the command automatically sends a request for a new token. 
 
-If the 4D.OAuth2Provider object has the "signedIn" property, the command opens a web browser to request authorization.
+When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
 
-# Tutorial
+# Tutorial : Send an email by calling the Microsoft Graph API
 
 ## Objectives 
 
-Send an email from 4D by calling the Microsoft Graph API
+Establish a connection to the Microsoft Graph and send an email using 4D NetKit and the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html)
 
 ## Prerequisites
 
-You have registered an app with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your client ID.
+You have registered an application with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
 
-> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. Once it's done, you can use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
+> Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. You use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
-You have an email adress compatible with Microsoft Graph, such as "myadress@outlook.com" for example.
+You have an email adress compatible with Microsoft Graph, such as "myaddress@outlook.com".
+
+You know how to use the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html)
 
 ## Overview
 
 [Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow) is a great resource to understand the authorization workflow.
 
-## Establishing a connection to your Azure application
+In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
 
-Once you have your app ID, you can establish a connection to your Azure application. In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
+## Steps
+
+Once you have your client ID, you can establish a connection to your Azure application. 
 
 1. Create a method and insert the following code:
 
 ```4d
 
-// Establish a connection to Microsoft Graph
+// Establish a connection to your Azure application
 var $oAuth2 : Object
 var $token : Object
 
@@ -135,11 +134,12 @@ $token:=$oAuth2.getToken()
 $email:=New object
 $email.subject:="my first mail "+Timestamp
 $email.from:=$from
-//$email.to:="recipient-email-address"
-//$email.attachments:=New collection(MAIL New attachment("c:\\tmp\\28619330.pdf"))
 
+// Add the recipient's email address. You can use your own email address to send an email to yourself.
 $email.to:=New collection
 $email.to.push(New object("email"; "recipient-email-address"))
+
+// Contents of the email 
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
 $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
 ```
@@ -172,4 +172,6 @@ Else
 End if 
 ```
 
-Now you can execute the method and check if the recipient address gets the email.
+5. Execute the method, your browser opens a page, allowing you to authenticate.
+
+6. Log in to your Microsoft Outlook account and check that you've received the email.
