@@ -1,24 +1,22 @@
----
-id: 4DNetKit
-title: 4D NetKit
----
+# 4D NetKit
 
-# Overview
-The 4D NetKit component is a built-in 4D component that allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
+## Overview
+4D NetKit is a built-in 4D component that allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
 
-# Table of contents
+## Table of contents
 
-* [Component method and class store](#oauth2-method-and-class-store)
-* [The Provider class](#the-provider-class)
+* [Component method and Provider class](#component-method-and-provider-class)
 * [Class Methods](#class-methods)
 * [Tutorial](#tutorial)
 
+## Component method and Provider class
+Inside the component, the `New OAuth2 provider` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
-## Component method
-Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
-
-## The Provider Class
 The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
+
+## Class Functions 
+
+### **New OAuth2 provider()**
 
 #### Syntax 
 **New OAuth2 provider**( *paramObj* : Object ) : Object
@@ -50,6 +48,7 @@ The available properties of `paramObj` are:
 | token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |
 | timeout|real| Waiting time in seconds (by default 120s)|
 |tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
+
 ### .getToken()
 
 #### Syntax
