@@ -36,20 +36,20 @@ The returned object's properties correspond to those of the `paramObj` object pa
 
 The available properties of `paramObj` are:
 
-|Parameter|Type|Description|
-|---------|--- |------|
-| name | text | Name of the provider, for example "Microsoft". |
-| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|
-| clientId | text | The client ID assigned to the app by the registration portal.|
-| redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|
-| scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |
-| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are *"common"* for both Microsoft accounts and work or school accounts, *"organizations"* for work or school accounts only, *"consumers"* for Microsoft accounts only, and *tenant identifiers* such as the tenant ID or domain name. Default is "common". |
-| authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |
-| tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |
-| clientSecret | text | (optional) The application secret that you created for your app in the app registration portal. Required for web apps. |
-| token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |
+|Parameter|Type|Description|Can be Null or undefined|
+|---------|--- |------|------|
+| name | text | Name of the provider, for example "Microsoft". |No
+| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|No
+| clientId | text | The client ID assigned to the app by the registration portal.|No
+| redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|No in signedIn mode, Yes in service mode
+| scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
+| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are *"common"* for both Microsoft accounts and work or school accounts, *"organizations"* for work or school accounts only, *"consumers"* for Microsoft accounts only, and *tenant identifiers* such as the tenant ID or domain name. Default is "common". |Yes
+| authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
+| tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
+| clientSecret | text | The application secret that you created for your app in the app registration portal. Required for web apps. |Yes
+| token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |Yes
 | timeout|real| Waiting time in seconds (by default 120s).|
-|tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time. |
+|tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time. |Yes
 
 ### Auth2ProviderObject.getToken()
 
@@ -110,66 +110,85 @@ Once you have your client ID, you can establish a connection to your Azure appli
 
 ```4d
 
-// Establish a connection to your Azure application
-var $oAuth2; $token; $param : Object
+var $oAuth2; $token; $param; $email : Object
 
-$param:=New object
+// Configure authentication
+
+$param:=New object()
+
 $param.name:="Microsoft"
+
 $param.permission:="signedIn"
+
 $param.clientId:="your-client-id"
+
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
+// Instantiate an object of the Auth2Provider class
+
 $oAuth2:=New OAuth2 provider($param)
 
+
+// Request a token using the class function
+
 $token:=$oAuth2.getToken()
-```
 
-2. Create a second method that contains the contents of the email:
 
-```4d
-#DECLARE($from : Text)->$email : Object
+// Set the email's content and metadata
 
 $email:=New object
+
 $email.subject:="my first mail "+Timestamp
-$email.from:=$from
 
-// Add the recipient's email address. You can use your own email address to send an email to yourself.
+$email.from:="email-sender-address@outlook.fr"
+
 $email.to:=New collection
-$email.to.push(New object("email"; "recipient-email-address"))
 
-// Contents of the email 
+$email.to.push(New object("email"; "email-recipient-address@outlook.fr"))
+
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
+
 $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
-```
 
-3. Back to the first method, insert the following code to configure SMTP authentication:
 
-```4d
-// Configure SMTP
-$address:="your-email-address"
+// Configure the SMTP connection
+
+$address:="email-address@outlook.fr"
+
 $parameters:=New object
+
 $parameters.accessTokenOAuth2:=$token.token.access_token
+
 $parameters.authenticationMode:=SMTP authentication OAUTH2
+
 $parameters.host:="smtp.office365.com"
+
 $parameters.port:=587
+
 $parameters.user:=$address
 
+
 $parameters.logFile:="smtp.log"
-```
 
-4. Add these lines to check the connection and send the email:
 
-```4d
+// Send the email if the connection is successful, and handle errors.
+
 $smtp:=SMTP New transporter($parameters)
 
 $statusSMTP:=$smtp.checkConnection()
+
 If ($statusSMTP.success)
-	$statusSend:=$smtp.send(mail($address))
+	
+	$statusSend:=$smtp.send($email)
+	
 Else 
+	
 	ALERT("Access denied to SMTP server")
+	
 End if 
+
 ```
 
 5. Execute the method. Your browser opens a page that allows you to authenticate.
