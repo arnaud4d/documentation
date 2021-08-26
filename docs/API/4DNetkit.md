@@ -1,22 +1,18 @@
 # 4D NetKit
 
 ## Overview
-4D NetKit is a built-in 4D component that allows you to interact with third-party web services and  their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
+4D NetKit is a built-in 4D component that allows you to interact with third-party web services and their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
 
 ## Table of contents
 
-* [Component method](#component-method)
-* [Auth2Provider-class](#Auth2Provider-class)
-* [Tutorial](#tutorial)
-
-## Component method 
-
+* [Auth2Provider](#Auth2Provider-class)
+* [Tutorial: Send an Email by Calling the Microsoft Graph API](#tutorial)
 
 ## Auth2Provider
 
 Inside the 4D NetKit component, the `New OAuth2 provider()` method returns an object which is an instance of the `Auth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
-This class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
+The `Auth2Provider` class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
 
 1. Using the `New OAuth2 provider()` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
 2. You call the `{Auth2ProviderObject}.getToken()` class function to retrieve a token from the web service provider.
@@ -36,7 +32,7 @@ This class allows you to request authentication tokens to third-party web servic
 
 In `paramObj`, pass an object that contains authentication information.
 
-The returned object's properties correspond to the `paramObj` object passed as a parameter.
+The returned object's properties correspond to those of the `paramObj` object passed as a parameter.
 
 The available properties of `paramObj` are:
 
