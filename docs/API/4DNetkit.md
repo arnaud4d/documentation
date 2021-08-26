@@ -6,7 +6,7 @@
 ## Table of contents
 
 * [Auth2Provider](#Auth2Provider-class)
-* [Tutorial: Send an Email by Calling the Microsoft Graph API](#tutorial)
+* [Tutorial: Send an Email by Calling the Microsoft Graph API](#tutorial--send-an-email-by-calling-the-microsoft-graph-api)
 
 ## Auth2Provider
 
