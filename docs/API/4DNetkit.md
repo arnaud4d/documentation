@@ -52,7 +52,9 @@ The available properties of `paramObj` are:
 |tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
 ### .getToken()
 
-`.getToken()` returns an object that contains a `token` property (as defined by the [IETF](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1)), as well as optional additional information returned by the server:
+#### Syntax
+
+**.getToken**() : Object
 
 Property|Object properties|Type|Description |
 |--- |---------| --- |------|
@@ -64,11 +66,9 @@ Property|Object properties|Type|Description |
 || token_type | text | Indicates the token type value. The only token type that Azure AD supports is "Bearer". |
 ||scope|text| A space separated list of the Microsoft Graph permissions that the access_token is valid for.|
 
-#### Syntax
-
-**.getToken**() : Object
-
 #### Description 
+
+`.getToken()` returns an object that contains a `token` property (as defined by the [IETF](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1)), as well as optional additional information returned by the server
 
 If the value of `token` is empty, the command sends a request for a new token.
 
