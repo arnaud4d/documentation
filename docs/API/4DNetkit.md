@@ -25,7 +25,7 @@ The `Provider` class allows you to send requests for authentication tokens to th
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| determines the properties of the object to be returned |
-|Result|Object|<-| object
+|Result|Object|<-| object of the Provider class
 
 #### Description
 `New OAuth2 provider` instantiates an object of the `Provider` class.
