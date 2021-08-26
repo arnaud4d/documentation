@@ -93,8 +93,6 @@ You have registered an application with the [Microsoft Identity platform](https:
 
 You have an email adress compatible with Microsoft Graph, such as "myaddress@outlook.com".
 
-You know how to use the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html)
-
 ## Overview
 
 [Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow) is a great resource to understand the authorization workflow.
