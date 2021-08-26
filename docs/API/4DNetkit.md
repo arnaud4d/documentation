@@ -57,7 +57,7 @@ The available properties of `paramObj` are:
 
 |Parameter|Type||Description|
 |---------|--- |------|------|
-|Result|Object|<-| Object that contains information on the token
+|Result|Object|<-| Object that holds information on the token retrieved
 
 
 #### Description 
