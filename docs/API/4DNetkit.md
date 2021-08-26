@@ -169,6 +169,6 @@ Else
 End if 
 ```
 
-5. Execute the method, your browser opens a page, allowing you to authenticate.
+5. Execute the method. Your browser opens a page that allows you to authenticate.
 
 6. Log in to your Microsoft Outlook account and check that you've received the email.
