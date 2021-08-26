@@ -15,7 +15,7 @@ The 4D NetKit component is a built-in 4D component that allows you to interact w
 
 
 ## Component method
-Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `Provider [class](https://developer.4d.com/docs/en/Concepts/classes.html).
+Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
 
 ## The Provider Class
 The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
