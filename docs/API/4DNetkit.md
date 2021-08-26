@@ -21,7 +21,7 @@ Inside the 4D NetKit component, the `New OAuth2 provider` method returns an obje
 The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
 
 #### Syntax 
-**New OAuth2 provider**( paramObj : Object ) : Object
+**New OAuth2 provider**( *paramObj* : Object ) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
