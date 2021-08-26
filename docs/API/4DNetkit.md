@@ -5,33 +5,32 @@
 
 ## Table of contents
 
-* [Component method and Provider class](#component-method-and-provider-class)
-* [Class Methods](#class-methods)
+* [Component method](#component-method)
+* [Auth2Provider class]
 * [Tutorial](#tutorial)
 
 ## Component method 
-Inside the component, the `New OAuth2 provider()` method returns an object which is an instance of the `Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
+Inside the component, the `New OAuth2 provider()` method returns an object which is an instance of the `Auth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
-## Provider class
-The `Provider` class allows you to send requests for authentication tokens to third-party web service providers. 
-
-## Class Functions 
+## Auth2Provider class
+The `Auth2Provider` class allows you to send requests for authentication tokens to third-party web service providers.
 
 ### **New OAuth2 provider**
 
-#### Syntax 
-**New OAuth2 provider**( *paramObj* : Object ) : cs.Provider
+**New OAuth2 provider**( *paramObj* : Object ) : cs.Auth2Provider
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| determines the properties of the object to be returned |
-|Result|cs.Provider|<-| object of the Provider class
+|Result|cs.Auth2Provider|<-| object of the Auth2Provider class
 
 #### Description
-`New OAuth2 provider` instantiates an object of the `Provider` class.
+`New OAuth2 provider` instantiates an object of the `Auth2Provider` class.
 
-In `paramObj`, pass an object that determines the properties of the returned object. 
+In `paramObj`, pass an object that determines the properties of the returned object.
+
+The returned object's properties correspond to the properties passed in `paramObj`
 
 The available properties of `paramObj` are:
 
@@ -50,11 +49,16 @@ The available properties of `paramObj` are:
 | timeout|real| Waiting time in seconds (by default 120s)|
 |tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time |
 
-### .getToken()
+### Auth2ProviderObject.getToken()
 
 #### Syntax
 
 **.getToken**() : Object
+
+|Parameter|Type|Description|
+|---------|--- |------|
+|Result|Object|<-| Object that contains information on the token
+
 
 #### Description 
 
