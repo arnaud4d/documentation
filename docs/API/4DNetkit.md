@@ -32,7 +32,7 @@ The `Auth2Provider` class allows you to request authentication tokens to third-p
 
 In `paramObj`, pass an object that contains authentication information.
 
-The returned object's properties correspond to those of the `paramObj` object passed as a parameter.
+The returned object's properties correspond to those of the `paramObj` object passed as a parameter. 
 
 The available properties of `paramObj` are:
 
