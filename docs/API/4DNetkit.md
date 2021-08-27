@@ -1,7 +1,7 @@
 # 4D NetKit
 
 ## Overview
-4D NetKit is a built-in 4D component that allows you to interact with third-party web services and their APIs (such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview), for example).
+4D NetKit is a built-in 4D component that allows you to interact with third-party web services and their APIs such as [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview).
 
 ## Table of contents
 
