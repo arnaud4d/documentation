@@ -10,11 +10,11 @@
 
 ## Auth2Provider
 
-Inside the 4D NetKit component, the `New OAuth2 provider()` method returns an object which is an instance of the `Auth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
+Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `Auth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
 The `Auth2Provider` class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
 
-1. Using the `New OAuth2 provider()` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
+1. Using the `New OAuth2 provider` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
 2. You call the `Auth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
 
 ### **New OAuth2 provider**
