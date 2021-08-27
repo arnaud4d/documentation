@@ -15,7 +15,7 @@ Inside the 4D NetKit component, the `New OAuth2 provider()` method returns an ob
 The `Auth2Provider` class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
 
 1. Using the `New OAuth2 provider()` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
-2. You call the `{Auth2ProviderObject}.getToken()` class function to retrieve a token from the web service provider.
+2. You call the `Auth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
 
 ### **New OAuth2 provider**
 
@@ -111,6 +111,7 @@ Once you have your client ID, you're ready to establish a connection to your Azu
 ```4d
 
 var $oAuth2; $token; $param; $email : Object
+var $address : Text
 
 // Configure authentication
 
@@ -132,11 +133,15 @@ $oAuth2:=New OAuth2 provider($param)
 $token:=$oAuth2.getToken()
 
 
+// Set the email address for SMTP configuration 
+
+$address:= "email-sender-address@outlook.fr"
+
 // Set the email's content and metadata
 
 $email:=New object
 $email.subject:="my first mail "+Timestamp
-$email.from:="email-sender-address@outlook.fr"
+$email.from:=$address
 $email.to:=New collection
 $email.to.push(New object("email"; "email-recipient-address@outlook.fr"))
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
@@ -145,7 +150,6 @@ $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br
 
 // Configure the SMTP connection
 
-$address:="email-address@outlook.fr"
 $parameters:=New object
 $parameters.accessTokenOAuth2:=$token.token.access_token
 $parameters.authenticationMode:=SMTP authentication OAUTH2
