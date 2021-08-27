@@ -98,7 +98,7 @@ Establish a connection to the Microsoft Graph and send an email using 4D NetKit 
 
 ## Resources
 
-[Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow) is a great resource to understand the authorization workflow.
+[Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#protocol-diagram) is a great resource to understand the authorization workflow.
 
 In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
 
