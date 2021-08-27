@@ -37,7 +37,7 @@ The returned object's properties correspond to those of the `paramObj` object pa
 The available properties of `paramObj` are:
 
 |Parameter|Type|Description|Can be Null or undefined|
-|---------|--- |------|:------:|
+|---------|--- |------|------|
 | name | text | Name of the provider. Currently, the only provider available is "Microsoft". |No
 | permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|No
 | clientId | text | The client ID assigned to the app by the registration portal.|No
