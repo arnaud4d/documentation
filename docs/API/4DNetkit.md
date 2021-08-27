@@ -48,7 +48,7 @@ The available properties of `paramObj` are:
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
 | clientSecret | text | The application secret that you created for your app in the app registration portal. Required for web apps. |Yes
 | token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |Yes
-| timeout|real| Waiting time in seconds (by default 120s).|
+| timeout|real| Waiting time in seconds (by default 120s).|Yes
 |tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time. |Yes
 
 ### Auth2ProviderObject.getToken()
