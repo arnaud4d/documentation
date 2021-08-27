@@ -122,16 +122,13 @@ $param.clientId:="your-client-id"
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
-
 // Instantiate an object of the Auth2Provider class
 
 $oAuth2:=New OAuth2 provider($param)
 
-
 // Request a token using the class function
 
 $token:=$oAuth2.getToken()
-
 
 // Set the email address for SMTP configuration 
 
@@ -147,7 +144,6 @@ $email.to.push(New object("email"; "email-recipient-address@outlook.fr"))
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
 $email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
 
-
 // Configure the SMTP connection
 
 $parameters:=New object
@@ -157,7 +153,6 @@ $parameters.host:="smtp.office365.com"
 $parameters.port:=587
 $parameters.user:=$address
 $parameters.logFile:="smtp.log"
-
 
 // Send the email if the connection is successful, and handle errors.
 
