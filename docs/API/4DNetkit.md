@@ -6,7 +6,7 @@
 ## Table of contents
 
 * [Auth2Provider](#Auth2Provider-class)
-* [Tutorial: Send an Email by Calling the Microsoft Graph API](#tutorial--send-an-email-by-calling-the-microsoft-graph-api)
+* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-and-send-an-email)
 
 ## Auth2Provider
 
@@ -82,11 +82,11 @@ If the token has expired:
 
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
-# Tutorial : Send an Email by Calling the Microsoft Graph API
+# Tutorial : Authenticate to the Microsoft Graph API and send an email
 
 ## Objectives 
 
-Establish a connection to the Microsoft Graph and send an email using 4D NetKit and the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
+Establish a connection to the Microsoft Graph API using 4D NetKit, and send an email using the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
 ## Prerequisites
 
