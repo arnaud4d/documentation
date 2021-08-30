@@ -43,11 +43,7 @@ The available properties of `paramObj` are:
 | clientId | text | The client ID assigned to the app by the registration portal.|No
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|No in signedIn mode, Yes in service mode
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
-| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are: <ul>
-<li>*"common"* for both Microsoft accounts and work or school accounts </li><li>*"organizations"* for work or school accounts only </li>
-<li>*"consumers"* for Microsoft accounts only</li>
-<li>*tenant identifiers* such as tenant ID or domain name.</li>
-</ul> Default is "common". |Yes
+| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are: <ul><li>*"common"* for both Microsoft accounts and work or school accounts </li><li>*"organizations"* for work or school accounts only </li><li>*"consumers"* for Microsoft accounts only</li><li>*tenant identifiers* such as tenant ID or domain name.</li></ul> Default is "common". |Yes
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
 | clientSecret | text | The application secret that you created for your app in the app registration portal. Required for web apps. |Yes
