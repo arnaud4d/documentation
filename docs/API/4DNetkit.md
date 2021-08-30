@@ -89,6 +89,8 @@ In "signedIn" mode, when `.getToken()` is called, a web server included in 4D Ne
 
 Establish a connection to the Microsoft Graph API using 4D NetKit, and send an email using the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
+In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
+
 Here's a diagram of the authorization process:
 ![authorization-flow](./authorization.png)
 
@@ -100,12 +102,7 @@ Here's a diagram of the authorization process:
 
 * You have a Microsoft e-mail account. For example, you signed up for an e-mail account with Microsoft's webmail services designated domains (@hotmail.com, @outlook.com, etc.).
 
-
-## Example: signedIn mode 
-
-In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
-
-### Steps
+## Steps
 
 Once you have your client ID, you're ready to establish a connection to your Azure application and send an email:
 
