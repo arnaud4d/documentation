@@ -39,8 +39,8 @@ The available properties of `paramObj` are:
 |Parameter|Type|Description|Can be Null or undefined|
 |---------|--- |------|------|
 | name | text | Name of the provider. Currently, the only provider available is "Microsoft". |No
-| permission | text | * "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). 
-* "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|No
+| permission | text | <ul><li> "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser)</li>.
+<li>"service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).</li></ul>|No
 | clientId | text | The client ID assigned to the app by the registration portal.|No
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|No in signedIn mode, Yes in service mode
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
