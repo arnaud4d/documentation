@@ -148,7 +148,7 @@ $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore i
 // Configure the SMTP connection
 
 $parameters:=New object
-$parameters.accessTokenOAuth2:=$token.token.access_token
+$parameters.accessTokenOAuth2:=$token
 $parameters.authenticationMode:=SMTP authentication OAUTH2
 $parameters.host:="smtp.office365.com"
 $parameters.user:=$address
