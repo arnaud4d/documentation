@@ -87,7 +87,7 @@ If the token has expired:
 
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
-# Tutorial : Authenticate to the Microsoft Graph API and send an email
+# Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class
 
 ## Objectives 
 
