@@ -164,6 +164,6 @@ $statusSend:=$smtp.send($email)
 
 ## Example: Service mode
 
-Service mode is an authorization method used to get access [without a user](https://docs.microsoft.com/en-us/graph/auth-v2-service).
+Service mode is an authorization method used to get access without a user. For more details, see [Microsoft's docs on service mode](https://docs.microsoft.com/en-us/graph/auth-v2-service).
 
 
