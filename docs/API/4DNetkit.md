@@ -101,9 +101,9 @@ Establish a connection to the Microsoft Graph API using 4D NetKit, and send an e
 
 [Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#protocol-diagram) is a great resource to understand the authorization workflow.
 
-In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
+## Example: signedIn mode 
 
-## Steps
+In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
 
 Once you have your client ID, you're ready to establish a connection to your Azure application and send an email:
 
@@ -161,3 +161,6 @@ $statusSend:=$smtp.send($email)
 2. Execute the method. Your browser opens a page that allows you to authenticate.
 
 3. Log in to your Microsoft Outlook account and check that you've received the email.
+
+## Example: Service mode
+
