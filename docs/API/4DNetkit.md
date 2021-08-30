@@ -17,9 +17,6 @@ The `Auth2Provider` class allows you to request authentication tokens to third-p
 1. Using the `New OAuth2 provider` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
 2. You call the `Auth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
 
-Here's a diagram of the authorization process:
-![authorization-flow](./authorization.png)
-
 ### **New OAuth2 provider**
 
 **New OAuth2 provider**( *paramObj* : Object ) : Object
@@ -92,6 +89,9 @@ In "signedIn" mode, when `.getToken()` is called, a web server included in 4D Ne
 
 Establish a connection to the Microsoft Graph API using 4D NetKit, and send an email using the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
+Here's a diagram of the authorization process:
+![authorization-flow](./authorization.png)
+
 ## Prerequisites
 
 * You have registered an application with the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
@@ -100,13 +100,12 @@ Establish a connection to the Microsoft Graph API using 4D NetKit, and send an e
 
 * You have a Microsoft e-mail account. For example, you signed up for an e-mail account with Microsoft's webmail services designated domains (@hotmail.com, @outlook.com, etc.).
 
-## Resources
-
-[Microsoft's documentation on client credentials flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#protocol-diagram) is a great resource to understand the authorization workflow.
 
 ## Example: signedIn mode 
 
 In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
+
+### Steps
 
 Once you have your client ID, you're ready to establish a connection to your Azure application and send an email:
 
