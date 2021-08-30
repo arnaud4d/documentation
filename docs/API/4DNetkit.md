@@ -48,8 +48,7 @@ The available properties of `paramObj` are:
 * *"common"* for both Microsoft accounts and work or school accounts 
 * *"organizations"* for work or school accounts only 
 * *"consumers"* for Microsoft accounts only 
-* *tenant identifiers* such as tenant ID or domain name. 
-Default is "common". |Yes
+* *tenant identifiers* such as tenant ID or domain name. Default is "common". |Yes
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
 | clientSecret | text | The application secret that you created for your app in the app registration portal. Required for web apps. |Yes
