@@ -81,7 +81,7 @@ If the token has expired:
 
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
-In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the redirectURI parameter of the Auth2Provider object. This web server intercepts the provider's authentication response and displays it in the browser.
+In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the [redirectURI parameter](#description) to intercept the provider's authorization response and display in the browser.
 
 # Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit and send an email using the SMTP transporter class
 
@@ -165,5 +165,7 @@ $statusSend:=$smtp.send($email)
 ## Example: Service mode
 
 Service mode is an authorization method used to get access without a user. For more details, see [Microsoft's docs on service mode](https://docs.microsoft.com/en-us/graph/auth-v2-service).
+
+This mode is useful for 
 
 
