@@ -83,7 +83,29 @@ When requesting access on behalf of a user ("signedIn" mode) the command opens a
 
 In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the [redirectURI parameter](#description) to intercept the provider's authorization response and display in the browser.
 
-# Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit and send an email using the SMTP Transporter class
+
+## Example: Authenticate to the Microsoft Graph API with 4D Netkit in service mode
+
+```4d
+var $oAuth2 : Object
+var $token : Object
+
+$param:=New object()
+$param.name:="Microsoft"
+$param.permission:="service"
+
+$param.clientId:="your-client-id" // Replace with the client ID you obtained on the Microsoft identity platform
+$param.clientSecret:="your-client-secret" // Replace with your client secret
+$param.tenant:="your-tenant-id" // Replace with your tenant id
+$param.tokenURI:="https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token/" // Replace the tenant id
+$param.scope:="https://graph.microsoft.com/.default"
+
+$oAuth2:=New OAuth2 provider($param)
+
+$token:=$oAuth2.getToken()
+```
+
+# Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit in signedIn mode, and send an email using the SMTP Transporter class
 
 ## Objectives 
 
