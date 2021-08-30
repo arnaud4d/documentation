@@ -161,5 +161,3 @@ $statusSend:=$smtp.send($email)
 2. Execute the method. Your browser opens a page that allows you to authenticate.
 
 3. Log in to your Microsoft Outlook account and check that you've received the email.
-
-
