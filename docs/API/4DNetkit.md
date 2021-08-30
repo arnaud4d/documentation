@@ -162,10 +162,4 @@ $statusSend:=$smtp.send($email)
 
 3. Log in to your Microsoft Outlook account and check that you've received the email.
 
-## Example: Service mode
-
-Service mode is an authorization method used to get access without a user. For more details, see [Microsoft's docs on service mode](https://docs.microsoft.com/en-us/graph/auth-v2-service).
-
-This mode is useful for 
-
 
