@@ -19,13 +19,13 @@ The `Auth2Provider` class allows you to request authentication tokens to third-p
 
 ### **New OAuth2 provider**
 
-**New OAuth2 provider**( *paramObj* : Object ) : cs.Auth2Provider
+**New OAuth2 provider**( *paramObj* : Object ) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| determines the properties of the object to be returned |
-|Result|cs.Auth2Provider|<-| object of the Auth2Provider class
+|Result|Object|<-| object of the Auth2Provider class
 
 #### Description
 `New OAuth2 provider` is a method that belongs to the 4D NetKit component. It instantiates an object of the `Auth2Provider` class.
@@ -39,17 +39,22 @@ The available properties of `paramObj` are:
 |Parameter|Type|Description|Can be Null or undefined|
 |---------|--- |------|------|
 | name | text | Name of the provider. Currently, the only provider available is "Microsoft". |No
-| permission | text | "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|No
+| permission | text | * "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser). 
+* "service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).|No
 | clientId | text | The client ID assigned to the app by the registration portal.|No
 | redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|No in signedIn mode, Yes in service mode
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
-| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are *"common"* for both Microsoft accounts and work or school accounts, *"organizations"* for work or school accounts only, *"consumers"* for Microsoft accounts only, and *tenant identifiers* such as the tenant ID or domain name. Default is "common". |Yes
+| tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are: 
+* *"common"* for both Microsoft accounts and work or school accounts 
+* *"organizations"* for work or school accounts only 
+* *"consumers"* for Microsoft accounts only 
+* *tenant identifiers* such as tenant ID or domain name. 
+Default is "common". |Yes
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
 | clientSecret | text | The application secret that you created for your app in the app registration portal. Required for web apps. |Yes
 | token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |Yes
 | timeout|real| Waiting time in seconds (by default 120s).|Yes
-|tokenExpiration | text | Timestamp (ISO 8601 UTC) that represents the expiration time. |Yes
 
 ### Auth2ProviderObject.getToken()
 
