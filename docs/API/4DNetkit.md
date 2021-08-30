@@ -28,7 +28,7 @@ The `Auth2Provider` class allows you to request authentication tokens to third-p
 |Result|Object|<-| object of the Auth2Provider class
 
 #### Description
-`New OAuth2 provider` is a method that belongs to the 4D NetKit component. It instantiates an object of the `Auth2Provider` class.
+`New OAuth2 provider` instantiates an object of the `Auth2Provider` class.
 
 In `paramObj`, pass an object that contains authentication information.
 
@@ -93,7 +93,7 @@ Establish a connection to the Microsoft Graph API using 4D NetKit, and send an e
 
 > Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. You use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
-* You have an email address compatible with Microsoft Graph, such as "myaddress@outlook.com".
+* You have a Microsoft e-mail account. For example, you signed up for an e-mail account with Microsoft's webmail services designated domains (@hotmail.com, @outlook.com, etc.).
 
 ## Resources
 
