@@ -120,7 +120,7 @@ $param:=New object()
 $param.name:="Microsoft"
 $param.permission:="signedIn"
 $param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
-$param.redirectURI:="http://127.0.0.1:50993/authorize/" // Location where the authorization server sends the user once the app has been successfully authorized. 
+$param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
 // Instantiate an object of the Auth2Provider class
@@ -129,7 +129,7 @@ $oAuth2:=New OAuth2 provider($param)
 
 // Request a token using the class function
 
-$token:=$oAuth2.getToken() // Starts the 4D NetKit web server on the port specified in $param.redirectURI
+$token:=$oAuth2.getToken() // Starts the a web server on the port specified in $param.redirectURI
 
 // Set the email address for SMTP configuration 
 
