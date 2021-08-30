@@ -6,7 +6,7 @@
 ## Table of contents
 
 * [Auth2Provider](#Auth2Provider-class)
-* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-and-send-an-email)
+* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-with-4d-netkit-and-send-an-email-using-the-smtp-transporter-class)
 
 ## Auth2Provider
 
@@ -81,7 +81,7 @@ If the token has expired:
 
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
-# Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class
+# Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit and send an email using the SMTP transporter class
 
 ## Objectives 
 
@@ -89,7 +89,7 @@ Establish a connection to the Microsoft Graph API using 4D NetKit, and send an e
 
 ## Prerequisites
 
-* You have registered an application with the [Microsoft Identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
+* You have registered an application with the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
 
 > Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. You use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
@@ -117,7 +117,7 @@ var $address : Text
 $param:=New object()
 $param.name:="Microsoft"
 $param.permission:="signedIn"
-$param.clientId:="your-client-id"
+$param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
@@ -131,17 +131,15 @@ $token:=$oAuth2.getToken()
 
 // Set the email address for SMTP configuration 
 
-$address:= "email-sender-address@outlook.fr"
+$address:= "email-sender-address@outlook.fr" // Replace with your Microsoft email account address
 
 // Set the email's content and metadata
 
 $email:=New object
 $email.subject:="my first mail "+Timestamp
 $email.from:=$address
-$email.to:=New collection
-$email.to.push(New object("email"; "email-recipient-address@outlook.fr"))
+$email.to:="email-recipient-address@outlook.fr" // Replace with the recipient's email address
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
-$email.htmlBody:="<html><body><h1>Test mail </h1> This is just a test e-mail <br /> Please ignore it</html><body>"
 
 // Configure the SMTP connection
 
@@ -149,19 +147,13 @@ $parameters:=New object
 $parameters.accessTokenOAuth2:=$token.token.access_token
 $parameters.authenticationMode:=SMTP authentication OAUTH2
 $parameters.host:="smtp.office365.com"
-$parameters.port:=587
 $parameters.user:=$address
-$parameters.logFile:="smtp.log"
 
 // Send the email if the connection is successful, and handle errors.
 
 $smtp:=SMTP New transporter($parameters)
-$statusSMTP:=$smtp.checkConnection()
-If ($statusSMTP.success)
-	$statusSend:=$smtp.send($email)
-Else 
-	ALERT("Access denied to SMTP server")
-End if 
+$statusSend:=$smtp.send($email)
+
 ```
 
 2. Execute the method. Your browser opens a page that allows you to authenticate.
