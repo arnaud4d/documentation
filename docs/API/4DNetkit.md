@@ -41,7 +41,7 @@ The available properties of `paramObj` are:
 | name | text | Name of the provider. Currently, the only provider available is "Microsoft". |No
 | permission | text | <ul><li> "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser).</li><li>"service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).</li></ul>|No
 | clientId | text | The client ID assigned to the app by the registration portal.|No
-| redirectURI | text | (optional in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized.|No in signedIn mode, Yes in service mode
+| redirectURI | text | (Not used in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized. When you call the `.getToken()` class function, a web server included in 4D NetKit is started on the port specified in this parameter to intercept the response.|No in signedIn mode, Yes in service mode
 | scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
 | tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are: <ul><li>*"common"* for both Microsoft accounts and work or school accounts </li><li>*"organizations"* for work or school accounts only </li><li>*"consumers"* for Microsoft accounts only</li><li>*tenant identifiers* such as tenant ID or domain name.</li></ul> Default is "common". |Yes
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
@@ -81,6 +81,8 @@ If the token has expired:
 
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
+In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the redirectURI parameter of the Auth2Provider object. This web server intercepts the provider's authentication response and displays it in the browser.
+
 # Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit and send an email using the SMTP transporter class
 
 ## Objectives 
@@ -118,7 +120,7 @@ $param:=New object()
 $param.name:="Microsoft"
 $param.permission:="signedIn"
 $param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
-$param.redirectURI:="http://127.0.0.1:50993/authorize/"
+$param.redirectURI:="http://127.0.0.1:50993/authorize/" 
 $param.scope:="https://outlook.office.com/SMTP.Send"
 
 // Instantiate an object of the Auth2Provider class
