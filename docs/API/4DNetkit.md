@@ -17,6 +17,8 @@ The `Auth2Provider` class allows you to request authentication tokens to third-p
 1. Using the `New OAuth2 provider` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
 2. You call the `Auth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
 
+[!authorization-flow](./authorization.png)
+
 ### **New OAuth2 provider**
 
 **New OAuth2 provider**( *paramObj* : Object ) : Object
