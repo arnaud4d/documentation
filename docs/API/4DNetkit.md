@@ -136,7 +136,7 @@ $address:= "email-sender-address@outlook.fr" // Replace with your Microsoft emai
 // Set the email's content and metadata
 
 $email:=New object
-$email.subject:="my first mail "+Timestamp
+$email.subject:="My first mail"
 $email.from:=$address
 $email.to:="email-recipient-address@outlook.fr" // Replace with the recipient's email address
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
