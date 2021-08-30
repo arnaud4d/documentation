@@ -83,8 +83,9 @@ When requesting access on behalf of a user ("signedIn" mode) the command opens a
 
 In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the [redirectURI parameter](#description) to intercept the provider's authorization response and display in the browser.
 
-
 ## Example: Authenticate to the Microsoft Graph API with 4D Netkit in service mode
+
+> More features compatible with service mode will be available in the future.
 
 ```4d
 var $oAuth2 : Object
@@ -105,7 +106,6 @@ $oAuth2:=New OAuth2 provider($param)
 $token:=$oAuth2.getToken()
 ```
 
-> More features compatible with service mode will be available in the future.
 
 # Tutorial : Authenticate to the Microsoft Graph API in signedIn mode with 4D Netkit, and send an email using the SMTP Transporter class
 
