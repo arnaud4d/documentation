@@ -96,8 +96,8 @@ $param.permission:="service"
 
 $param.clientId:="your-client-id" // Replace with the client ID you obtained on the Microsoft identity platform
 $param.clientSecret:="your-client-secret" // Replace with your client secret
-$param.tenant:="your-tenant-id" // Replace with your tenant id
-$param.tokenURI:="https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token/" // Replace the tenant id
+$param.tenant:="your-tenant-id" // Replace with your tenant ID
+$param.tokenURI:="https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token/" // Replace the tenant ID
 $param.scope:="https://graph.microsoft.com/.default"
 
 $oAuth2:=New OAuth2 provider($param)
