@@ -106,7 +106,7 @@ $token:=$oAuth2.getToken()
 
 > More features compatible with service mode will be available in the future.
 
-# Tutorial : Authenticate to the Microsoft Graph API in signedIn mode with 4D Netkit, and send an email using the SMTP Transporter class
+# Tutorial: Authenticate to the Microsoft Graph API and send an email with SMTP
 
 ## Objectives 
 
