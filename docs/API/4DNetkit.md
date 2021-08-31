@@ -171,7 +171,7 @@ $parameters.authenticationMode:=SMTP authentication OAUTH2
 $parameters.host:="smtp.office365.com"
 $parameters.user:=$address
 
-// Send the email if the connection is successful, and handle errors.
+// Send the email 
 
 $smtp:=SMTP New transporter($parameters)
 $statusSend:=$smtp.send($email)
