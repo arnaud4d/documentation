@@ -86,7 +86,7 @@ When requesting access on behalf of a user ("signedIn" mode) the command opens a
 
 In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the [redirectURI parameter](#description) to intercept the provider's authorization response and display in the browser.
 
-## Example: Authenticate to the Microsoft Graph API with 4D Netkit in service mode
+## Tutorial: Authenticate to the Microsoft Graph API with 4D Netkit in service mode
 
 ```4d
 var $oAuth2 : Object
@@ -107,15 +107,15 @@ $oAuth2:=New OAuth2 provider($param)
 $token:=$oAuth2.getToken()
 ```
 
-# Tutorial: Authenticate to the Microsoft Graph API and send an email with SMTP
+## Tutorial: Authenticate to the Microsoft Graph API in signedIn mode and send an email with SMTP
 
-## Objectives 
+### Objectives 
 
 Establish a connection to the Microsoft Graph API using 4D NetKit, and send an email using the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
 In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
 
-## Prerequisites
+### Prerequisites
 
 * You have registered an application with the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
 
@@ -123,7 +123,7 @@ In this example, we get access [on behalf of a user](https://docs.microsoft.com/
 
 * You have a Microsoft e-mail account. For example, you signed up for an e-mail account with Microsoft's webmail services designated domains (@hotmail.com, @outlook.com, etc.).
 
-## Steps
+### Steps
 
 Once you have your client ID, you're ready to establish a connection to your Azure application and send an email:
 
