@@ -138,7 +138,7 @@ var $address : Text
 
 // Configure authentication
 
-$param:=New object()
+$param:=New object
 $param.name:="Microsoft"
 $param.permission:="signedIn"
 $param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
