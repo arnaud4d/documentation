@@ -99,6 +99,12 @@ Establish a connection to the Microsoft Graph API in service mode
 
 > Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. You use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
+### Steps
+
+Once you have your client ID and client secret, you're ready to establish a connection to your Azure application.
+
+1. Open your 4D application, create a method and insert the following code:
+
 ```4d
 var $oAuth2 : Object
 var $token : Object
@@ -117,6 +123,8 @@ $oAuth2:=New OAuth2 provider($param)
 
 $token:=$oAuth2.getToken()
 ```
+
+2. Execute the method to establish the connection.
 
 ## Authenticate to the Microsoft Graph API in signedIn mode and send an email with SMTP
 
@@ -152,7 +160,7 @@ $param.name:="Microsoft"
 $param.permission:="signedIn"
 $param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
-$param.scope:="https://outlook.office.com/SMTP.Send"
+$param.scope:="https://outlook.office.com/SMTP.Send" // Get consent for sending an smtp email
 
 // Instantiate an object of the Auth2Provider class
 
