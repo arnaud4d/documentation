@@ -6,7 +6,7 @@
 ## Table of contents
 
 * [Auth2Provider](#Auth2Provider-class)
-* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-with-4d-netkit-and-send-an-email-using-the-smtp-transporter-class)
+* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP Transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-with-4d-netkit-and-send-an-email-using-the-smtp-transporter-class)
 
 ## Auth2Provider
 
