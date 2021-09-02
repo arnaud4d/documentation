@@ -5,17 +5,17 @@
 
 ## Table of contents
 
-* [Auth2Provider](#Auth2Provider-class)
+* [OAuth2Provider](#OAuth2Provider-class)
 * [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP Transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-with-4d-netkit-and-send-an-email-using-the-smtp-transporter-class)
 
-## Auth2Provider
+## OAuth2Provider
 
-Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `Auth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
+Inside the 4D NetKit component, the `New OAuth2 provider` method returns an object which is an instance of the `OAuth2Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html). 
 
-The `Auth2Provider` class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
+The `OAuth2Provider` class allows you to request authentication tokens to third-party web services providers in order to use their APIs in your application. This is done in two steps:
 
-1. Using the `New OAuth2 provider` component method, you instantiate an object of the `Auth2Provider` class that holds authentication information.
-2. You call the `Auth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
+1. Using the `New OAuth2 provider` component method, you instantiate an object of the `OAuth2Provider` class that holds authentication information.
+2. You call the `OAuth2ProviderObject.getToken()` class function to retrieve a token from the web service provider.
 
 Here's a diagram of the authorization process:
 ![authorization-flow](./authorization.png)
@@ -28,10 +28,10 @@ Here's a diagram of the authorization process:
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| determines the properties of the object to be returned |
-|Result|Object|<-| object of the Auth2Provider class
+|Result|Object|<-| object of the OAuth2Provider class
 
 #### Description
-`New OAuth2 provider` instantiates an object of the `Auth2Provider` class.
+`New OAuth2 provider` instantiates an object of the `OAuth2Provider` class.
 
 In `paramObj`, pass an object that contains authentication information.
 
@@ -53,9 +53,9 @@ The available properties of `paramObj` are:
 | token | object | If this property exists, the `getToken()` function uses this token object to calculate which request must be sent. It is automatically updated with the token received by the `getToken()` function.   |Yes
 | timeout|real| Waiting time in seconds (by default 120s).|Yes
 
-### Auth2ProviderObject.getToken()
+### OAuth2ProviderObject.getToken()
 
-**Auth2ProviderObject.getToken()** : Object
+**OAuth2ProviderObject.getToken()** : Object
 
 |Parameter|Type||Description|
 |---------|--- |------|------|
@@ -162,7 +162,7 @@ $param.clientId:="your-client-id" // Replace with the client id you obtained on 
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send" // Get consent for sending an smtp email
 
-// Instantiate an object of the Auth2Provider class
+// Instantiate an object of the OAuth2Provider class
 
 $oAuth2:=New OAuth2 provider($param)
 
