@@ -168,7 +168,7 @@ $oAuth2:=New OAuth2 provider($param)
 
 // Request a token using the class function
 
-$token:=$oAuth2.getToken() // Starts the a web server on the port specified in $param.redirectURI
+$token:=$oAuth2.getToken() // Sends a token request and starts the a web server on the port specified in $param.redirectURI to intercept the authorization response
 
 // Set the email address for SMTP configuration 
 
