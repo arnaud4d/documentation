@@ -7,7 +7,7 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 
 ### WebForm Objects
 
-`WebForm` objects are instantiated wih the [WEB Form](#web-form) command. These objects are then usually used to handle the behavior of webforms and their components.
+`WebForm` objects are instantiated with the [WEB Form](#web-form) command.
 
 ### Summary 
 ||
@@ -22,21 +22,21 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 |v19 R3|Added|
 </details>
 
-<!-- REF #4D.WebForm.WEB Form.Params -->
+<!-- REF #_command_.WEB Form.Syntax -->
+**WEB Form** : 4D.WebForm<!-- END REF -->
+
+<!-- REF #_command_.WEB Form.Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |Result|4D.WebForm|<-|New [WebForm](#web-form-object) object
 <!-- END REF -->
 
-<!-- REF #4D.WebForm.WEB Form.Syntax -->
-**.WEB Form** : 4D.WebForm<!-- END REF -->
-
 #### Description
-The `WEB Form` command <!-- REF #4D.WebForm.WEB Form.Summary --> returns a new `4D.WebForm` object<!-- END REF -->
+The `WEB Form` command <!-- REF #_command_.WEB Form.Summary --> returns a `4D.WebForm` object that references a webform.<!-- END REF -->
 
-Each property of the returned object is the [server-side](../web-development/web-studio.md#server-side) reference of a [component](web-studio.md#components) on the webform. 
+Each property of the returned object is an object of the [4D.WebFormItem](WebFormItemClass.md) class.
 
-For example, `Web Form.myImage` refers to the image component with `myImage` as server reference.
+
 
 The command returns `Null` if it is called in a request that does not originate from [4D Web Studio](../web-studio/web-studio.md)
 ## WEB Event
