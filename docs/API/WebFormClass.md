@@ -7,7 +7,7 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 
 ### WebForm Objects
 
-`WebForm` objects are instantiated with the [WEB Form](#web-form) command. They provide the following properties and functions:
+`WebForm` objects are instantiated wih the [WEB Form](#web-form) command. These objects are then usually used to handle the behavior of webforms and their components.
 
 ### Summary 
 ||
@@ -39,31 +39,6 @@ Each property of the returned object is the [server-side](../web-development/web
 For example, `Web Form.myImage` refers to the image component with `myImage` as server reference.
 
 The command returns `Null` if it is called in a request that does not originate from [4D Web Studio](../web-studio/web-studio.md)
-
-#### Available functions
-
-Each webform component object offers the following functions:
-
-| Function | Description |
-|----|----|
-| show() | displays the component |
-| hide() | hides the component |
-| addCSSClass($className) |  adds the specified CSS class to the component
-| removeCSSClass($className) | removes the specified CSS class from the component
-
-#### Example
-
-To call a function that hides an image when the user clicks a button: 
-
-1. Select the image component on the canvas, and enter a server-side reference in the Properties Panel > Server Side, for example `myImage`.
-2. Create an exposed function named `isHidden` that contains the following code:
-```4d 
-	//hide the component that has "myImage" as server-side reference
-	WEB Form.imageAlias.hide()
-	```
-2. Select the Button component and add an `onclick` event to it
-4. Attach the `isHidden` function to the event
-
 ## WEB Event
 
 **WEB Event** <!-- REF #4D.WebForm.WEB Event.Summary --> returns an object with information on an event linked to a webform component<!-- END REF --> 
