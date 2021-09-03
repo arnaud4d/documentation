@@ -142,6 +142,17 @@ To display or hide an element, click the eye icon.
 
 Inside a WebForm, you can style components using the Properties panel and the Styles library and see the result directly on the canvas.
 
+### Resources and Tools
+
+If you're not familiar with CSS properties and styles, or you need a refresher, here are a few useful links:
+
+[Learn CSS on the MDN website](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance).
+
+[A guide to flexbox properties on css-tricks.com](https://css-tricks.com/snippets/css/a-guide-to-flexbox/).
+
+[Box-shadow examples](https://getcssscan.com/css-box-shadow-examples).
+[Box-shadow generator](https://cssgenerator.org/box-shadow-css-generator.html).
+
 #### Styles Library 
 
 One way of styling components is by dragging CSS classes from the Styles library and dropping them on the components.
@@ -164,7 +175,7 @@ Using the properties panel, you can bind a CSS class to the element and define v
 
 ![styles-library](assets/en/web-studio/properties-panel.png)
 
-Some visual properties, such as column size in datatables or grid areas, can be edited directly on the canvas.
+Some visual properties, such as grid areas or column size in datatables, can be edited directly on the canvas.
 
 ##### Overridden properties
 
@@ -192,7 +203,7 @@ This exports the style of the element as a local CSS class. Now it appears as a 
 
 Note that only the [overridden properties](#overriden-properties) are exported as a CSS class.
 
-#### Editing a class
+#### Editing a CSS class
 
 Once a local class is created, you can hover over it in the Styles Library and click the **Edit Class** button next to its name to edit the CSS directly. The changes apply to all the components using this class.
 
@@ -227,10 +238,7 @@ The following components are available:
 
 ## About data sources
 
-Data sources contain data and automatically generate events when that data is changed. You can attach components to these events so that : 
-* data is automatically sent from the datasource to the component
-* when an end-user enters data in a component attached to a datasource, the datasource data is updated automatically 
-* etc.
+Data sources contain data. You can bind them to your webform components to determine where the data is displayed in your application.
 
 The **Data Sources** section groups the available data sources:
 
@@ -251,60 +259,51 @@ Only [exposed functions](../ORDA/ordaClasses.md#exposed-vs-non-exposed-functions
 The data sources display the attributes as well as the functions/methods of data classes.
 ## Creating a data source
 
-## Adding events and methods
+To create a data source: 
+
+## Binding a data source to a component: 
+
+There are several ways to bind a data source to a component:
+
+* Drag it from the Data Source section and drop it on a component
+* Entering the name of the data source in the Properties panel > Data source
+
+## Events, methods and class functions
+
+## Events
+
+Events are usually used as a means of triggering certain behaviors. They are used in conjuction with methods and class functions. 
+
+For example, if the user clicks a button on a webpage, you can choose how to react. 
 
 ![alt-text](assets/en/web-studio/events.png)
 
-You can link events to your components. For example, you can assign an `onchange` event to a search bar so that it suggests a list of employees as the user is typing.
-
-These events are used to execute code on the 4D server. There's no need to write additional Javascript or React code.
+In 4D WebStudio, events are used to execute code on the 4D server. There's no need to write additional Javascript or React code.
 
 Events are executed in the defined order, and you can map one method to several events or one event to several methods.
 
-> **TODO --> Add description of the particular event on the component: Onload**
+## Methods
 
-### WEB Form Object
+Methods allow you to determine how to react to certain events.
 
-Using the [WEB Form](https://doc.4d.com/4dv19/help/command/en/page1735.html) command, you can handle the behavior of your webform and its components on the server side.
+For example, to make a search bar, you can attach an `onchange` event to a Text input component and write a method that taps into a [dataclass](../ORDA/dsMapping.md) to suggest a list of items as the user is typing. 
 
-#### Server-side reference
+## Class Functions
 
-The [WEB Form](https://doc.4d.com/4dv19R/help/command/en/page1735.html) command returns an object, and each of this object's properties is the server-side reference of a [component](web-studio.md#components).   
+Just like methods, some 4D class functions allow you to set the behavior of your components.
+
+For example, to display or hide a component when an event occurs, you can use the [4D.WebFormItem class functions](../API/WebFormItem.md)
+## Server-side reference
+
+The server-side reference of a component is its "address" on the server. To set the behavior of a component, you can assign a server-side reference to it, and then use that reference in class functions.
 
 For example, `Web Form.myImage` refers to the image component with `myImage` as server-side reference.
 
-You can assign a server-side reference to your components in the properties panel:
+To assign a server-side reference to a component, enter a value in the Properties Panel > Server Side:
 
 ![alt-text](assets/en/web-studio/image-server-side.png)
 
-In the above image, the server-side reference of the Image component is "imageAlias".
-
-#### Available functions
-
-Each webform component object offers the following functions:
-
-| Function | Description |
-|----|----|
-| show() | displays the component |
-| hide() | hides the component |
-| addCSSClass($className) |  adds the specified CSS class to the component
-| removeCSSClass($className) | removes the specified CSS class from the component
-
-#### Example
-
-To call a function that hides an image when the user clicks a button: 
-
-![alt-text](assets/en/web-studio/web-form-object.png)
-
-In the above image: 
-* The image has `imageAlias` as server-side reference
-* The **Hide** button component has an `onclick` event attached to it
-* The exposed function `isHidden` is attached to the `onclick` event and contains the following code:
-	```4d 
-	//hide the component that has "imageAlias" as server-side reference
-	Web Form.imageAlias.hide()
-	```
-
+You can then modify the behavior of your components using events and functions, such as [4D.WebFormItem class functions](../API/WebFormItem.md).
 ### WEB Event Object
 
 The [WEB Event](https://doc.4d.com/4dv19R/help/command/en/page1734.html) command returns an object describing the event triggered in a web form component, such as a button or a datatable. 

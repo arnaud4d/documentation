@@ -3,15 +3,17 @@ id: WebFormItemClass
 title: WebFormItem
 ---
 
-The `WebFormItem`class allows you to handle the behavior of your webform and its components on the server side.
+The `WebFormItem` class allows you to handle the behavior of your webform and its components on the server side.
 
 ### WebFormItem Objects
 
 `4D.WebFormItem` objects are properties of the `4D.WebForm` object returned by the `WEB Form` command.
 
-When you call the `WEB Form` command, the returned `4D.WebForm` object holds as many `4D.WebFormItems` as there are components with server-side references in your webform editor.
+When you call the `WEB Form` command, the returned `4D.WebForm` object holds as many `4D.WebFormItems` as there are components with [server-side references](../web-studio/web-studio.md#server-side-references) in your webform editor.
 
-`4D.WebFormItem` objects have class functions that allow you handle the behavior of webforms and their components.
+For example, `WebFormObject.myImage` refers to the image component with `myImage` as server reference.
+
+`4D.WebFormItem` objects have class functions that allow you to handle the behavior of webforms and their components.
 
 ### Summary 
 ||
@@ -29,7 +31,7 @@ When you call the `WEB Form` command, the returned `4D.WebForm` object holds as 
 |v19 R3|Added|
 </details>
 
-<!-- REF #4D.WebForm.WEB Form.Params -->
+<!-- REF #.hide.Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |Result|4D.WebForm|<-|New [WebForm](#web-form-object) object
@@ -62,9 +64,6 @@ When you call the `WEB Form` command, the returned `4D.WebForm` object holds as 
 #### Description
 
 **.show** displays the component
-
-
-
 #### Available functions
 
 Each webform component object offers the following functions:
