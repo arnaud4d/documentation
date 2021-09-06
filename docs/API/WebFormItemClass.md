@@ -3,7 +3,7 @@ id: WebFormItemClass
 title: WebFormItem
 ---
 
-The `WebFormItem` class allows you to handle the behavior of webform components on the server side.
+When working in [4D Web Studio](../web-studio/web-studio.md), the `WebFormItem` class allows you to handle the behavior of webform components on the server side.
 
 ### WebFormItem Objects
 
@@ -18,10 +18,10 @@ For example, `WebFormObject.myImage` refers to the image component with `myImage
 ### Summary 
 ||
 |---|
-|[<!-- INCLUDE #WebFormItemClass.hide() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.hide.Summary --> |
-|[<!-- INCLUDE #WebFormItemClass.show() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.show.Summary --> |
-|[<!-- INCLUDE #WebFormItemClass.addCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.addCSSClass.Summary --> |
-|[<!-- INCLUDE #WebFormItemClass.removeCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.removeCSSClass.Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.hide().Syntax -->](#hide)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.hide().Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.show().Syntax -->](#show)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.show().Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.addCSSClass().Syntax -->](#addcssclass)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.addCSSClass().Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.removeCSSClass().Syntax -->](#removecssclass)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.removeCSSClass().Summary --> |
 
 ## .hide()
 
@@ -36,7 +36,7 @@ For example, `WebFormObject.myImage` refers to the image component with `myImage
 
 #### Description
 
-The **.hide()** function <!-- REF #WebFormItemClass.hide().Summary -->hides the component<!-- END REF -->
+The **.hide()** function <!-- REF #WebFormItemClass.hide().Summary -->hides the component<!-- END REF -->.
 
 #### Example
 
@@ -47,10 +47,9 @@ To call a function that hides an image when the user clicks a button:
 
 ```4d 
 var $myComponent: 4D.WebFormItem
-
 $myComponent:=WEB Form.myImage
 $myComponent.hide() //The component that has "myComponent" as server reference 
-	```
+```
 
 3. Select the Button component and add an `onclick` event to it
 4. Attach the `isHidden` function to the event
@@ -68,7 +67,7 @@ $myComponent.hide() //The component that has "myComponent" as server reference
 
 #### Description
 
-The **.show** function <!-- REF #WebFormItemClass.show().Summary -->makes the component visible<!-- END REF -->
+The **.show** function <!-- REF #WebFormItemClass.show().Summary -->makes the component visible<!-- END REF -->.
 
 ## .addCSSClass()
 
@@ -89,7 +88,7 @@ The **.show** function <!-- REF #WebFormItemClass.show().Summary -->makes the co
 
 #### Description
 
-The **.addCSSClass** function <!-- REF #WebFormItemClass.addCSSClass().Summary -->adds a CSS class to the component<!-- END REF -->
+The **.addCSSClass** function <!-- REF #WebFormItemClass.addCSSClass().Summary -->adds the class specified in *className* to the component<!-- END REF -->.
 
 ## .removeCSSClass()
 
@@ -99,10 +98,10 @@ The **.addCSSClass** function <!-- REF #WebFormItemClass.addCSSClass().Summary -
 |v19 R3|Added|
 </details>
 
-<!-- REF #WebFormItemClass.removeCSSClass().Summary -->
+<!-- REF #WebFormItemClass.removeCSSClass().Syntax -->
 **.removeCSSClass**(*className*: Text)<!-- END REF -->
 
-<!-- REF #WebFormItemClass.addCSSClass().Params -->
+<!-- REF #WebFormItemClass.removeCSSClass().Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |className|Text|->|Name of the CSS class to remove from the component|
@@ -110,5 +109,5 @@ The **.addCSSClass** function <!-- REF #WebFormItemClass.addCSSClass().Summary -
 
 #### Description
 
-The **.removeCSSClass()** function <!-- REF #WebFormItemClass.removeCSSClass().Summary -->makes the target component visible<!-- END REF -->
+The **.removeCSSClass()** function <!-- REF #WebFormItemClass.removeCSSClass().Summary -->removes the class specified in *className* from the component<!-- END REF -->.
 

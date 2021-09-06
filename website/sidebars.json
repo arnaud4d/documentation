@@ -46,6 +46,8 @@
 	"API/SessionClass",
 	"API/SignalClass",
 	"API/SMTPTransporterClass",
+	"API/WebFormClass",
+	"API/WebFormItemClass",
 	"API/WebServerClass",
 	"API/ZipArchiveClass",
 	"API/ZipFileClass",

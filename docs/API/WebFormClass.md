@@ -3,7 +3,7 @@ id: WebFormClass
 title: WebForm
 ---
 
-The `WebForm `class allows you to handle the behavior of your webform and its components on the server side.
+When working in [4D Web Studio](../web-studio/web-studio.md), the `WebForm `class allows you to handle the behavior of your webform and its components on the server side.
 
 ### WebForm Objects
 
@@ -12,8 +12,8 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 ### Summary 
 ||
 |---|
-|[<!-- INCLUDE #WEB Form -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Form.Summary.Summary --> |
-|[<!-- INCLUDE #WEB Event -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Event.Summary --> |
+|[<!-- INCLUDE #_command_.WEB Form.Syntax -->](#web-form)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Form.Summary --> |
+|[<!-- INCLUDE #_command_.WEB Event.Syntax -->](#web-event)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Event.Summary --> |
 
 ## WEB Form
 
@@ -29,7 +29,7 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 <!-- REF #_command_.WEB Form.Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|Result|4D.WebForm|<-|New [WebForm](#web-form-object) object
+|Result|4D.WebForm|<-|New `WebForm` object
 <!-- END REF -->
 
 #### Description
@@ -37,7 +37,7 @@ The `WEB Form` command <!-- REF #_command_.WEB Form.Summary --> returns a `4D.We
 
 Each property of the returned object is an object of the [4D.WebFormItem](WebFormItemClass.md) class.
 
-The command returns `Null` if it is called in a request that does not originate from [4D Web Studio](../web-studio/web-studio.md)
+The command returns `Null` if it is called in a request that does not originate from [4D Web Studio](../web-studio/web-studio.md).
 
 ## WEB Event
 
@@ -58,7 +58,7 @@ The command returns `Null` if it is called in a request that does not originate 
 
 #### Description
 
-**WEB Event** <!-- REF #4D.WebForm.WEB Event.Summary --> returns an object with information on a triggered event linked to a webform component.<!-- END REF --> 
+**WEB Event** <!-- REF #_command_.WEB Event.Summary --> returns an object with information on a triggered event linked to a webform component.<!-- END REF --> 
 
 The function must be called in the context of a web form handled by the web server
 

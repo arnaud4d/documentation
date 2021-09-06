@@ -292,7 +292,7 @@ For example, to make a search bar, you can attach an `onchange` event to a Text 
 
 Just like methods, some 4D class functions allow you to set the behavior of your components.
 
-For example, to display or hide a component when an event occurs, you can use the [4D.WebFormItem class functions](../API/WebFormItem.md)
+For example, to display or hide a component when an event occurs, you can use the [4D.WebFormItem class functions](../API/WebFormItemClass.md)
 ## Server-side reference
 
 The server-side reference of a component is its "address" on the server. To set the behavior of a component, you can assign a server-side reference to it, and then use that reference in class functions.
@@ -303,7 +303,7 @@ To assign a server-side reference to a component, enter a value in the Propertie
 
 ![alt-text](assets/en/web-studio/image-server-side.png)
 
-You can then modify the behavior of your components using events and functions, such as [4D.WebFormItem class functions](../API/WebFormItem.md).
+You can then modify the behavior of your components using events and functions, such as [4D.WebFormItem class functions](../API/WebFormItemClass.md).
 ## Known limitations
 
 The web studio is still in early stages of development, so some features are not yet available: 
