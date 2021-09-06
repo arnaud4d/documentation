@@ -3,27 +3,27 @@ id: WebFormItemClass
 title: WebFormItem
 ---
 
-The `WebFormItem` class allows you to handle the behavior of your webform and its components on the server side.
+The `WebFormItem` class allows you to handle the behavior of webform components on the server side.
 
 ### WebFormItem Objects
 
-`4D.WebFormItem` objects are properties of the `4D.WebForm` object returned by the `WEB Form` command.
+`4D.WebFormItem` objects are properties of the `4D.WebForm` object returned by the `WEB Form` command. 
 
-When you call the `WEB Form` command, the returned `4D.WebForm` object holds as many `4D.WebFormItems` as there are components with [server-side references](../web-studio/web-studio.md#server-side-references) in your webform editor.
+When you call the `WEB Form` command, the returned `4D.WebForm` object holds as many `4D.WebFormItems` as there are components with [server-side references](../web-studio/web-studio.md#server-side-references) in your webform.
 
 For example, `WebFormObject.myImage` refers to the image component with `myImage` as server reference.
 
-`4D.WebFormItem` objects have class functions that allow you to handle the behavior of webforms and their components.
+`4D.WebFormItem` objects have class functions that allow you to modify the behavior of webforms and their components.
 
 ### Summary 
 ||
 |---|
-|[<!-- INCLUDE #.hide() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #4D.WebForm.Summary --> |
-|[<!-- INCLUDE #.show() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #4D.WebForm.Summary --> |
-|[<!-- INCLUDE #addCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #4D.WebForm.Summary --> |
-|[<!-- INCLUDE #removeCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #4D.WebForm.Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.hide() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.hide.Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.show() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.show.Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.addCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.addCSSClass.Summary --> |
+|[<!-- INCLUDE #WebFormItemClass.removeCSSClass() -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #WebFormItemClass.removeCSSClass.Summary --> |
 
-## .hide
+## .hide()
 
 <details><summary>History</summary>
 |Version|Changes|
@@ -31,49 +31,12 @@ For example, `WebFormObject.myImage` refers to the image component with `myImage
 |v19 R3|Added|
 </details>
 
-<!-- REF #.hide.Params -->
-|Parameter|Type||Description|
-|---------|--- |:---:|------|
-|Result|4D.WebForm|<-|New [WebForm](#web-form-object) object
-<!-- END REF -->
-
-<!-- REF #4D.WebForm.WEB Form.Syntax -->
+<!-- REF #WebFormItemClass.hide().Syntax -->
 **.hide()**<!-- END REF -->
 
 #### Description
 
-**.hide** hides the component
-
-## .show
-
-<details><summary>History</summary>
-|Version|Changes|
-|---|---|
-|v19 R3|Added|
-</details>
-
-<!-- REF #4D.WebForm.WEB Form.Params -->
-|Parameter|Type||Description|
-|---------|--- |:---:|------|
-|Result|4D.WebForm|<-|New [WebForm](#web-form-object) object
-<!-- END REF -->
-
-<!-- REF #4D.WebForm.WEB Form.Syntax -->
-**.show()**<!-- END REF -->
-
-#### Description
-
-**.show** displays the component
-#### Available functions
-
-Each webform component object offers the following functions:
-
-| Function | Description |
-|----|----|
-| show() | displays the component |
-| hide() | hides the component |
-| addCSSClass($className) |  adds the specified CSS class to the component
-| removeCSSClass($className) | removes the specified CSS class from the component
+The **.hide()** function <!-- REF #WebFormItemClass.hide().Summary -->hides the component<!-- END REF -->
 
 #### Example
 
@@ -81,19 +44,18 @@ To call a function that hides an image when the user clicks a button:
 
 1. Select the image component on the canvas, and enter a server-side reference in the Properties Panel > Server Side, for example `myImage`.
 2. Create an exposed function named `isHidden` that contains the following code:
+
 ```4d 
-	//hide the component that has "myImage" as server-side reference
-	var $myWebForm : 4D.WebForm
-	
-	$myWebForm:= WEB Form.
-	WEB Form.imageAlias.hide()
+var $myComponent: 4D.WebFormItem
+
+$myComponent:=WEB Form.myImage
+$myComponent.hide() //The component that has "myComponent" as server reference 
 	```
-2. Select the Button component and add an `onclick` event to it
+
+3. Select the Button component and add an `onclick` event to it
 4. Attach the `isHidden` function to the event
 
-## WEB Event
-
-**WEB Event** <!-- REF #4D.WebForm.WEB Event.Summary --> returns an object with information on an event linked to a webform component<!-- END REF --> 
+## .show()
 
 <details><summary>History</summary>
 |Version|Changes|
@@ -101,74 +63,52 @@ To call a function that hides an image when the user clicks a button:
 |v19 R3|Added|
 </details>
 
-<!-- REF #4D.WebForm.WEB Form.Params -->
+<!-- REF #WebFormItemClass.show().Syntax -->
+**.show()**<!-- END REF -->
+
+#### Description
+
+The **.show** function <!-- REF #WebFormItemClass.show().Summary -->makes the component visible<!-- END REF -->
+
+## .addCSSClass()
+
+<details><summary>History</summary>
+|Version|Changes|
+|---|---|
+|v19 R3|Added|
+</details>
+
+<!-- REF #WebFormItemClass.addCSSClass().Syntax -->
+**.addCSSClass**(*className* : Text)<!-- END REF -->
+
+<!-- REF #WebFormItemClass.addCSSClass().Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|Result|Object|<-| Object
+|className|Text|->|Name of the CSS class to add to the component|
 <!-- END REF -->
 
 #### Description
 
-The [WEB Event](https://doc.4d.com/4dv19R/help/command/en/page1734.html) command returns an object describing the event triggered in a web form component, such as a button or a datatable. 
+The **.addCSSClass** function <!-- REF #WebFormItemClass.addCSSClass().Summary -->adds a CSS class to the component<!-- END REF -->
 
-The function must be called in the context of a web form handled by the web server
+## .removeCSSClass()
 
-The returned object contains the following properties:
+<details><summary>History</summary>
+|Version|Changes|
+|---|---|
+|v19 R3|Added|
+</details>
 
-| Property | Type | Description |
-|----|----|----|
-| caller | Text | Server-side reference of the component triggering the event |
-| eventType | Text | Event type (onclick, onchange, onmouseover...) |
-| data	| Object	| For Tabs component: contains an index property (Number) with the index of the clicked Tab (index starts at 0) |
+<!-- REF #WebFormItemClass.removeCSSClass().Summary -->
+**.removeCSSClass**(*className*: Text)<!-- END REF -->
 
-Here's the list of available events: 
+<!-- REF #WebFormItemClass.addCSSClass().Params -->
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|className|Text|->|Name of the CSS class to remove from the component|
+<!-- END REF -->
 
-* blur
-* focus
-* auxclick
-* click
-* dblclick
-* mouseenter
-* mouseleave
-* mouseover
-* keydown
-* keyup
-* change
-* On Load
+#### Description
 
-> The On Load event triggers when the `WebForm` component loads.
-
-#### Example
-
-The objective is to display help when the user hovers over the component:
-
-![alt-text](assets/en/web-studio/web-event-2.png)
-
-To attach an `onmouseover` event to an Input Text component that displays the information:
-
-![alt-text](assets/en/web-studio/web-event-1.png)
-
-In the above image: 
-
-* The Text Input component has `orderNumber` as server reference
-* The component has an `onmouseover` event attached to it
-* The exposed function `help` attached to the `onmouseover` event contains the following code: 
-
-#### Example 
-
-```4d
-var $event : Object
-var $webForm : 4D.WebForm
-
-$webForm:=WEB Form
-$event:=WEB Event
-$componentRef:=$event.caller
-
-If ($event.eventType="onmouseover")  // event is onmouseover 
-$webForm["helpOn_"+$componentRef].show()  // show the help on "orderNumber" by showing the text component with reference "helpOn_orderNumber" 
-Else 
-$webForm["helpOn_"+$componentRef].hide()  // hide the help on orderNumber
-End if 
-```
-
+The **.removeCSSClass()** function <!-- REF #WebFormItemClass.removeCSSClass().Summary -->makes the target component visible<!-- END REF -->
 

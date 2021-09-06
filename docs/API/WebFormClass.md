@@ -12,7 +12,8 @@ The `WebForm `class allows you to handle the behavior of your webform and its co
 ### Summary 
 ||
 |---|
-|[<!-- INCLUDE #WEB Form -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #4D.WebForm.Summary --> |
+|[<!-- INCLUDE #WEB Form -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Form.Summary.Summary --> |
+|[<!-- INCLUDE #WEB Event -->](#new)<p>&nbsp;&nbsp;&nbsp;&nbsp;<!-- INCLUDE #_command_.WEB Event.Summary --> |
 
 ## WEB Form
 
@@ -36,12 +37,9 @@ The `WEB Form` command <!-- REF #_command_.WEB Form.Summary --> returns a `4D.We
 
 Each property of the returned object is an object of the [4D.WebFormItem](WebFormItemClass.md) class.
 
-
-
 The command returns `Null` if it is called in a request that does not originate from [4D Web Studio](../web-studio/web-studio.md)
-## WEB Event
 
-**WEB Event** <!-- REF #4D.WebForm.WEB Event.Summary --> returns an object with information on an event linked to a webform component<!-- END REF --> 
+## WEB Event
 
 <details><summary>History</summary>
 |Version|Changes|
@@ -49,7 +47,10 @@ The command returns `Null` if it is called in a request that does not originate 
 |v19 R3|Added|
 </details>
 
-<!-- REF #4D.WebForm.WEB Form.Params -->
+<!-- REF #_command_.WEB Event.Syntax -->
+**WEB Form** : Object<!-- END REF -->
+
+<!-- REF #_command_.WEB Event.Params -->
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |Result|Object|<-| Object
@@ -57,7 +58,7 @@ The command returns `Null` if it is called in a request that does not originate 
 
 #### Description
 
-The [WEB Event](https://doc.4d.com/4dv19R/help/command/en/page1734.html) command returns an object describing the event triggered in a web form component, such as a button or a datatable. 
+**WEB Event** <!-- REF #4D.WebForm.WEB Event.Summary --> returns an object with information on a triggered event linked to a webform component.<!-- END REF --> 
 
 The function must be called in the context of a web form handled by the web server
 
@@ -69,7 +70,7 @@ The returned object contains the following properties:
 | eventType | Text | Event type (onclick, onchange, onmouseover...) |
 | data	| Object	| For Tabs component: contains an index property (Number) with the index of the clicked Tab (index starts at 0) |
 
-Here's the list of available events: 
+*eventType* can contain the following events: 
 
 * blur
 * focus
@@ -84,7 +85,7 @@ Here's the list of available events:
 * change
 * On Load
 
-> The On Load event triggers when the `WebForm` component loads.
+The On Load event is triggered when the `WebForm` component loads.
 
 #### Example
 
