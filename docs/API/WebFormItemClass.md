@@ -47,12 +47,13 @@ To call a function that hides an image when the user clicks a button:
 
 ```4d 
 var $myComponent: 4D.WebFormItem
+
 $myComponent:=WEB Form.myImage
 $myComponent.hide() //The component that has "myComponent" as server reference 
 ```
 
-3. Select the Button component and add an `onclick` event to it
-4. Attach the `isHidden` function to the event
+3. Select the Button component and add an `onclick` event to it.
+4. Attach the `isHidden` function to the event.
 
 ## .show()
 
