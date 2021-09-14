@@ -55,7 +55,7 @@ The web studio page is available when the [`WebAdmin` web server is running](../
 
 There are two ways to access the web studio:
 
-*	from your 4D standalone application, go to **Design** > **Web Studio...**. 
+*	from your 4D single-user application, go to **Design** > **Web Studio...**. 
  
  	If the `WebAdmin` server is already running, your default browser opens at `IPaddress:HTTPPort/studio`. Otherwise, you will be asked if you want to start the `WebAdmin` web server first.
 
