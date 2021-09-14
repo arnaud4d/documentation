@@ -47,7 +47,7 @@ By default, access to the web studio is not granted. You need to enable access t
 
 ### Activating authentication
 
-Authentication on the `WebAdmin` web server is granted using an access key. For more details, see [Access key](../Administration/webAdmin.md#access-key) 
+Authentication on the `WebAdmin` web server is granted using an access key. For more details, see [Access key](../Administration/webAdmin.md#access-key).
 
 ### Opening the web studio
 
