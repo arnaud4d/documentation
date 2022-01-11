@@ -19,6 +19,21 @@ You use this menu to select the default startup mode for the database: **Design*
 
 ## Component
 
-This area allows component developers to configure how their component classes and functions will be exposed in the 4D method editor once the compoment is installed.
+This area allows component developers to configure how their component classes and functions will be exposed in the 4D method editor once the component is installed.
 
-### Componenty 
+### Component namespace in the class store
+
+Use this area to define a namespace for the component classes and functions in the code. By default, this area in empty: component classes are not available outside of the component context. 
+
+When you enter a value, you declare that component classes and functions will be available in the host projet code through the `cs.component-name` namespace. 
+
+For example, you have developed a component creating shapes and you write "eGeometry" in the component namespace area. Assuming that you have created a `Rectangle` class containing a `getArea()` function, once your project is installed as a component, the developer of the host project can write:
+
+```
+var $rect: cs.eGeometry.Rectangle 
+$rect:=cs.eGeometry.Rectangle.new(10;20)
+
+$area:=$rect.getArea()
+```
+
+The component designation must be compliant with [property naming rules](Concepts/identifiers.md#object-properties). Of course, it is recommended to use a distinguished name to avoid any conflict with the other installed components. 
