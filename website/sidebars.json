@@ -87,7 +87,7 @@
 			"API/SignalClass",
 			"API/SMTPTransporterClass",
 			"API/SystemWorkerClass",
-      "API/WebServerClass",
+			"API/WebServerClass",
 			"API/ZipArchiveClass",
 			"API/ZipFileClass",
 			"API/ZipFolderClass"
@@ -414,6 +414,9 @@
 			"ViewPro/configuring",
 			"ViewPro/formulas",
 			"ViewPro/method-list"
+		],
+		"netkit": [
+			"temp-netkit/netkit"
 		]
 	}
 }
