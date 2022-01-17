@@ -205,3 +205,67 @@ $statusSend:=$smtp.send($email)
 2. Execute the method. Your browser opens a page that allows you to authenticate.
 
 3. Log in to your Microsoft Outlook account and check that you've received the email.
+
+## Office365
+
+The `New Office365 provider` method returns an object which is an instance of the `Office365Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
+
+The `Office365` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
+
+### **New Office365 provider**
+
+**New Office365 provider**( *paramObj* : Object ) : Object
+
+#### Parameters 
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|paramObj|Object|->| Oauth2Provider object |
+|Result|Object|<-| object of the Office365 class
+
+#### Description
+
+`New Office365 provider` instantiates an object of the `Office365` class.
+
+In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
+
+The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
+
+### Office365.user.getById
+
+**Office365.user.getById**( *id* {; *select*}) : Object
+
+#### Parameters 
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|id|string|->| Oauth2Provider object |
+|select|string|<-| Set of properties to be returned
+
+#### Description
+
+`Office365.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with Null as a value and throws an error.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+
+| Property | Type | Description
+|---|---|---|
+id | Text | The unique identifier for the user.    
+businessPhones | Text | The user's phone numbers.
+displayName | Text | The name displayed in the address book for the user.|
+givenName | Text | The user's first name.
+jobTitle | Text | The user's job title.
+mail | Text | The user's email address.
+mobilePhone | Text | The user's cellphone number.
+officeLocation | Text | The user's physical office location.
+preferredLanguage | Text | The user's language of preference.
+surname | Text | The user's last name.
+userPrincipalName | Text | The user's principal name.
+
+Otherwise, the object contains only the properties specified in the `select` parameter.
+
+For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
+
+
