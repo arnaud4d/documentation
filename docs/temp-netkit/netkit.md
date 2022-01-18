@@ -230,19 +230,19 @@ In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
 
 The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
 
-### Office365.user.getById
+### Office365Object.user.getById
 
-**Office365.user.getById**( *id* {; *select*}) : Object
+**Office365Object.user.getById**( *id* {; *select*}) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|id|string|->| Oauth2Provider object |
+|id|string|->| Unique identifier of the user to search for |
 |select|string|<-| Set of properties to be returned
 
 #### Description
 
-`Office365.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with Null as a value and throws an error.
+`Office365Object.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with Null as a value and throws an error.
 
 In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
@@ -266,6 +266,77 @@ userPrincipalName | Text | The user's principal name.
 
 Otherwise, the object contains only the properties specified in the `select` parameter.
 
-For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
+For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+#### Example 
+
+To search for a user using an ID:
+
+```4d
+var $oAuth2; $Office365; $currentUser; $userInfo: Object
+
+$oAuth2:=SignedInProvider // Method that creates an OAuth2Provider Object
+
+$Office365:=New Office365 provider($oAuth2)
+
+$currentUser:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail")
+
+$userInfo:=$Office365.user.getById($currentUser.userPrincipalName)
+```
+
+### Office365Object.user.getByPrincipalName
+
+**Office365.user.getByPrincipalName**(*userPrincipalName* {; *select*}) : Object
+
+#### Description
+
+`Office365Object.user.getByPrincipalName` returns information on the user whose principal name matches the `userPrincipalName` parameter. If the principal name is not found or connection fails, the command returns an object with Null as a value and throws an error.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
+
+#### Example 
+
+To search for a user using a principal name:
+
+```4d
+var $oAuth2; $Office365; $currentUser; $userInfo: Object
+
+$oAuth2:=SignedInProvider // Method that creates an OAuth2Provider Object
+
+$Office365:=New Office365 provider($oAuth2)
+
+$currentUser:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail")
+
+$userInfo:=$Office365.user.getByPrincipalName($currentUser.userPrincipalName)
+```
 
 
+### Office365.user.getCurrentUser
+
+**Office365.user.getCurrentUser**({*select*}) : Object
+
+#### Description
+
+`Office365Object.user.getCurrentUser` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
+
+The command returns a Null object if the session is not a sign-in session.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
+
+#### Example 
+
+To retrieve information from the current user:
+
+```4d
+var $oAuth2; $Office365; $userInfo: Object
+
+$oAuth2:=SignedInProvider // Call a method that creates an OAuth2Provider Object
+
+$Office365:=New Office365 provider($oAuth2) // Create an Office365 object
+
+$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Select properties to be returned
+```
