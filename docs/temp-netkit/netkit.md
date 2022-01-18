@@ -268,22 +268,6 @@ Otherwise, the object contains only the properties specified in the `select` par
 
 For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
-#### Example 
-
-To search for a user using an ID:
-
-```4d
-var $oAuth2; $Office365; $currentUser; $userInfo: Object
-
-$oAuth2:=SignedInProvider // Method that creates an OAuth2Provider Object
-
-$Office365:=New Office365 provider($oAuth2)
-
-$currentUser:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail")
-
-$userInfo:=$Office365.user.getById($currentUser.userPrincipalName)
-```
-
 ### Office365Object.user.getByPrincipalName
 
 **Office365.user.getByPrincipalName**(*userPrincipalName* {; *select*}) : Object
@@ -295,22 +279,6 @@ $userInfo:=$Office365.user.getById($currentUser.userPrincipalName)
 In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
 By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
-
-#### Example 
-
-To search for a user using a principal name:
-
-```4d
-var $oAuth2; $Office365; $currentUser; $userInfo: Object
-
-$oAuth2:=SignedInProvider // Method that creates an OAuth2Provider Object
-
-$Office365:=New Office365 provider($oAuth2)
-
-$currentUser:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail")
-
-$userInfo:=$Office365.user.getByPrincipalName($currentUser.userPrincipalName)
-```
 
 
 ### Office365.user.getCurrentUser
