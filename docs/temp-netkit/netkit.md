@@ -10,8 +10,10 @@ title: 4D NetKit
 
 ## Table of contents
 
-* [OAuth2Provider](#OAuth2Provider-class)
-* [Tutorial : Authenticate to the Microsoft Graph API with 4D Netkit, and send an email using the SMTP Transporter class](#tutorial--authenticate-to-the-microsoft-graph-api-with-4d-netkit-and-send-an-email-using-the-smtp-transporter-class)
+* [OAuth2Provider class](#oauth2provider)
+* [Office365 class](#office365)
+* [Tutorial : Authenticate to the Microsoft Graph API in service mode](#authenticate-to-the-microsoft-graph-api-with-4d-netkit-in-service-mode)
+* [Tutorial : Authenticate to the Microsoft Graph API in signedIn mode (4D NetKit), then send an email (SMTP Transporter class)](#authenticate-to-the-microsoft-graph-api-in-signedin-mode-and-send-an-email-with-smtp)
 
 ## OAuth2Provider
 
@@ -90,6 +92,109 @@ If the token has expired:
 When requesting access on behalf of a user ("signedIn" mode) the command opens a web browser to request authorization.
 
 In "signedIn" mode, when `.getToken()` is called, a web server included in 4D NetKit starts automatically on the port specified in the [redirectURI parameter](#description) to intercept the provider's authorization response and display in the browser.
+
+## Office365
+
+The `New Office365 provider` method returns an object which is an instance of the `Office365Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
+
+The `Office365` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
+
+### **New Office365 provider**
+
+**New Office365 provider**( *paramObj* : Object ) : Object
+
+#### Parameters 
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|paramObj|Object|->| Oauth2Provider object |
+|Result|Object|<-| object of the Office365 class
+
+#### Description
+
+`New Office365 provider` instantiates an object of the `Office365` class.
+
+In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
+
+The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
+
+### Office365Object.user.getById()
+
+**Office365Object.user.getById**( *id* {; *select*}) : Object
+
+#### Parameters 
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|id|string|->| Unique identifier of the user to search for |
+|select|string|<-| Set of properties to be returned
+
+#### Description
+
+`Office365Object.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+
+| Property | Type | Description
+|---|---|---|
+id | Text | The unique identifier for the user.    
+businessPhones | Text | The user's phone numbers.
+displayName | Text | The name displayed in the address book for the user.|
+givenName | Text | The user's first name.
+jobTitle | Text | The user's job title.
+mail | Text | The user's email address.
+mobilePhone | Text | The user's cellphone number.
+officeLocation | Text | The user's physical office location.
+preferredLanguage | Text | The user's language of preference.
+surname | Text | The user's last name.
+userPrincipalName | Text | The user's principal name.
+
+Otherwise, the object contains only the properties specified in the `select` parameter.
+
+For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+### Office365Object.user.getByPrincipalName()
+
+**Office365.user.getByPrincipalName**(*userPrincipalName* {; *select*}) : Object
+
+#### Description
+
+`Office365Object.user.getByPrincipalName` returns information on the user whose principal name matches the `userPrincipalName` parameter. If the principal name is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
+
+
+### Office365.user.getCurrentUser()
+
+**Office365.user.getCurrentUser**({*select*}) : Object
+
+#### Description
+
+`Office365Object.user.getCurrentUser` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
+
+The command returns a `Null` object if the session is not a sign-in session.
+
+In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
+
+#### Example 
+
+To retrieve information from the current user:
+
+```4d
+var $oAuth2; $Office365; $userInfo: Object
+
+$oAuth2:=SignedInProvider // Call a method that creates an OAuth2Provider Object
+
+$Office365:=New Office365 provider($oAuth2) // Create an Office365 object
+
+$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Select properties to be returned
+```
 
 # Tutorials
 
@@ -205,106 +310,3 @@ $statusSend:=$smtp.send($email)
 2. Execute the method. Your browser opens a page that allows you to authenticate.
 
 3. Log in to your Microsoft Outlook account and check that you've received the email.
-
-## Office365
-
-The `New Office365 provider` method returns an object which is an instance of the `Office365Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
-
-The `Office365` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
-
-### **New Office365 provider**
-
-**New Office365 provider**( *paramObj* : Object ) : Object
-
-#### Parameters 
-|Parameter|Type||Description|
-|---------|--- |:---:|------|
-|paramObj|Object|->| Oauth2Provider object |
-|Result|Object|<-| object of the Office365 class
-
-#### Description
-
-`New Office365 provider` instantiates an object of the `Office365` class.
-
-In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
-
-The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
-
-### Office365Object.user.getById
-
-**Office365Object.user.getById**( *id* {; *select*}) : Object
-
-#### Parameters 
-|Parameter|Type||Description|
-|---------|--- |:---:|------|
-|id|string|->| Unique identifier of the user to search for |
-|select|string|<-| Set of properties to be returned
-
-#### Description
-
-`Office365Object.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with Null as a value and throws an error.
-
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
-
-The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
-
-By default, if the *select* parameter is not defined, the command returns an object with the following properties:
-
-| Property | Type | Description
-|---|---|---|
-id | Text | The unique identifier for the user.    
-businessPhones | Text | The user's phone numbers.
-displayName | Text | The name displayed in the address book for the user.|
-givenName | Text | The user's first name.
-jobTitle | Text | The user's job title.
-mail | Text | The user's email address.
-mobilePhone | Text | The user's cellphone number.
-officeLocation | Text | The user's physical office location.
-preferredLanguage | Text | The user's language of preference.
-surname | Text | The user's last name.
-userPrincipalName | Text | The user's principal name.
-
-Otherwise, the object contains only the properties specified in the `select` parameter.
-
-For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
-
-### Office365Object.user.getByPrincipalName
-
-**Office365.user.getByPrincipalName**(*userPrincipalName* {; *select*}) : Object
-
-#### Description
-
-`Office365Object.user.getByPrincipalName` returns information on the user whose principal name matches the `userPrincipalName` parameter. If the principal name is not found or connection fails, the command returns an object with Null as a value and throws an error.
-
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
-
-By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
-
-
-### Office365.user.getCurrentUser
-
-**Office365.user.getCurrentUser**({*select*}) : Object
-
-#### Description
-
-`Office365Object.user.getCurrentUser` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
-
-The command returns a Null object if the session is not a sign-in session.
-
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
-
-By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
-
-#### Example 
-
-To retrieve information from the current user:
-
-```4d
-var $oAuth2; $Office365; $userInfo: Object
-
-$oAuth2:=SignedInProvider // Call a method that creates an OAuth2Provider Object
-
-$Office365:=New Office365 provider($oAuth2) // Create an Office365 object
-
-$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Select properties to be returned
-```
