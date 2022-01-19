@@ -187,13 +187,22 @@ By default, if the *select* parameter is not defined, the command returns an obj
 To retrieve information from the current user:
 
 ```4d
-var $oAuth2; $Office365; $userInfo: Object
+var $oAuth2; $Office365; $userInfo; $params: Object
 
-$oAuth2:=SignedInProvider // Call a method that creates an OAuth2Provider Object
+// Set up parameters: 
 
-$Office365:=New Office365 provider($oAuth2) // Create an Office365 object
+$params:=New object
+$params.name:="Microsoft"
+$params.permission:="signedIn"
+$params.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
+$params.redirectURI:="http://127.0.0.1:50993/authorize/"
+$param.scope:="https://graph.microsoft.com/.default"
 
-$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Select properties to be returned
+$oAuth2:=New Oauth2Provider($params) //Creates an OAuth2Provider Object
+
+$Office365:=New Office365 provider($oAuth2) // Creates an Office365 object
+
+$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Return the properties specified in the parameter.
 ```
 
 # Tutorials
