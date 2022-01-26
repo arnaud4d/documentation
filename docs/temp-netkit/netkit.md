@@ -119,20 +119,23 @@ The returned object can be used with the `Office365` class functions to retrieve
 
 ### Office365Object.user.get()
 
-**Office365Object.user.get**( *id* : Text {; *select* : Text}) : Object
+**Office365Object.user.get**( *id* : Text {; *select* : Text}) : Object<br/>**Office365Object.user.get**( *userPrincipalName* : Text {; *select* : Text}) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |id|Text|->| Unique identifier of the user to search for. |
-|select|Text|->| Set of properties to be returned.
-|result|Object|<-| Object holding information on the user.
+|userPrincipalName|Text|->| The user principal name (UPN) of the user to search for.|
+|select|Text|->| Set of properties to be returned.|
+|result|Object|<-| Object holding information on the user.|
 
 #### Description
 
-`Office365Object.user.get` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
+`Office365Object.user.get` returns information on the user whose ID matches the *id* parameter, or whose userPrincipalName matches the *userPrincipalName* parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
 
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+> The UPN is an Internet-style login name for the user based on the Internet standard RFC 822. By convention, it should correspond to the user's email name.
+
+In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
 The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
@@ -167,7 +170,7 @@ For more details on user information, see [Microsoft's docs on user information]
 
 The command returns a `Null` object if the session is not a sign-in session.
 
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
 By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
 
