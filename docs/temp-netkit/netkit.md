@@ -117,30 +117,33 @@ In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
 
 The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
 
-### Office365Object.user.getById()
+### Office365Object.user.get()
 
-**Office365Object.user.getById**( *id* {; *select*}) : Object
+**Office365Object.user.get**( *id* : Text {; *select* : Text}) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|id|string|->| Unique identifier of the user to search for |
-|select|string|<-| Set of properties to be returned
+|id|Text|->| Unique identifier of the user to search for. |
+|select|Text|->| Set of properties to be returned.
+|result|Object|<-| Object holding information on the user.
 
 #### Description
 
-`Office365Object.user.getById` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
+`Office365Object.user.get` returns information on the user whose ID matches the `id` parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
 
 In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
 The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+#### Default properties of the returned object
 
 By default, if the *select* parameter is not defined, the command returns an object with the following properties:
 
 | Property | Type | Description
 |---|---|---|
 id | Text | The unique identifier for the user.    
-businessPhones | Text | The user's phone numbers.
+businessPhones | Collection | The user's phone numbers.
 displayName | Text | The name displayed in the address book for the user.|
 givenName | Text | The user's first name.
 jobTitle | Text | The user's job title.
@@ -154,27 +157,13 @@ userPrincipalName | Text | The user's principal name.
 Otherwise, the object contains only the properties specified in the `select` parameter.
 
 For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+### Office365.user.getCurrent()
 
-### Office365Object.user.getByPrincipalName()
-
-**Office365.user.getByPrincipalName**(*userPrincipalName* {; *select*}) : Object
-
-#### Description
-
-`Office365Object.user.getByPrincipalName` returns information on the user whose principal name matches the `userPrincipalName` parameter. If the principal name is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
-
-In `select`, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
-
-By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
-
-
-### Office365.user.getCurrentUser()
-
-**Office365.user.getCurrentUser**({*select*}) : Object
+**Office365.user.getCurrent**({*select* : Text}) : Object
 
 #### Description
 
-`Office365Object.user.getCurrentUser` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
+`Office365Object.user.getCurrent` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
 
 The command returns a `Null` object if the session is not a sign-in session.
 
@@ -198,11 +187,11 @@ $params.clientId:="your-client-id" // Replace with the client id you obtained on
 $params.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://graph.microsoft.com/.default"
 
-$oAuth2:=New Oauth2Provider($params) //Creates an OAuth2Provider Object
+$oAuth2:=New Oauth2 provider($params) //Creates an OAuth2Provider Object
 
 $Office365:=New Office365 provider($oAuth2) // Creates an Office365 object
 
-$userInfo:=$Office365.user.getCurrentUser("id,userPrincipalName,principalName,displayName,givenName,mail") // Return the properties specified in the parameter.
+$userInfo:=$Office365.user.getCurrent("id,userPrincipalName,principalName,displayName,givenName,mail") // Return the properties specified in the parameter.
 ```
 
 # Tutorials
