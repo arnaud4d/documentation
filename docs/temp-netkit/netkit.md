@@ -200,6 +200,55 @@ $userInfo:=$Office365.user.getCurrent("id,userPrincipalName,\
 principalName,displayName,givenName,mail") 
 ```
 
+### Office365Object.user.list()
+
+**Office365Object.user.list**({*options*: Object}) : Object
+
+#### Parameters 
+|Parameter|Type||Description|
+|---------|--- |:---:|------|
+|options|Object|->| additional options for the search|
+|result|Object|<-| Object holding a collection of users and additional info on the request|
+
+#### Description
+
+`Office365Object.user.list` returns a list of Office365 users.
+
+In *options* you can pass an object to specify additional search options.
+
+By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+
+| Property | Type | Description
+|---|---|---|
+search | Text | Additional search criteria.    
+
+
+In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+
+The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+#### Default properties of the returned object
+
+By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+
+| Property | Type | Description
+|---|---|---|
+id | Text | The unique identifier for the user.    
+businessPhones | Collection | The user's phone numbers.
+displayName | Text | The name displayed in the address book for the user.|
+givenName | Text | The user's first name.
+jobTitle | Text | The user's job title.
+mail | Text | The user's email address.
+mobilePhone | Text | The user's cellphone number.
+officeLocation | Text | The user's physical office location.
+preferredLanguage | Text | The user's language of preference.
+surname | Text | The user's last name.
+userPrincipalName | Text | The user's principal name.
+
+Otherwise, the object contains only the properties specified in the `select` parameter.
+
+For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
 # Tutorials
 
 ## Authenticate to the Microsoft Graph API with 4D Netkit in service mode
