@@ -139,7 +139,7 @@ In *select*, pass a string that contains a set of properties you want to retriev
 
 The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
-#### Default properties of the returned object
+#### Returned object
 
 By default, if the *select* parameter is not defined, the command returns an object with the following properties:
 
@@ -173,7 +173,7 @@ The command returns a `Null` object if the session is not a sign-in session.
 
 In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
-By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [property table](#default-properties-of-the-returned-object)).
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [property table](#returned-object)).
 
 #### Example 
 
@@ -214,40 +214,43 @@ principalName,displayName,givenName,mail")
 
 `Office365Object.user.list` returns a list of Office365 users.
 
-In *options* you can pass an object to specify additional search options.
+In *options* you can pass an object to specify additional search options. The following table groups the available search options: 
 
-By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+| Property | Type | Description | Can be empty or Null
+|---|---|---|---|
+| search | Text | Additional search criteria.| Yes |
+| filter | Text | Filter query parameter. | Yes |
+| select | Text | Set of properties to be returned| Yes |
+|top| Integer | Request page size limit | Yes |
+|orderBy| Text | Sort order for the items returned (default is ascending) | Yes |
 
-| Property | Type | Description
+The `search` property restricts the results of a request to match a search criterion. The search syntax rules are available on [Microsoft's docs](https://docs.microsoft.com/en-us/graph/search-query-parameter)  
+
+The `filter` property allows retrieving just a subset of users. See [filter parameter](https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter).
+
+The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,).
+
+By default, if the `select` is not defined, the user objects returned will have [default properties](#returned-object) 
+
+The full list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
+The `top` property defines the page size of a request. Maximum value is 999. When a result set spans multiple pages, you can use the .next() function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
+
+the `orderBy` property defines how the returned items are ordered. By default, they are arranged in ascending order. This parameter requires the name of the field that will be aranged, followed by a space, followed by "asc" or "desc". For example `fieldname asc`.
+
+#### Returned object 
+
+| Property | Type | Description | 
 |---|---|---|
-search | Text | Additional search criteria.    
+| users | Collection | Collection of objects with information on users| 
+| page |  Integer | Page number (starts at 1) |
+| isLastPage |  Boolean | True if the last page is reached |
+| previous() |  Object | Function that moves to the previous page of user information |
+| next() |  Object | Function that moves to the next page of user information |
+| success |  Boolean | Function that moves to the next page of user information |
+| statusText |  Text | Status message returned by the Office 365 server, or last error returned in the 4D error stack |
+| errors |  Collection | Collection of 4D error objects (not returned if an Office 365 server response is received) |
 
-
-In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
-
-The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
-
-#### Default properties of the returned object
-
-By default, if the *select* parameter is not defined, the command returns an object with the following properties:
-
-| Property | Type | Description
-|---|---|---|
-id | Text | The unique identifier for the user.    
-businessPhones | Collection | The user's phone numbers.
-displayName | Text | The name displayed in the address book for the user.|
-givenName | Text | The user's first name.
-jobTitle | Text | The user's job title.
-mail | Text | The user's email address.
-mobilePhone | Text | The user's cellphone number.
-officeLocation | Text | The user's physical office location.
-preferredLanguage | Text | The user's language of preference.
-surname | Text | The user's last name.
-userPrincipalName | Text | The user's principal name.
-
-Otherwise, the object contains only the properties specified in the `select` parameter.
-
-For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
 # Tutorials
 
