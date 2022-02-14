@@ -107,7 +107,7 @@ The `Office365` class allows you to get information from Office365 applications,
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| Oauth2Provider object |
-|Result|Object|<-| object of the Office365 class
+|Result|Object|<-| object of the Office365 class |
 
 #### Description
 
@@ -160,6 +160,7 @@ userPrincipalName | Text | The user's principal name.
 Otherwise, the object contains only the properties specified in the `select` parameter.
 
 For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+
 ### Office365.user.getCurrent()
 
 **Office365.user.getCurrent**({*select* : Text}) : Object
@@ -172,7 +173,7 @@ The command returns a `Null` object if the session is not a sign-in session.
 
 In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
 
-By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [description of `getById`](#office365objectusergetbyid)).
+By default, if the *select* parameter is not defined, the command returns an object with a default set of properties (see the [property table](#default-properties-of-the-returned-object)).
 
 #### Example 
 
@@ -186,7 +187,7 @@ var $oAuth2; $Office365; $userInfo; $params: Object
 $params:=New object
 $params.name:="Microsoft"
 $params.permission:="signedIn"
-$params.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
+$params.clientId:="your-client-id" // Replace with your Microsoft identity platform client ID
 $params.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://graph.microsoft.com/.default"
 
@@ -194,7 +195,9 @@ $oAuth2:=New Oauth2 provider($params) //Creates an OAuth2Provider Object
 
 $Office365:=New Office365 provider($oAuth2) // Creates an Office365 object
 
-$userInfo:=$Office365.user.getCurrent("id,userPrincipalName,principalName,displayName,givenName,mail") // Return the properties specified in the parameter.
+// Return the properties specified in the parameter.
+$userInfo:=$Office365.user.getCurrent("id,userPrincipalName,\
+principalName,displayName,givenName,mail") 
 ```
 
 # Tutorials
@@ -202,6 +205,7 @@ $userInfo:=$Office365.user.getCurrent("id,userPrincipalName,principalName,displa
 ## Authenticate to the Microsoft Graph API with 4D Netkit in service mode
 
 ### Objectives
+
 Establish a connection to the Microsoft Graph API in service mode
 
 ### Prerequisites
@@ -224,10 +228,10 @@ $param:=New object()
 $param.name:="Microsoft"
 $param.permission:="service"
 
-$param.clientId:="your-client-id" // Replace with the client ID you obtained on the Microsoft identity platform
+$param.clientId:="your-client-id" // Replace with your Microsoft identity platform client ID
 $param.clientSecret:="your-client-secret" // Replace with your client secret
 $param.tenant:="your-tenant-id" // Replace with your tenant ID
-$param.tokenURI:="https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token/" // Replace the tenant ID
+$param.tokenURI:="https://login.microsoftonline.com/your-tenant-id/oauth2/v2.0/token/" //Replace ID
 $param.scope:="https://graph.microsoft.com/.default"
 
 $oAuth2:=New OAuth2 provider($param)
@@ -269,24 +273,23 @@ var $address : Text
 $param:=New object
 $param.name:="Microsoft"
 $param.permission:="signedIn"
-$param.clientId:="your-client-id" // Replace with the client id you obtained on the Microsoft identity platform 
+$param.clientId:="your-client-id" // Replace with your Microsoft identity platform client ID
 $param.redirectURI:="http://127.0.0.1:50993/authorize/"
 $param.scope:="https://outlook.office.com/SMTP.Send" // Get consent for sending an smtp email
 
 // Instantiate an object of the OAuth2Provider class
-
 $oAuth2:=New OAuth2 provider($param)
 
 // Request a token using the class function
 
-$token:=$oAuth2.getToken() // Sends a token request and starts the a web server on the port specified in $param.redirectURI to intercept the authorization response
+// Send a token request and start the a web server on the port specified in $param.redirectURI 
+//to intercept the authorization response
+$token:=$oAuth2.getToken() 
 
 // Set the email address for SMTP configuration 
-
 $address:= "email-sender-address@outlook.fr" // Replace with your Microsoft email account address
 
 // Set the email's content and metadata
-
 $email:=New object
 $email.subject:="My first mail"
 $email.from:=$address
@@ -294,7 +297,6 @@ $email.to:="email-recipient-address@outlook.fr" // Replace with the recipient's 
 $email.textBody:="Test mail \r\n This is just a test e-mail \r\n Please ignore it"
 
 // Configure the SMTP connection
-
 $parameters:=New object
 $parameters.accessTokenOAuth2:=$token
 $parameters.authenticationMode:=SMTP authentication OAUTH2
