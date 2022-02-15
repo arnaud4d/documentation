@@ -241,7 +241,7 @@ the `orderBy` property defines how the returned items are ordered. By default, t
 | users | Collection | Collection of objects with information on users| 
 | page |  Integer | User information page number (starts at 1) |
 | previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the page property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, success is set to `True`</li><li>If no previous page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
-| next() |  Function | Function that updates the `users` collection with the next user information page and increases the `page` property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, success is set to `True`</li><li>If no previous page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
+| next() |  Function | Function that updates the `users` collection with the next user information page and increases the `page` property by 1. Returns a status object: <ul><li>If a next page is successfully loaded, success is set to `True`</li><li>If no next page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No next page"</li></ul>  |
 | isLastPage |  Boolean | `True` if the last page is reached |
 | success |  Boolean | `True` if the operation is successful, `False` otherwise |
 | statusText |  Text | Status message returned by the Office 365 server, or last error returned in the 4D error stack |
