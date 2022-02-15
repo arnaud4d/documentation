@@ -214,7 +214,7 @@ principalName,displayName,givenName,mail")
 
 `Office365Object.user.list` returns a list of Office365 users.
 
-In *options* you can pass an object to specify additional search options. The following table groups the available search options: 
+In *options*, you can pass an object to specify additional search options. The following table groups the available search options: 
 
 | Property | Type | Description | Can be empty or Null
 |---|---|---|---|
@@ -222,7 +222,7 @@ In *options* you can pass an object to specify additional search options. The fo
 | filter | Text | Filter query parameter | Yes |
 | select | Text | Set of properties to be returned| Yes |
 |top| Integer | Request page size limit | Yes |
-|orderBy| Text | Sort order for the items returned (default is ascending) | Yes |
+|orderBy| Text | Sort order for the items returned (default is ascending) | |
 
 The `search` property restricts the results of a request to match a search criterion. The search syntax rules are available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/search-query-parameter)  
 
@@ -230,7 +230,7 @@ The `filter` property allows retrieving just a subset of users. See [filter para
 
 The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,). By default, if `select` is not defined, the returned user objects have [default properties](#returned-object).
 
-The `top` property defines the page size for a request. Maximum value is 999. When a result set spans multiple pages, you can use the `.next()` function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
+The `top` property defines the page size for a request. Maximum value is 999. If `top` is not defined, the default value is applied (100). When a result set spans multiple pages, you can use the `.next()` function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
 
 the `orderBy` property defines how the returned items are ordered. By default, they are arranged in ascending order. The syntax is "fieldname asc" or "fieldname desc". Replace "fieldname" with the name of the field to be arranged. 
 
@@ -240,17 +240,17 @@ the `orderBy` property defines how the returned items are ordered. By default, t
 |---|---|---|
 | users | Collection | Collection of objects with information on users| 
 | page |  Integer | User information page number (starts at 1) |
-| previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the page property by 1. Returns a status object: <ul><li>1</li><li>2</li><li>3</li></ul>  |
-| next() |  Function | Function that updates the `users` collection with the next user information page and increases the page property by 1.  |
-| isLastPage |  Boolean | True if the last page is reached |
-| success |  Boolean | True if the operation is successful, False otherwise |
+| previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the page property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, success is set to `True`</li><li>If no previous page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
+| next() |  Function | Function that updates the `users` collection with the next user information page and increases the `page` property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, success is set to `True`</li><li>If no previous page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
+| isLastPage |  Boolean | `True` if the last page is reached |
+| success |  Boolean | `True` if the operation is successful, `False` otherwise |
 | statusText |  Text | Status message returned by the Office 365 server, or last error returned in the 4D error stack |
 | errors |  Collection | Collection of 4D error items (not returned if an Office 365 server response is received): <ul><li>[].errcode is the 4D error code number</li><li>[].message is a description of the 4D error</li><li>[].componentSignature is the signature of the internal component that returned the error</li></ul>|
 
 #### Example
 
 ```4d
-var $oAuth2; $Office365; $userInfo; $params; $userList; $userList2; $userList3 : Object
+var $oAuth2; $Office365; $userInfo; $params; $userList; $userList2; $userList3; $userList4 : Object
 var $col : Collection
 
 // Set up parameters: 
@@ -267,22 +267,23 @@ $oAuth2:=New Oauth2 provider($params)
 // Create an Office365 object
 $Office365:=New Office365 provider($oAuth2) 
 
+// Return a list of all the users
+$informationList1:=$Office365.user.list() 
+
 // Return a list of users whose displayName is Jean
-$userList:=$Office365.user.list(New object("filter"; "startswith(displayName,'Jean')"))
+$userList2:=$Office365.user.list(New object("filter"; "startswith(displayName,'Jean')"))
 
 // return a list of users whose display names contain "F" and arrange it in descending order.
-$userList2:=$Office365.user.list(New object("search"; "\"displayName:F\"";\n 
+$userList3:=$Office365.user.list(New object("search"; "\"displayName:F\"";\n 
 "orderBy"; "displayName desc"; "select"; "displayName"))
 
 // Create a list filled with all the userPrincipalName 
-$userList3:=$Office365.user.list(New object("select"; "userPrincipalName"))
-$col:=New collection
+$userList4:=$Office365.user.list(New object("select"; "userPrincipalName"))
+$col2:=New collection
 Repeat 
-    $col.combine($userList3.users)
-Until (Not($userList3.next().success))
+    $col.combine($userList4.users)
+Until (Not($userList4.next().success))
 ```
-
-
 
 ## Tutorials
 
@@ -290,7 +291,7 @@ Until (Not($userList3.next().success))
 
 #### Objectives
 
-Establish a connection to the Microsoft Graph API in service mode
+Establish a connection to the Microsoft Graph API in service mode.
 
 #### Prerequisites
 
