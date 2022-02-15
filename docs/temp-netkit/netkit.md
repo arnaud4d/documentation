@@ -161,9 +161,9 @@ Otherwise, the object contains only the properties specified in the `select` par
 
 For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
-### Office365.user.getCurrent()
+### Office365Object.user.getCurrent()
 
-**Office365.user.getCurrent**({*select* : Text}) : Object
+**Office365Object.user.getCurrent**({*select* : Text}) : Object
 
 #### Description
 
@@ -218,55 +218,87 @@ In *options* you can pass an object to specify additional search options. The fo
 
 | Property | Type | Description | Can be empty or Null
 |---|---|---|---|
-| search | Text | Additional search criteria.| Yes |
-| filter | Text | Filter query parameter. | Yes |
+| search | Text | Additional search criteria| Yes |
+| filter | Text | Filter query parameter | Yes |
 | select | Text | Set of properties to be returned| Yes |
 |top| Integer | Request page size limit | Yes |
 |orderBy| Text | Sort order for the items returned (default is ascending) | Yes |
 
-The `search` property restricts the results of a request to match a search criterion. The search syntax rules are available on [Microsoft's docs](https://docs.microsoft.com/en-us/graph/search-query-parameter)  
+The `search` property restricts the results of a request to match a search criterion. The search syntax rules are available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/search-query-parameter)  
 
 The `filter` property allows retrieving just a subset of users. See [filter parameter](https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter).
 
-The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,).
+The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,). By default, if `select` is not defined, the returned user objects have [default properties](#returned-object).
 
-By default, if the `select` is not defined, the user objects returned will have [default properties](#returned-object) 
+The `top` property defines the page size for a request. Maximum value is 999. When a result set spans multiple pages, you can use the `.next()` function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
 
-The full list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
-
-The `top` property defines the page size of a request. Maximum value is 999. When a result set spans multiple pages, you can use the .next() function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
-
-the `orderBy` property defines how the returned items are ordered. By default, they are arranged in ascending order. This parameter requires the name of the field that will be aranged, followed by a space, followed by "asc" or "desc". For example `fieldname asc`.
+the `orderBy` property defines how the returned items are ordered. By default, they are arranged in ascending order. The syntax is "fieldname asc" or "fieldname desc". Replace "fieldname" with the name of the field to be arranged. 
 
 #### Returned object 
 
 | Property | Type | Description | 
 |---|---|---|
 | users | Collection | Collection of objects with information on users| 
-| page |  Integer | Page number (starts at 1) |
+| page |  Integer | User information page number (starts at 1) |
+| previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the page property by 1. Returns a status object: <ul><li>1</li><li>2</li><li>3</li></ul>  |
+| next() |  Function | Function that updates the `users` collection with the next user information page and increases the page property by 1.  |
 | isLastPage |  Boolean | True if the last page is reached |
-| previous() |  Object | Function that moves to the previous page of user information |
-| next() |  Object | Function that moves to the next page of user information |
-| success |  Boolean | Function that moves to the next page of user information |
+| success |  Boolean | True if the operation is successful, False otherwise |
 | statusText |  Text | Status message returned by the Office 365 server, or last error returned in the 4D error stack |
-| errors |  Collection | Collection of 4D error objects (not returned if an Office 365 server response is received) |
+| errors |  Collection | Collection of 4D error items (not returned if an Office 365 server response is received): <ul><li>[].errcode is the 4D error code number</li><li>[].message is a description of the 4D error</li><li>[].componentSignature is the signature of the internal component that returned the error</li></ul>|
+
+#### Example
+
+```4d
+var $oAuth2; $Office365; $userInfo; $params; $userList; $userList2; $userList3 : Object
+var $col : Collection
+
+// Set up parameters: 
+$params:=New object
+$params.name:="Microsoft"
+$params.permission:="signedIn"
+$params.clientId:="your-client-id" // Replace with your Microsoft identity platform client ID
+$params.redirectURI:="http://127.0.0.1:50993/authorize/"
+$param.scope:="https://graph.microsoft.com/.default"
+
+// Create an OAuth2Provider Object
+$oAuth2:=New Oauth2 provider($params) 
+
+// Create an Office365 object
+$Office365:=New Office365 provider($oAuth2) 
+
+// Return a list of users whose displayName is Jean
+$userList:=$Office365.user.list(New object("filter"; "startswith(displayName,'Jean')"))
+
+// return a list of users whose display names contain "F" and arrange it in descending order.
+$userList2:=$Office365.user.list(New object("search"; "\"displayName:F\"";\n 
+"orderBy"; "displayName desc"; "select"; "displayName"))
+
+// Create a list filled with all the userPrincipalName 
+$userList3:=$Office365.user.list(New object("select"; "userPrincipalName"))
+$col:=New collection
+Repeat 
+    $col.combine($userList3.users)
+Until (Not($userList3.next().success))
+```
 
 
-# Tutorials
 
-## Authenticate to the Microsoft Graph API with 4D Netkit in service mode
+## Tutorials
 
-### Objectives
+### Authenticate to the Microsoft Graph API with in service mode
+
+#### Objectives
 
 Establish a connection to the Microsoft Graph API in service mode
 
-### Prerequisites
+#### Prerequisites
 
 * You have registered an application with the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID) and client secret.
 
 > Here, the term "application" does not refer to an application built in 4D. It refers to an entry point you create on the Azure portal. You use the generated client ID to tell your 4D application to trust the Microsoft identity platform.
 
-### Steps
+#### Steps
 
 Once you have your client ID and client secret, you're ready to establish a connection to your Azure application.
 
@@ -293,15 +325,15 @@ $token:=$oAuth2.getToken()
 
 2. Execute the method to establish the connection.
 
-## Authenticate to the Microsoft Graph API in signedIn mode and send an email with SMTP
+### Authenticate to the Microsoft Graph API in signedIn mode and send an email with SMTP
 
-### Objectives 
+#### Objectives 
 
 Establish a connection to the Microsoft Graph API in signedIn mode, and send an email using the [SMTP Transporter class](http://developer.4d.com/docs/fr/API/SMTPTransporterClass.html).
 
 In this example, we get access [on behalf of a user](https://docs.microsoft.com/en-us/graph/auth-v2-user).
 
-### Prerequisites
+#### Prerequisites
 
 * You have registered an application with the [Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and obtained your application ID (also called client ID).
 
@@ -309,7 +341,7 @@ In this example, we get access [on behalf of a user](https://docs.microsoft.com/
 
 * You have a Microsoft e-mail account. For example, you signed up for an e-mail account with Microsoft's webmail services designated domains (@hotmail.com, @outlook.com, etc.).
 
-### Steps
+#### Steps
 
 Once you have your client ID, you're ready to establish a connection to your Azure application and send an email:
 
