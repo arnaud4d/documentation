@@ -202,7 +202,7 @@ principalName,displayName,givenName,mail")
 
 ### Office365Object.user.list()
 
-**Office365Object.user.list**({*options*: Object}) : Object
+**Office365Object.user.list**({*options*: Object}) : Collection
 
 #### Parameters 
 |Parameter|Type||Description|
