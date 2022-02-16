@@ -101,53 +101,55 @@ The `Office365` class allows you to get information from Office365 applications,
 
 ### **New Office365 provider**
 
-**New Office365 provider**( *paramObj* : Object ) : Object
+**New Office365 provider**( *paramObj* : Object ) : cs.NetKit.Office365
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
 |paramObj|Object|->| Oauth2Provider object |
-|Result|Object|<-| object of the Office365 class |
+|Result|cs.NetKit.Office365|<-| Object of the Office365Provider class |
 
 #### Description
 
-`New Office365 provider` instantiates an object of the `Office365` class.
+`New Office365 provider` instantiates an object of the `Office365Provider` class.
 
 In `paramObj`, pass an [Oauth2Provider object](#new-auth2-provider).
 
-The returned object can be used with the `Office365` class functions to retrieve information on users. That information varies depending on the information set in the Oauth2Provider object.
+The returned object can be used with the `Office365Provider` class functions to retrieve information on users. That information varies depending on the information set in the `Oauth2Provider` object.
 
-### Office365Object.user.get()
+### Office365Provider.user.get()
 
-**Office365Object.user.get**( *id* : Text {; *select* : Text}) : Object<br/>**Office365Object.user.get**( *userPrincipalName* : Text {; *select* : Text}) : Object
+**Office365Provider.user.get**( *id* : Text {; *select* : Text}) : Object<br/>**Office365Provider.user.get**( *userPrincipalName* : Text {; *select* : Text}) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|id|Text|->| Unique identifier of the user to search for. |
-|userPrincipalName|Text|->| The user principal name (UPN) of the user to search for.|
-|select|Text|->| Set of properties to be returned.|
-|result|Object|<-| Object holding information on the user.|
+|id|Text|->| Unique identifier of the user to search for |
+|userPrincipalName|Text|->| User principal name (UPN) of the user to search for|
+|select|Text|->| Set of properties to be returned|
+|result|Object|<-| Object holding information on the user|
 
 #### Description
 
-`Office365Object.user.get` returns information on the user whose ID matches the *id* parameter, or whose userPrincipalName matches the *userPrincipalName* parameter. If the ID is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
+`Office365Provider.user.get()` returns information on the user whose ID matches the *id* parameter, or whose User Principal Name (UPN) matches the *userPrincipalName* parameter. 
 
 > The UPN is an Internet-style login name for the user based on the Internet standard RFC 822. By convention, it should correspond to the user's email name.
 
-In *select*, pass a string that contains a set of properties you want to retrieve. Each property must be separated by a comma (,).
+If the ID or UPN is not found or connection fails, the command returns an object with `Null` as a value and throws an error.
 
-The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+In *select*, you can pass a string that contains a specific set of properties you want to retrieve. Each property must be separated by a comma (,). If the select parameter is omitted, the function returns an object with a predefined set of properties (see below).
+
+> The list of available properties is available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
 #### Returned object
 
-By default, if the *select* parameter is not defined, the command returns an object with the following properties:
+By default, if the *select* parameter is omitted, the command returns an object with the following properties:
 
 | Property | Type | Description
 |---|---|---|
-id | Text | The unique identifier for the user.    
+id | Text | Unique identifier for the user    
 businessPhones | Collection | The user's phone numbers.
-displayName | Text | The name displayed in the address book for the user.|
+displayName | Text | Name displayed in the address book for the user.|
 givenName | Text | The user's first name.
 jobTitle | Text | The user's job title.
 mail | Text | The user's email address.
@@ -157,17 +159,17 @@ preferredLanguage | Text | The user's language of preference.
 surname | Text | The user's last name.
 userPrincipalName | Text | The user's principal name.
 
-Otherwise, the object contains only the properties specified in the `select` parameter.
+Otherwise, the object contains the properties specified in the `select` parameter.
 
-For more details on user information, see [Microsoft's docs on user information](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
+For more details on user information, see [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0).
 
-### Office365Object.user.getCurrent()
+### Office365Provider.user.getCurrent()
 
-**Office365Object.user.getCurrent**({*select* : Text}) : Object
+**Office365Provider.user.getCurrent**({*select* : Text}) : Object
 
 #### Description
 
-`Office365Object.user.getCurrent` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
+`Office365Provider.user.getCurrent()` returns information on the current user. In this case, it requires a [signed-in user](https://docs.microsoft.com/en-us/graph/auth-v2-user), and therefore a delegated permission.
 
 The command returns a `Null` object if the session is not a sign-in session.
 
@@ -180,10 +182,11 @@ By default, if the *select* parameter is not defined, the command returns an obj
 To retrieve information from the current user:
 
 ```4d
-var $oAuth2; $Office365; $userInfo; $params: Object
+var $userInfo; $params : Object
+var $oAuth2 : cs.NetKit.OAuth2Provider
+var $Office365 : cs.NetKit.Office365Provider
 
 // Set up parameters: 
-
 $params:=New object
 $params.name:="Microsoft"
 $params.permission:="signedIn"
@@ -200,9 +203,9 @@ $userInfo:=$Office365.user.getCurrent("id,userPrincipalName,\
 principalName,displayName,givenName,mail") 
 ```
 
-### Office365Object.user.list()
+### Office365Provider.user.list()
 
-**Office365Object.user.list**({*options*: Object}) : Object
+**Office365Provider.user.list**({*options*: Object}) : Object
 
 #### Parameters 
 |Parameter|Type||Description|
@@ -212,36 +215,38 @@ principalName,displayName,givenName,mail")
 
 #### Description
 
-`Office365Object.user.list` returns a list of Office365 users.
+`Office365Provider.user.list()` returns a list of Office365 users. 
 
 In *options*, you can pass an object to specify additional search options. The following table groups the available search options: 
 
-| Property | Type | Description | Can be empty or Null
-|---|---|---|---|
-| search | Text | Additional search criteria| Yes |
-| filter | Text | Filter query parameter | Yes |
-| select | Text | Set of properties to be returned| Yes |
-|top| Integer | Request page size limit | Yes |
-|orderBy| Text | Sort order for the items returned (default is ascending) | |
+| Property | Type | Description |
+|---|---|---|
+| search | Text | Additional search criteria|
+| filter | Text | Filter query parameter | 
+| select | Text | Set of properties to be returned|
+|top| Integer | Request page size limit |
+|orderBy| Text | Sort order for the items returned (default is ascending) | 
 
 The `search` property restricts the results of a request to match a search criterion. The search syntax rules are available on [Microsoft's documentation website](https://docs.microsoft.com/en-us/graph/search-query-parameter)  
 
-The `filter` property allows retrieving just a subset of users. See [filter parameter](https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter).
+The `filter` property allows retrieving just a subset of users. See [Microsoft's documentation on filter parameter](https://docs.microsoft.com/en-us/graph/query-parameters#filter-parameter).
 
-The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,). By default, if `select` is not defined, the returned user objects have [default properties](#returned-object).
+The `select` parameter contains a set of properties to retrieve. Each property must be separated by a comma (,). By default, if `select` is not defined, the returned user objects have a [default set of properties](#returned-object).
 
-The `top` property defines the page size for a request. Maximum value is 999. If `top` is not defined, the default value is applied (100). When a result set spans multiple pages, you can use the `.next()` function to ask for the next page. See [Microsoft's docs on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
+The `top` property defines the page size for a request. Maximum value is 999. If `top` is not defined, the default value is applied (100). When a result set spans multiple pages, you can use the `.next()` function to ask for the next page. See [Microsoft's documentation on paging](https://docs.microsoft.com/en-us/graph/paging) for more information.
 
 the `orderBy` property defines how the returned items are ordered. By default, they are arranged in ascending order. The syntax is "fieldname asc" or "fieldname desc". Replace "fieldname" with the name of the field to be arranged. 
 
 #### Returned object 
 
+The returned object holds a collection of users as well as status properties and functions that allow you to navigate between different `pages` of results.
+
 | Property | Type | Description | 
 |---|---|---|
-| users | Collection | Collection of objects with information on users| 
-| page |  Integer | User information page number (starts at 1) |
-| previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the page property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, success is set to `True`</li><li>If no previous page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
-| next() |  Function | Function that updates the `users` collection with the next user information page and increases the `page` property by 1. Returns a status object: <ul><li>If a next page is successfully loaded, success is set to `True`</li><li>If no next page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No next page"</li></ul>  |
+| users | Collection | Collection of objects with information on users.| 
+| page |  Integer | User information page number. Starts at 1. By default, each page holds 100 results. Page size limit can be set in the `top` option. |
+| previous() |  Function | Function that updates the `users` collection with the previous user information page and decreases the `page` property by 1. Returns a status object: <ul><li>If a previous page is successfully loaded, `success` is set to `True`</li><li>If no previous `page` is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No previous page"</li></ul>  |
+| next() |  Function | Function that updates the `users` collection with the next user information page and increases the `page` property by 1. Returns a status object: <ul><li>If a next page is successfully loaded, `success` is set to `True`</li><li>If no next page is returned, the returned object is not updated, `success` is set to `False` and `statusText` is set to "No next page"</li></ul>  |
 | isLastPage |  Boolean | `True` if the last page is reached |
 | success |  Boolean | `True` if the operation is successful, `False` otherwise |
 | statusText |  Text | Status message returned by the Office 365 server, or last error returned in the 4D error stack |
@@ -250,7 +255,9 @@ the `orderBy` property defines how the returned items are ordered. By default, t
 #### Example
 
 ```4d
-var $oAuth2; $Office365; $userInfo; $params; $userList; $userList2; $userList3; $userList4 : Object
+var $oAuth2 : cs.NetKit.OAuth2Provider
+$Office365 : cs.NetKit.Office365Provider
+$userInfo; $params; $userList; $userList2; $userList3; $userList4 : Object
 var $col : Collection
 
 // Set up parameters: 
@@ -279,7 +286,7 @@ $userList3:=$Office365.user.list(New object("search"; "\"displayName:F\"";\n
 
 // Create a list filled with all the userPrincipalName 
 $userList4:=$Office365.user.list(New object("select"; "userPrincipalName"))
-$col2:=New collection
+$col:=New collection
 Repeat 
     $col.combine($userList4.users)
 Until (Not($userList4.next().success))
@@ -287,7 +294,7 @@ Until (Not($userList4.next().success))
 
 ## Tutorials
 
-### Authenticate to the Microsoft Graph API with in service mode
+### Authenticate to the Microsoft Graph API in service mode
 
 #### Objectives
 
