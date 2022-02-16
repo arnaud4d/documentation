@@ -29,13 +29,13 @@ Here's a diagram of the authorization process:
 
 ### **New OAuth2 provider**
 
-**New OAuth2 provider**( *paramObj* : Object ) : Object
+**New OAuth2 provider**( *paramObj* : Object ) : cs.NetKit.OAuth2Provider
 
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|paramObj|Object|->| determines the properties of the object to be returned |
-|Result|Object|<-| object of the OAuth2Provider class
+|paramObj|Object|->| Determines the properties of the object to be returned |
+|Result|cs.NetKit.OAuth2Provider|<-| Object of the OAuth2Provider class
 
 #### Description
 `New OAuth2 provider` instantiates an object of the `OAuth2Provider` class.
@@ -52,7 +52,7 @@ The available properties of `paramObj` are:
 | permission | text | <ul><li> "signedIn": Azure AD will sign in the user and ensure they gave their consent for the permissions your app requests (opens a web browser).</li><li>"service": the app calls Microsoft Graph [with its own identity](https://docs.microsoft.com/en-us/graph/auth-v2-service) (access without a user).</li></ul>|No
 | clientId | text | The client ID assigned to the app by the registration portal.|No
 | redirectURI | text | (Not used in service mode) The redirect_uri of your app, the location where the authorization server sends the user once the app has been successfully authorized. When you call the `.getToken()` class function, a web server included in 4D NetKit is started on the port specified in this parameter to intercept the provider's authorization response.|No in signedIn mode, Yes in service mode
-| scope | text or collection | text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> collection: Collection of Microsoft Graph permissions. |No
+| scope | text or collection | Text: A space-separated list of the Microsoft Graph permissions that you want the user to consent to.</br> Collection: Collection of Microsoft Graph permissions. |No
 | tenant | text | The {tenant} value in the path of the request can be used to control who can sign into the application. The allowed values are: <ul><li>"common" for both Microsoft accounts and work or school accounts </li><li>"organizations" for work or school accounts only </li><li>"consumers" for Microsoft accounts only</li><li>tenant identifiers such as tenant ID or domain name.</li></ul> Default is "common". |Yes
 | authenticateURI | text | Uri used to do the Authorization request. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize". |Yes
 | tokenURI | text | Uri used to request an access token. By default: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token". |Yes
@@ -313,7 +313,7 @@ Once you have your client ID and client secret, you're ready to establish a conn
 1. Open your 4D application, create a method and insert the following code:
 
 ```4d
-var $oAuth2 : Object
+var $oAuth2 : cs.NetKit.OAuth2Provider
 var $token : Object
 
 $param:=New object()
@@ -356,8 +356,8 @@ Once you have your client ID, you're ready to establish a connection to your Azu
 1. Open your 4D application, create a method and insert the following code:
 
 ```4d
-
-var $oAuth2; $token; $param; $email : Object
+var $token; $param; $email : Object
+var $oAuth2 : cs.NetKit.OAuth2Provider
 var $address : Text
 
 // Configure authentication
