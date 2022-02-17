@@ -95,8 +95,6 @@ In "signedIn" mode, when `.getToken()` is called, a web server included in 4D Ne
 
 ## Office365Provider
 
-The `New Office365 provider` method returns an object which is an instance of the `Office365Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
-
 The `Office365Provider` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
 
 ### **New Office365 provider**
