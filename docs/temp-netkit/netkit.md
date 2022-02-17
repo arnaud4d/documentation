@@ -11,7 +11,7 @@ title: 4D NetKit
 ## Table of contents
 
 * [OAuth2Provider class](#oauth2provider)
-* [Office365 class](#office365)
+* [Office365Provider class](#office365)
 * [Tutorial : Authenticate to the Microsoft Graph API in service mode](#authenticate-to-the-microsoft-graph-api-with-4d-netkit-in-service-mode)
 * [Tutorial : Authenticate to the Microsoft Graph API in signedIn mode (4D NetKit), then send an email (SMTP Transporter class)](#authenticate-to-the-microsoft-graph-api-in-signedin-mode-and-send-an-email-with-smtp)
 
