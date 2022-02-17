@@ -210,7 +210,7 @@ principalName,displayName,givenName,mail")
 #### Parameters 
 |Parameter|Type||Description|
 |---------|--- |:---:|------|
-|options|Object|->| additional options for the search|
+|options|Object|->| Additional options for the search|
 |result|Object|<-| Object holding a collection of users and additional info on the request|
 
 #### Description
