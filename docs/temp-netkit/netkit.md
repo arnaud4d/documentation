@@ -97,7 +97,7 @@ In "signedIn" mode, when `.getToken()` is called, a web server included in 4D Ne
 
 The `New Office365 provider` method returns an object which is an instance of the `Office365Provider` [class](https://developer.4d.com/docs/en/Concepts/classes.html).
 
-The `Office365` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
+The `Office365Provider` class allows you to get information from Office365 applications, such as user information, after a valid token request (see [Oauth2Provider object](#new-auth2-provider)).
 
 ### **New Office365 provider**
 
@@ -196,7 +196,7 @@ $param.scope:="https://graph.microsoft.com/.default"
 
 $oAuth2:=New Oauth2 provider($params) //Creates an OAuth2Provider Object
 
-$Office365:=New Office365 provider($oAuth2) // Creates an Office365 object
+$Office365:=New Office365 provider($oAuth2) // Creates an Office365Provider object
 
 // Return the properties specified in the parameter.
 $userInfo:=$Office365.user.getCurrent("id,userPrincipalName,\
@@ -271,7 +271,7 @@ $param.scope:="https://graph.microsoft.com/.default"
 // Create an OAuth2Provider Object
 $oAuth2:=New Oauth2 provider($params) 
 
-// Create an Office365 object
+// Create an Office365Provider object
 $Office365:=New Office365 provider($oAuth2) 
 
 // Return a list of all the users
