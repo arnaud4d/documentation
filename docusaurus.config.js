@@ -33,6 +33,8 @@ module.exports = {
         docs: {
           // Docs folder path relative to website dir.
           path: './docs',
+          // path: 'docsPostProcessed', //local only, when activating postprocessing
+          
           // Sidebars file relative to website dir.
           sidebarPath: require.resolve('./sidebars.js'),
           versions: {
